@@ -64,7 +64,6 @@ public class Indexer {
 			}
 			
 			writer = new IndexWriter(dir, config);
-			writer.close();
 			
 		} catch (IOException e) {
 			System.err.println("Error : " + e.getMessage());
@@ -99,10 +98,18 @@ public class Indexer {
 		
 		if (Files.isDirectory(documentsPath)) {
 			for (Path filePath : documentsPath) {
-				
+				System.out.println(filePath.toString());
 			}
 		} else {
 
+		}
+	}
+	
+	public void closeConnection() {
+		try {
+			writer.close();
+		} catch (IOException e) {
+			System.err.println("Error : " + e.getMessage());
 		}
 	}
 }
