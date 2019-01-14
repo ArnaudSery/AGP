@@ -2,7 +2,7 @@ package business;
 
 public class Boat extends Transport {
 
-	public int priceTransport() {
-		return costTransport = 50;
+	public Boat() {
+		this.costTransport = 50;
 	}
 }

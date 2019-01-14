@@ -2,7 +2,7 @@ package business;
 
 public class Bus extends Transport {
 
-	public int priceTransport() {
-		return costTransport = 10;
+	public Bus() {
+		this.costTransport = 10;
 	}
 }
