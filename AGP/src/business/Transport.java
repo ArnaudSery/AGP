@@ -1,5 +1,9 @@
 package business;
 
-public class Transport {
+public abstract class Transport {
 
+	
+	public int costTransport;
+	
+	public abstract int priceTransport();
 }
