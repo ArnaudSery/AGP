@@ -9,11 +9,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.stream.Stream;
 
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.SimplePayloadFilter;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
@@ -29,13 +34,11 @@ import org.apache.lucene.store.FSDirectory;
  *
  */
 public class Indexer {
-	private int key;
 	private String sourceDirectory;
 	private String indexDirectory;
 	private IndexWriter writer;
 	
-	public Indexer(int key, String sourceDirectory, String indexDirectory) {
-		this.key = key;
+	public Indexer(String sourceDirectory, String indexDirectory) {
 		this.sourceDirectory = sourceDirectory;
 		this.indexDirectory = indexDirectory;
 	}
@@ -97,11 +100,18 @@ public class Indexer {
 		Path documentsPath = Paths.get(documentsDirectory);
 		
 		if (Files.isDirectory(documentsPath)) {
-			for (Path filePath : documentsPath) {
-				System.out.println(filePath.toString());
+			try {
+				Files.walkFileTree(documentsPath, new SimpleFileVisitor<Path>() {
+					@Override
+					public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+						addDocument(file.toString());
+						return FileVisitResult.CONTINUE;
+					}
+				});
+				
+			} catch (IOException e) {
+				System.err.println("Error : " + e.getMessage());
 			}
-		} else {
-
 		}
 	}
 	
@@ -111,5 +121,21 @@ public class Indexer {
 		} catch (IOException e) {
 			System.err.println("Error : " + e.getMessage());
 		}
+	}
+	
+	public String getSourceDirectory() {
+		return sourceDirectory;
+	}
+
+	public void setSourceDirectory(String sourceDirectory) {
+		this.sourceDirectory = sourceDirectory;
+	}
+
+	public String getIndexDirectory() {
+		return indexDirectory;
+	}
+
+	public void setIndexDirectory(String indexDirectory) {
+		this.indexDirectory = indexDirectory;
 	}
 }
