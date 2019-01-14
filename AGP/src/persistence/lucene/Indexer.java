@@ -4,14 +4,12 @@
 package persistence.lucene;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 
@@ -31,118 +29,112 @@ import org.apache.lucene.store.FSDirectory;
  *
  */
 public class Indexer {
-	private String sourceDirectory;
-	private String indexDirectory;
+	private Path sourcePath;
+	private Path indexPath;
 	private IndexWriter writer;
 	
-	public Indexer(String sourceDirectory, String indexDirectory) {
-		this.sourceDirectory = sourceDirectory;
-		this.indexDirectory = indexDirectory;
+	
+	public Indexer(Path sourcePath, Path indexPath) {
+		this.sourcePath = sourcePath;
+		this.indexPath = indexPath;
 	}
 	
-	public void createIndex(boolean recreateIndex) {
-		Path sourcePath = Paths.get(sourceDirectory);
-		Path indexPath = Paths.get(indexDirectory);
+	public void createIndex(boolean recreateIndex) throws IOException {
+		Directory directory;
+		Analyzer analyzer;
+		IndexWriterConfig indexConfiguration;
 		
 		if (!Files.isReadable(sourcePath)) {
-			System.err.println("Error : sourcePath " + sourceDirectory + " does not exist or is not readable.");
+			System.err.println("Error : sourcePath "
+							   + sourcePath.toString()
+							   + " does not exist or is not readable.");
 		}
 		
 		if (!Files.isReadable(indexPath)) {
-			System.err.println("Error : indexPath " + indexDirectory + " does not exist or is not readable.");
+			System.err.println("Error : indexPath "
+							   + indexPath.toString()
+							   + " does not exist or is not readable.");
 		}
 		
-		try {
-			Directory dir = FSDirectory.open(indexPath);
-			Analyzer analyzer = new StandardAnalyzer();
-			IndexWriterConfig config = new IndexWriterConfig(analyzer);
-			
-			if (recreateIndex) {
-				config.setOpenMode(OpenMode.CREATE);
-			} else {
-				config.setOpenMode(OpenMode.CREATE_OR_APPEND);
-			}
-			
-			writer = new IndexWriter(dir, config);
-			
-		} catch (IOException e) {
-			System.err.println("Error : " + e.getMessage());
-		}
+		directory = FSDirectory.open(indexPath);
+		analyzer = new StandardAnalyzer();
+		indexConfiguration = new IndexWriterConfig(analyzer);
+		
+		indexConfiguration.setOpenMode(
+				(recreateIndex) ? OpenMode.CREATE : OpenMode.CREATE_OR_APPEND
+		);
+		
+		writer = new IndexWriter(directory, indexConfiguration);
 	}
 	
-	public void addDocument(String documentDirectory) {
-		Path documentPath = Paths.get(documentDirectory);
+	public void addDocument(Path documentPath) throws IOException {
+		String absolutePathStr;
+		File documentFile;
+		FileReader fileReader;
+		BufferedReader bufferedReader;
+		Document document;
+		
+		
+		if (writer == null) {
+			System.err.println("Please initialize the writer before.");
+		}
 		
 		if (!Files.isReadable(documentPath)) {
-			System.err.println("Error : documentPath " + documentDirectory + " does not exist or is not readable.");
+			System.err.println("Error : documentPath "
+					   + documentPath.toString()
+					   + " does not exist or is not readable.");
 		}
 		
-		try (InputStream stream = Files.newInputStream(documentPath)) {
-			Document document = new Document();
-			
-			String fileDirectory = documentPath.getFileName().toString();
-			String absFileDirectory = Paths.get(sourceDirectory, fileDirectory).toString();
-			String fileName = fileDirectory.substring(0, fileDirectory.lastIndexOf("."));
-			
-			System.out.println(documentPath.getFileName().toString());
-			Field idField = new StringField("id", fileName, Field.Store.YES);
-			Field fileDirectoryField = new StringField("fileDirectory", absFileDirectory, Field.Store.YES);
-			
-			InputStreamReader inputStreamReader = new InputStreamReader(stream, StandardCharsets.UTF_8);
-			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-			Field descriptionField = new TextField("description", bufferedReader);
-			
-			document.add(idField);
-			document.add(fileDirectoryField);
-			document.add(descriptionField);
-			
-			writer.addDocument(document);
-			
-		} catch (IOException e) {
-			System.err.println("Error : " + e.getMessage());
-		}
+		
+		documentFile = documentPath.toFile();
+		absolutePathStr = documentFile.getAbsolutePath();
+		
+		fileReader = new FileReader(documentFile);
+		bufferedReader = new BufferedReader(fileReader);
+		
+		document = new Document();
+		document.add(new StringField("path", absolutePathStr, Field.Store.YES));
+		document.add(new TextField("content", bufferedReader));
+		
+		writer.addDocument(document);
+		
+		bufferedReader.close();
+		fileReader.close();
 	}
 	
-	public void addDocuments(String documentsDirectory) {
-		Path documentsPath = Paths.get(documentsDirectory);
-		
+	public void addDocuments(Path documentsPath) throws IOException {
 		if (Files.isDirectory(documentsPath)) {
-			try {
-				Files.walkFileTree(documentsPath, new SimpleFileVisitor<Path>() {
-					@Override
-					public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-						addDocument(file.toString());
-						return FileVisitResult.CONTINUE;
-					}
-				});
-				
-			} catch (IOException e) {
-				System.err.println("Error : " + e.getMessage());
-			}
+			Files.walkFileTree(documentsPath, new SimpleFileVisitor<Path>() {
+				@Override
+				public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
+						throws IOException {
+					
+					addDocument(file);
+					return FileVisitResult.CONTINUE;
+				}
+			});
+		} else {
+			addDocument(documentsPath);
 		}
 	}
 	
-	public void closeConnection() {
-		try {
-			writer.close();
-		} catch (IOException e) {
-			System.err.println("Error : " + e.getMessage());
-		}
-	}
-	
-	public String getSourceDirectory() {
-		return sourceDirectory;
+	public void close() throws IOException {
+		writer.close();
 	}
 
-	public void setSourceDirectory(String sourceDirectory) {
-		this.sourceDirectory = sourceDirectory;
+	public Path getSourcePath() {
+		return sourcePath;
 	}
 
-	public String getIndexDirectory() {
-		return indexDirectory;
+	public void setSourcePath(Path sourcePath) {
+		this.sourcePath = sourcePath;
 	}
 
-	public void setIndexDirectory(String indexDirectory) {
-		this.indexDirectory = indexDirectory;
+	public Path getIndexPath() {
+		return indexPath;
+	}
+
+	public void setIndexPath(Path indexPath) {
+		this.indexPath = indexPath;
 	}
 }

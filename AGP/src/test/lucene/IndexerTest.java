@@ -2,37 +2,49 @@ package test.lucene;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.IOException;
-import java.util.List;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-import org.apache.lucene.queryparser.classic.ParseException;
 import org.junit.jupiter.api.Test;
 
 import persistence.lucene.Indexer;
-import persistence.lucene.SearchResult;
+import persistence.lucene.TextualResult;
+import persistence.lucene.TextualResults;
 import persistence.lucene.Searcher;
 
 class IndexerTest {
 
 	@Test
 	void test() {
-		Indexer index = new Indexer("C:\\DATA", "C:\\INDEX");
-		index.createIndex(true);
-		index.addDocuments("C:\\DATA");
-		index.closeConnection();
+		Path sourcePath = Paths.get("C:\\DATA");
+		Path indexPath = Paths.get("C:\\INDEX");
 		
-		Searcher searcher = new Searcher("C:\\DATA", "C:\\INDEX");
 		try {
-			List<SearchResult> searchResult = searcher.search("poney");
+			Indexer index = new Indexer(sourcePath, indexPath);
 			
-			for (SearchResult result : searchResult) {
-				System.out.println("RESULT : id:" + result.getId() + " score:" + result.getScore() + " descr:" + result.getDescription());
+			index.createIndex(true);
+			index.addDocuments(sourcePath);
+			index.close();
+			
+			Searcher searcher = new Searcher(indexPath);
+			TextualResults textualResults = searcher.search("motcle");
+			
+			/*TextualResult textualResult;
+			
+			while (textualResults.hasNext()) {
+				textualResult = textualResults.next();
+				System.out.println("id:" + textualResult.getId()
+								   + " score:" + textualResult.getScore()
+								   + " content:" + textualResult.getDescription());
+			}*/
+			
+			for (TextualResult textualResult : textualResults) {
+				System.out.println("id:" + textualResult.getId()
+								   + " score:" + textualResult.getScore()
+								   + " content:" + textualResult.getDescription());
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

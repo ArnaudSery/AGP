@@ -4,16 +4,10 @@
 package persistence.lucene;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
@@ -25,70 +19,84 @@ import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
 /**
  *
  */
 public class Searcher {
-	private String sourceDirectory;
-	private String indexDirectory;
+	private final int MAX_RESULTS = 100;
+	private Path indexPath;
 	
-	public Searcher(String sourceDirectory, String indexDirectory) {
-		this.sourceDirectory = sourceDirectory;
-		this.indexDirectory = indexDirectory;
+	
+	public Searcher(Path indexPath) {
+		this.indexPath = indexPath;
 	}
 	
-	public List<SearchResult> search(String query) throws IOException, ParseException {
+	public TextualResults search(String query) throws IOException, ParseException {
+		Directory directory;
+		Analyzer analyzer;
+		IndexReader reader;
+		IndexSearcher searcher;
+		QueryParser parser;
+		Query parsedQuery;
+		ScoreDoc[] results;
+		
+		File documentFile;
+		FileReader fileReader;
+		BufferedReader bufferedReader;
+		Document document;
+		
+		int id;
+		int score;
+		String description;
+		String line;
+		TextualResults textualResults;
+		
 		
 		if (query.isEmpty()) {
 			System.err.println("Error : a query is required.");
 		}
 		
-		Path indexPath = Paths.get(indexDirectory);
 		
-		Analyzer analyzer = new StandardAnalyzer();
-		IndexReader reader = DirectoryReader.open(FSDirectory.open(indexPath));
-		IndexSearcher searcher = new IndexSearcher(reader);
+		analyzer = new StandardAnalyzer();
+		parser = new QueryParser("content", analyzer);
 		
-		QueryParser parser = new QueryParser("description", analyzer);
-		Query parsedQuery = parser.parse(query);
-		TopDocs results = searcher.search(parsedQuery, 100);
-		ScoreDoc[] hits = results.scoreDocs;
+		directory = FSDirectory.open(indexPath);
+		reader = DirectoryReader.open(directory);
+		searcher = new IndexSearcher(reader);
 		
-		List<SearchResult> searchResult = new LinkedList<SearchResult>();
+		parsedQuery = parser.parse(query);
+		results = searcher
+					.search(parsedQuery, MAX_RESULTS)
+					.scoreDocs;
 		
-		Document document;
-		int id;
-		String description;
-		String line;
+		textualResults = new TextualResults();
 		
-		for (ScoreDoc hit : hits) {		
+		
+		for (ScoreDoc result : results) {		
+			id = result.doc;
+			score = (int) (result.score * 1000);
+			document = searcher.doc(id);
 			description = "";
 			
-			document = searcher.doc(hit.doc);
+			documentFile = new File(document.get("path"));
+			fileReader = new FileReader(documentFile);
+			bufferedReader = new BufferedReader(fileReader);
 			
-			id = Integer.parseInt(document.get("id"));
-			String fileDirectory = document.get("fileDirectory");
-			Path filePath = Paths.get(fileDirectory);
-			
-			try (InputStream stream = Files.newInputStream(filePath)) {
-				InputStreamReader inputStreamReader = new InputStreamReader(stream, StandardCharsets.UTF_8);
-				BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-				
-				while ((line = bufferedReader.readLine()) != null) {
-					description += line + "\n";
-				}
-			} catch (IOException e) {
-				// TODO: handle exception
+			while ((line = bufferedReader.readLine()) != null) {
+				description += line + "\n";
 			}
 			
-			searchResult.add(new SearchResult(id, hit.score, description));
+			textualResults.add(new TextualResult(id, score, description));
+			
+			bufferedReader.close();
+			fileReader.close();
 		}
 		
 		reader.close();
 		
-		return searchResult;
+		return textualResults;
 	}
 }

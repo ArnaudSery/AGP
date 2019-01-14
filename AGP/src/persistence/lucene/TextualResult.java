@@ -6,13 +6,13 @@ package persistence.lucene;
 /**
  *
  */
-public class SearchResult {
+public class TextualResult {
 	private int id;
-	private float score;
+	private int score;
 	private String description;
 	
 	
-	public SearchResult(int id, float score, String description) {
+	public TextualResult(int id, int score, String description) {
 		this.id = id;
 		this.score = score;
 		this.description = description;
@@ -22,7 +22,7 @@ public class SearchResult {
 		return id;
 	}
 
-	public float getScore() {
+	public int getScore() {
 		return score;
 	}
 
