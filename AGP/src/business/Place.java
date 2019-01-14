@@ -1,17 +1,17 @@
 package business;
 
-public class Places {
+public abstract class Place {
 
-	public int id;
-	public String name;
-	public float visitDuration;
-	public float entrancePrice;
-	public String description;
-	public Coordinates coordinates;
-	public Island island;
+	private int id;
+	private String name;
+	private float visitDuration;
+	private float entrancePrice;
+	private String description;
+	private Coordinates coordinates;
+	private Island island;
 	
 	
-	public Places(int id, String name, float visitDuration, float entrancePrice, String description, Coordinates coordinates, Island island) {
+	public Place(int id, String name, float visitDuration, float entrancePrice, String description, Coordinates coordinates, Island island) {
 		this.id = id;
 		this.name = name;
 		this.visitDuration = visitDuration;

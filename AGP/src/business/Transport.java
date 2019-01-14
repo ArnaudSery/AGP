@@ -4,14 +4,16 @@ public abstract class Transport {
 
 	
 	public int costTransport;
-
-	public Transport() {
+	
+	public Transport(){
 		
 	}
 	
 	public Transport(int costTransport) {
 		this.costTransport = costTransport;
 	}
+	
+	
 	
 	public int getCostTransport() {
 		return costTransport;

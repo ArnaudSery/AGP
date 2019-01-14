@@ -15,9 +15,13 @@ public class SimulationEntry {
 			this.totalCost = 1000;
 		}
 
-		public SimulationEntry(int numberDay, int nulberExcursion, String keyWord, int totalCost) {
+		public SimulationEntry(int numberDay, int numberExcursion, String keyWord, int totalCost) {
 			this.numberDay =  numberDay;
-			this.numberExcursion = nulberExcursion;
+			this.numberExcursion = numberExcursion;
+			if(numberDay < numberExcursion) {
+				this.numberExcursion = this.numberDay;
+				System.out.println("numberExcursion = numberDay");
+			}
 			this.keyWord = keyWord;
 			this.totalCost = totalCost;
 			//this.intensity = intensity;
