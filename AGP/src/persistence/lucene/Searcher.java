@@ -3,7 +3,12 @@
  */
 package persistence.lucene;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -27,9 +32,11 @@ import org.apache.lucene.store.FSDirectory;
  *
  */
 public class Searcher {
+	private String sourceDirectory;
 	private String indexDirectory;
 	
-	public Searcher(String indexDirectory) {
+	public Searcher(String sourceDirectory, String indexDirectory) {
+		this.sourceDirectory = sourceDirectory;
 		this.indexDirectory = indexDirectory;
 	}
 	
@@ -55,11 +62,28 @@ public class Searcher {
 		Document document;
 		int id;
 		String description;
+		String line;
 		
-		for (ScoreDoc hit : hits) {
+		for (ScoreDoc hit : hits) {		
+			description = "";
+			
 			document = searcher.doc(hit.doc);
+			
 			id = Integer.parseInt(document.get("id"));
-			description = document.get("description");
+			String fileDirectory = document.get("fileDirectory");
+			Path filePath = Paths.get(fileDirectory);
+			
+			try (InputStream stream = Files.newInputStream(filePath)) {
+				InputStreamReader inputStreamReader = new InputStreamReader(stream, StandardCharsets.UTF_8);
+				BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+				
+				while ((line = bufferedReader.readLine()) != null) {
+					description += line + "\n";
+				}
+			} catch (IOException e) {
+				// TODO: handle exception
+			}
+			
 			searchResult.add(new SearchResult(id, hit.score, description));
 		}
 		

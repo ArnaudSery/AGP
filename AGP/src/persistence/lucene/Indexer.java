@@ -80,17 +80,20 @@ public class Indexer {
 		try (InputStream stream = Files.newInputStream(documentPath)) {
 			Document document = new Document();
 			
-			String fileName = documentPath.getFileName().toString();
-			fileName = fileName.substring(0, fileName.lastIndexOf("."));
+			String fileDirectory = documentPath.getFileName().toString();
+			String absFileDirectory = Paths.get(sourceDirectory, fileDirectory).toString();
+			String fileName = fileDirectory.substring(0, fileDirectory.lastIndexOf("."));
 			
 			System.out.println(documentPath.getFileName().toString());
 			Field idField = new StringField("id", fileName, Field.Store.YES);
+			Field fileDirectoryField = new StringField("fileDirectory", absFileDirectory, Field.Store.YES);
 			
 			InputStreamReader inputStreamReader = new InputStreamReader(stream, StandardCharsets.UTF_8);
 			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 			Field descriptionField = new TextField("description", bufferedReader);
 			
 			document.add(idField);
+			document.add(fileDirectoryField);
 			document.add(descriptionField);
 			
 			writer.addDocument(document);

@@ -21,7 +21,7 @@ class IndexerTest {
 		index.addDocuments("C:\\DATA");
 		index.closeConnection();
 		
-		Searcher searcher = new Searcher("C:\\INDEX");
+		Searcher searcher = new Searcher("C:\\DATA", "C:\\INDEX");
 		try {
 			List<SearchResult> searchResult = searcher.search("poney");
 			
