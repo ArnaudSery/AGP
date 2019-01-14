@@ -6,13 +6,14 @@ public class SimulationEntry {
 		private int numberExcursion;
 		private String keyWord;
 		private int totalCost;
-		//private int intensity;
+		private int intensity;
 		
 		public SimulationEntry() {
 			this.numberDay =  3;
 			this.numberExcursion = 2;
 			this.keyWord = "";
 			this.totalCost = 1000;
+			this.intensity = 10;
 		}
 
 		public SimulationEntry(int numberDay, int numberExcursion, String keyWord, int totalCost) {
@@ -24,7 +25,7 @@ public class SimulationEntry {
 			}
 			this.keyWord = keyWord;
 			this.totalCost = totalCost;
-			//this.intensity = intensity;
+			this.intensity = intensity;
 		}
 
 		public int getNumberDay() {
@@ -57,6 +58,14 @@ public class SimulationEntry {
 
 		public void setTotalCost(int cost) {
 			this.totalCost = cost;
+		}
+		
+		public int getIntensity() {
+			return intensity;
+		}
+
+		public void setIntensity(int intensity) {
+			this.intensity = intensity;
 		}
 		
 }

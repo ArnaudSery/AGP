@@ -1,11 +1,12 @@
 package business;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 
 public class Simulation {
 	
 	private SimulationEntry SimulationEntry;
-	private HashMap<Places, Integer> placeResult = new HashMap<Places, Integer>();
+	private LinkedList<Place> placeResult = new LinkedList<Place>();
 	
 	public Simulation() {
 		
@@ -20,20 +21,23 @@ public class Simulation {
 		Coordinates coord6 = new Coordinates(14.26,60.50);
 		Island isle = new Island(0, "Guadeloupe");
 		Hotel HotelDuSoldatInconnu = new Hotel(0, "HotelDuSoldatInconnu", 200, coord1, isle);
-		Places restaurantDelArte = new HistoricPlace(1, "DelArte", 2, 100, "husihvgriuh", coord2, isle);
-		Places TourEiffel = new HistoricPlace(2, "TourEiffel", 6, 100, "husihvgriuh", coord3, isle);
+		Place restaurantDelArte = new HistoricPlace(1, "DelArte", 2, 100, "husihvgriuh", coord2, isle);
+		Place TourEiffel = new HistoricPlace(2, "TourEiffel", 6, 100, "husihvgriuh", coord3, isle);
 		Hotel hotel2 = new Hotel(3, "hotel2", 150, coord4, isle);
-		Places place1 = new ActivityPlace(4, "place1", 5, 150, "lol", coord5, isle);
-		Places place2 = new ActivityPlace(5, "place2", 2, 150, "lol",coord6, isle);
+		Place place1 = new ActivityPlace(4, "place1", 5, 150, "lol", coord5, isle);
+		Place place2 = new ActivityPlace(5, "place2", 2, 150, "lol",coord6, isle);
 		
 		// 
-		placeResult.put(key, value)
+		placeResult.add(restaurantDelArte);
+		placeResult.add(TourEiffel);
+		placeResult.add(place1);
+		placeResult.add(place2);
 		
-		
-		
+		Excursion.CreateExcursion(placeResult);
 		
 		
 		
 	}
+	
 
 }
