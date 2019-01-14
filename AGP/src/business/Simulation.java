@@ -7,6 +7,7 @@ public class Simulation {
 	
 	private SimulationEntry SimulationEntry;
 	private LinkedList<Place> placeResult = new LinkedList<Place>();
+	private LinkedList<Hotel> placeResultHotel = new LinkedList<Hotel>();
 	
 	public Simulation() {
 		
@@ -33,7 +34,10 @@ public class Simulation {
 		placeResult.add(place1);
 		placeResult.add(place2);
 		
-		Excursion.CreateExcursion(placeResult);
+		placeResultHotel.add(HotelDuSoldatInconnu);
+		placeResultHotel.add(hotel2);
+		
+		Excursion.CreateExcursion(placeResult, placeResultHotel);
 		
 		
 		
