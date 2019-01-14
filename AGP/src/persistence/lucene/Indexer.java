@@ -18,6 +18,8 @@ import java.nio.file.attribute.BasicFileAttributes;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field;
+import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
@@ -78,10 +80,17 @@ public class Indexer {
 		try (InputStream stream = Files.newInputStream(documentPath)) {
 			Document document = new Document();
 			
+			String fileName = documentPath.getFileName().toString();
+			fileName = fileName.substring(0, fileName.lastIndexOf("."));
+			
+			System.out.println(documentPath.getFileName().toString());
+			Field idField = new StringField("id", fileName, Field.Store.YES);
+			
 			InputStreamReader inputStreamReader = new InputStreamReader(stream, StandardCharsets.UTF_8);
 			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-			TextField descriptionField = new TextField("description", bufferedReader);
+			Field descriptionField = new TextField("description", bufferedReader);
 			
+			document.add(idField);
 			document.add(descriptionField);
 			
 			writer.addDocument(document);
