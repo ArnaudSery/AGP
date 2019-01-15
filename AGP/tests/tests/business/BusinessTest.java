@@ -1,4 +1,4 @@
-package test.business;
+package tests.business;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,9 +30,9 @@ class BusinessTest {
 		Coordinates coord3 = new Coordinates(-14.28, 60.58);
 		Coordinates coord4 = new Coordinates(14.25,-60.50);
 		Utilitaire ut = new Utilitaire();
-		double distance = ut.CalculDistance(coord1.getLongitude(),coord1.getLatitude(),coord2.getLongitude(),coord2.getLatitude());
+		double distance = ut.CalculDistance(coord1,coord2);
 		assertTrue(distance < 0.20 && distance > 0.19);
-		double distance2 = ut.CalculDistance(coord3.getLongitude(),coord3.getLatitude(),coord4.getLongitude(),coord4.getLatitude());
+		double distance2 = ut.CalculDistance(coord3,coord4);
 		assertTrue(distance2 < 125 && distance2 > 124);
 	}
 	
