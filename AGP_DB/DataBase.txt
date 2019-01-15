@@ -45,6 +45,7 @@ INSERT INTO Island (id, name) VALUES
   (3, 'Martinique');
   
 INSERT INTO Place (id, name, type ,visitDuration, entrancePrice, latitude, longitude, idIsland) VALUES
+  (0, 'Savane des Pétrifications', 				'activity', 7, 8.5  , 14.40 , -60.85 ,3); 
   (1,  'Musée du Café',  							'historic', 1, 5.0  , 16.06 , -61.76 ,1),
   (2,  'Distillerie Rhum Bologne',  				'activity', 1, 12.0 , 16.00 , -61.73 ,1),
   (3,  'Fort Delgrès',  							'activity', 2, 23.5 , 15.98 , -61.72 ,1),
@@ -74,9 +75,9 @@ INSERT INTO Place (id, name, type ,visitDuration, entrancePrice, latitude, longi
   (27, 'Cap 110', 									'historic', 8, 21.6 , 14.46 , -61.04 ,3),
   (28, 'La Baignoire de Joséphine', 				'activity', 1, 11.5 , 14.61 , -60.89 ,3),
   (29, 'Musée départemental de préhistoire de la martinique', 	'historic', 2, 14.3 , 14.60 , -61.06 ,3),
-  (0, 'Savane des Pétrifications', 				'activity', 7, 8.5  , 14.40 , -60.85 ,3); 
   
 INSERT INTO Hotel (id, name, pricePerDay, latitude, longitude, idIsland) VALUES
+  (0, 'Residence Roxelle' 			, 163.2 , 14.76 , -61.16 , 3);
   (1, 'Le Relax Hotêl' 				, 158.6 , 16.35 , -61.45 , 1),
   (2, 'Les Nids de Belle Eau' 		, 135.5 , 16.02 , -61.60 , 1),
   (3, 'Eden Des Colibris' 			, 143.8 , 16.07 , -61.72 , 1),
@@ -85,4 +86,3 @@ INSERT INTO Hotel (id, name, pricePerDay, latitude, longitude, idIsland) VALUES
   (6, 'Kai Woshe Inn' 				, 135.2 , 15.27 , -61.25 , 2),
   (7, 'la Dunette' 					, 120.0 , 14.44 , -60.88 , 3),
   (8, 'Le refuge du bon repos' 		, 126.9 , 14.83 , -61.07 , 3),
-  (9, 'Residence Roxelle' 			, 163.2 , 14.76 , -61.16 , 3);
