@@ -1,4 +1,4 @@
-package tests.business;
+package test.business;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
@@ -66,7 +66,7 @@ class BusinessTest {
 		placeResultHotel.add(HotelDuSoldatInconnu);
 		placeResultHotel.add(hotel2);
 		
-		Excursion.CreateExcursion(placeResult, placeResultHotel, SimulationEntry.getNumberHourMax());	
+		//Excursion.CreateExcursion(placeResult, placeResultHotel, SimulationEntry.getNumberHourMax());	
 	}
 
 
