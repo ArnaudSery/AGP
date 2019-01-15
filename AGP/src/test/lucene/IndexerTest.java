@@ -6,9 +6,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 
 import org.junit.jupiter.api.Test;
 
+import persistence.extendeddb.ExtendedDatabaseAPI;
+import persistence.extendeddb.MixedResult;
+import persistence.extendeddb.MixedResults;
+import persistence.extendeddb.SQLConfiguration;
+import persistence.extendeddb.TextualConfiguration;
 import persistence.extendeddb.jdbc.SQLResult;
 import persistence.extendeddb.jdbc.SQLResults;
 import persistence.extendeddb.jdbc.SQLSearcher;
@@ -31,7 +37,7 @@ class IndexerTest {
 			index.addDocuments(sourcePath);
 			index.close();
 			
-			Searcher searcher = new Searcher(indexPath);
+			/*Searcher searcher = new Searcher(indexPath);
 			TextualResults textualResults = searcher.search("motcle");
 			
 			TextualResult textualResult;
@@ -85,23 +91,53 @@ class IndexerTest {
 	
 	@Test
 	void testAPI() {
-		String mixedQuery = "SELECT name FROM toto places hhh WIth tets";
+		Path sourcePath = Paths.get("C:\\DATA");
+		Path indexPath = Paths.get("C:\\INDEX");
 		
-		String[] partsQuery = mixedQuery.split("(?i: with )");
-		String simpleQuery = partsQuery[0];
-		String textualQuery = partsQuery[1];
+		SQLConfiguration sqlConfiguration = new SQLConfiguration(
+				"mysql",
+				"localhost",
+				"travelDB",
+				"root",
+				"password"
+		);
 		
-		System.out.println(simpleQuery);
-		System.out.println(textualQuery);
+		TextualConfiguration textualConfiguration = new TextualConfiguration(
+				sourcePath,
+				indexPath,
+				"Place",
+				"id"
+		);
 		
-		String table = "Place";
-		
-		boolean hasTableForJoin = simpleQuery.matches("(?i:.*FROM.* " + table + ".*)");
-		System.out.println(hasTableForJoin);
-		/*
-		simpleQuery = simpleQuery.substring(0, 7)
-					  + textualConfiguration.getJoinKey() + ", "
-					  + simpleQuery.substring(7);*/
+		try {
+			ExtendedDatabaseAPI database = new ExtendedDatabaseAPI(sqlConfiguration, textualConfiguration);
+			/*SQLResults sqlResults = database.simpleQuery("SELECT name, type FROM Place WHERE type = 'historic'");
+			
+			for (SQLResult sqlResult : sqlResults) {
+				System.out.println(sqlResult.getAttributes());
+			}
+			
+			TextualResults textualResults = database.textualQuery("cergy");
+			
+			for (TextualResult textualResult : textualResults) {
+				System.out.println("id:" + textualResult.getId()
+								   + " score:" + textualResult.getScore()
+								   + " content:" + textualResult.getContent());
+			}
+			System.out.println("=======================================");*/
+			MixedResults mixedResults = database.MixedQuery("SELECT name, type FROM Place WITH musée");
+			
+			for (MixedResult mixedResult : mixedResults) {
+				System.out.println("=========" + mixedResult.getAttribute("name") + "=========");
+				System.out.println(" type:" + mixedResult.getAttribute("type") + " score:" + mixedResult.getScore());
+				System.out.println("DESCRIPTION:" + mixedResult.getContent());
+			}
+			
+			System.out.println("=======================================");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

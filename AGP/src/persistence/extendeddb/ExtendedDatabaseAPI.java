@@ -9,7 +9,6 @@ import java.util.Map;
 
 import org.apache.lucene.queryparser.classic.ParseException;
 
-import persistence.ExtendedDatabaseAPI;
 import persistence.extendeddb.jdbc.SQLResult;
 import persistence.extendeddb.jdbc.SQLResults;
 import persistence.extendeddb.jdbc.SQLSearcher;
@@ -52,7 +51,7 @@ public class ExtendedDatabaseAPI {
 		return searcher.search(query);
 	}
 
-	public MixedResults query(String mixedQuery) throws SQLException, IOException, ParseException {
+	public MixedResults MixedQuery(String mixedQuery) throws SQLException, IOException, ParseException {
 		String sqlQuery;
 		String[] partsQuery;
 		boolean hasTextualQuery;

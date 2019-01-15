@@ -7,11 +7,11 @@ package persistence.extendeddb;
  *
  */
 public class SQLConfiguration {
-	private static String system;
-	private static String host;
-	private static String base;
-	private static String user;
-	private static String password;
+	private String system;
+	private String host;
+	private String base;
+	private String user;
+	private String password;
 	
 	
 	public SQLConfiguration() {
@@ -19,50 +19,54 @@ public class SQLConfiguration {
 	}
 	
 	public SQLConfiguration(String system, String host, String base, String user, String password) {
-		
+		this.system = system;
+		this.host = host;
+		this.base = base;
+		this.user = user;
+		this.password = password;
 	}
 
-	public static String getSystem() {
+	public String getSystem() {
 		return system;
 	}
 
-	public static void setSystem(String system) {
-		SQLConfiguration.system = system;
+	public void setSystem(String system) {
+		this.system = system;
 	}
 
-	public static String getHost() {
+	public String getHost() {
 		return host;
 	}
 
-	public static void setHost(String host) {
-		SQLConfiguration.host = host;
+	public void setHost(String host) {
+		this.host = host;
 	}
 
-	public static String getBase() {
+	public String getBase() {
 		return base;
 	}
 
-	public static void setBase(String base) {
-		SQLConfiguration.base = base;
+	public void setBase(String base) {
+		this.base = base;
 	}
 
-	public static String getUser() {
+	public String getUser() {
 		return user;
 	}
 
-	public static void setUser(String user) {
-		SQLConfiguration.user = user;
+	public void setUser(String user) {
+		this.user = user;
 	}
 
-	public static String getPassword() {
+	public String getPassword() {
 		return password;
 	}
 
-	public static void setPassword(String password) {
-		SQLConfiguration.password = password;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public static String getUrl() {
+	public String getUrl() {
 		return "jdbc:" + system + "://" + host + "/" + base;
 	}
 }

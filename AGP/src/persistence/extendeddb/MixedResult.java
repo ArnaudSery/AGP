@@ -3,8 +3,6 @@
  */
 package persistence.extendeddb;
 
-import java.util.Map;
-
 import persistence.extendeddb.jdbc.SQLResult;
 import persistence.extendeddb.lucene.TextualResult;
 
