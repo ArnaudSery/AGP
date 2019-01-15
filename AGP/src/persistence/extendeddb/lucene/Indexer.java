@@ -6,6 +6,7 @@ package persistence.extendeddb.lucene;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
@@ -26,19 +27,35 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
 /**
- *
+ * Indexer class
+ * 
+ * Creates an index and allows you to add documents.
  */
 public class Indexer {
 	private Path sourcePath;
 	private Path indexPath;
 	private IndexWriter writer;
 	
-	
+	/**
+	 * Index constructor
+	 * 
+	 * @param sourcePath The directory that contains the files to index.
+	 * @param indexPath  The directory that will contain the future index.
+	 */
 	public Indexer(Path sourcePath, Path indexPath) {
 		this.sourcePath = sourcePath;
 		this.indexPath = indexPath;
 	}
 	
+	/**
+	 * createIndex
+	 * 
+	 * Method used to create the index.
+	 * 
+	 * @param recreateIndex If the option is true, the existing index will
+	 *                      be overwritten.
+	 * @throws IOException
+	 */
 	public void createIndex(boolean recreateIndex) throws IOException {
 		Directory directory;
 		Analyzer analyzer;
@@ -67,6 +84,14 @@ public class Indexer {
 		writer = new IndexWriter(directory, indexConfiguration);
 	}
 	
+	/**
+	 * addDocument
+	 * 
+	 * Method used to index a document.
+	 * 
+	 * @param documentPath The path to the document to index.
+	 * @throws IOException
+	 */
 	public void addDocument(Path documentPath) throws IOException {
 		String absolutePathStr;
 		File documentFile;
@@ -89,19 +114,34 @@ public class Indexer {
 		documentFile = documentPath.toFile();
 		absolutePathStr = documentFile.getAbsolutePath();
 		
+		// Opening the document to read its content
 		fileReader = new FileReader(documentFile);
 		bufferedReader = new BufferedReader(fileReader);
 		
 		document = new Document();
+		
+		// Indexing of two fields (absolute path and content of the file)
 		document.add(new StringField("path", absolutePathStr, Field.Store.YES));
+		
+		// The content is not fully indexed
+		// (only used to search the document by keywords)
 		document.add(new TextField("content", bufferedReader));
 		
+		// Adding the document to the index
 		writer.addDocument(document);
 		
 		bufferedReader.close();
 		fileReader.close();
 	}
 	
+	/**
+	 * addDocuments
+	 * 
+	 * Method used to index multiple documents.
+	 * 
+	 * @param documentsPath The path to the directory with the documents to index.
+	 * @throws IOException
+	 */
 	public void addDocuments(Path documentsPath) throws IOException {
 		if (Files.isDirectory(documentsPath)) {
 			Files.walkFileTree(documentsPath, new SimpleFileVisitor<Path>() {
@@ -118,6 +158,34 @@ public class Indexer {
 		}
 	}
 	
+	/**
+	 * writeDocument
+	 * 
+	 * Method used to write a document to the sourcePath directory.
+	 * Useful if the files to index are not created.
+	 * 
+	 * @param key     The primary key of the line of your database to
+	 * 				  which the content will be attached.
+	 * @param content The content of the file.
+	 * @throws IOException 
+	 */
+	public void writeDocument(String key, String content)
+			throws IOException {
+		
+		File documentFile = new File(sourcePath + "/" + key + ".txt");
+		FileWriter fileWriter = new FileWriter(documentFile);
+		fileWriter.write(content);
+		fileWriter.close();
+	}
+	
+	/**
+	 * close
+	 * 
+	 * Method used to close the connection to the indexer.
+	 * Call it when you have finished adding documents.
+	 * 
+	 * @throws IOException
+	 */
 	public void close() throws IOException {
 		writer.close();
 	}

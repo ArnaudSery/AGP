@@ -4,7 +4,9 @@
 package persistence.extendeddb;
 
 /**
- *
+ * SQLConfiguration class
+ * 
+ * Used to define the configuration of the ExtendedDatabaseAPI.
  */
 public class SQLConfiguration {
 	private String system;
@@ -13,11 +15,22 @@ public class SQLConfiguration {
 	private String user;
 	private String password;
 	
-	
+	/**
+	 * SQLConfiguration constructor
+	 */
 	public SQLConfiguration() {
 		
 	}
 	
+	/**
+	 * SQLConfiguration constructor
+	 * 
+	 * @param system   The type of database.
+	 * @param host     The name of the server hosting the database.
+	 * @param base     The name of the database.
+	 * @param user     A user of the database.
+	 * @param password Its password.
+	 */
 	public SQLConfiguration(String system, String host, String base, String user, String password) {
 		this.system = system;
 		this.host = host;

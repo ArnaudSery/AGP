@@ -17,14 +17,22 @@ import persistence.extendeddb.lucene.TextualResult;
 import persistence.extendeddb.lucene.TextualResults;
 
 /**
- *
+ * ExtendedDatabaseAPI class
+ * 
+ * This API allows you to query the database through simple
+ * or compound queries.
  */
 public class ExtendedDatabaseAPI {
 	private SQLConfiguration sqlConfiguration;
 	private TextualConfiguration textualConfiguration;
 	private SQLSearcher databaseConnection;
 	
-	
+	/**
+	 * ExtendedDatabaseAPI constructor
+	 * 
+	 * @param sqlConfiguration     The database configuration.
+	 * @param textualConfiguration The Lucene configuration.
+	 */
 	public ExtendedDatabaseAPI(SQLConfiguration sqlConfiguration,
 							   TextualConfiguration textualConfiguration) {
 		
@@ -32,6 +40,13 @@ public class ExtendedDatabaseAPI {
 		this.textualConfiguration = textualConfiguration;
 	}
 	
+	/**
+	 * getDatabaseConnection
+	 * 
+	 * Initiates a connection to the database (Singleton).
+	 * 
+	 * @return SQLSearcher
+	 */
 	private SQLSearcher getDatabaseConnection() {
 		if (databaseConnection == null) {
 			databaseConnection = new SQLSearcher(
@@ -44,15 +59,46 @@ public class ExtendedDatabaseAPI {
 		return databaseConnection;
 	}
 	
+	/**
+	 * simpleQuery
+	 * 
+	 * Method used to execute simple SQL queries on the database.
+	 * 
+	 * @param query An SQL query.
+	 * @throws SQLException
+	 * @return SQLResults
+	 */
 	public SQLResults simpleQuery(String query) throws SQLException {
 		return getDatabaseConnection().search(query);
 	}
 	
-	public TextualResults textualQuery(String query) throws IOException, ParseException {
+	/**
+	 * textualQuery
+	 * 
+	 * Method used to execute textual queries on the database.
+	 * 
+	 * @param query A textual query.
+	 * @throws IOException, ParseException
+	 * @return TextualResults
+	 */
+	public TextualResults textualQuery(String query)
+			throws IOException, ParseException {
+		
 		Searcher searcher = new Searcher(textualConfiguration.getIndexPath());
 		return searcher.search(query);
 	}
-
+	
+	/**
+	 * mixedQuery
+	 * 
+	 * Method used to execute mixed queries on the database.
+	 * This method can also execute simple SQL queries,
+	 * without the "with" clause.
+	 * 
+	 * @param mixedQuery A mixed query.
+	 * @throws SQLException, IOException, ParseException
+	 * @return MixedResults
+	 */
 	public MixedResults mixedQuery(String mixedQuery)
 			throws SQLException, IOException, ParseException {
 		
@@ -71,10 +117,10 @@ public class ExtendedDatabaseAPI {
 		String idAttribute;
 		Map<String, String> attributes;
 		
-		
+		// Splitting the query into two parts
+		// (SQL query and textual query)
 		partsQuery = mixedQuery.split("(?i: WITH )");
 		sqlQuery = partsQuery[0];
-		
 		
 		hasTextualQuery = partsQuery.length == 2;
 		hasTableForJoin = sqlQuery.matches(
@@ -86,8 +132,8 @@ public class ExtendedDatabaseAPI {
 		mixedResults = new MixedResults();
 		
 		if (hasTextualQuery && hasTableForJoin) {
-			textualResults = textualQuery(partsQuery[1]);
-			
+			// Execution of the simple SQL query
+			// We add the primary key of the table for the join below
 			sqlQuery = sqlQuery.substring(0, 7)
 					   + textualConfiguration.getTable() + "."
 					   + textualConfiguration.getJoinKey() + ", "
@@ -95,6 +141,10 @@ public class ExtendedDatabaseAPI {
 			
 			sqlResults = simpleQuery(sqlQuery);
 			
+			// Execution of the textual query
+			textualResults = textualQuery(partsQuery[1]);
+			
+			// Join
 			for (TextualResult textualResult : textualResults) {
 				documentId = textualResult.getId();
 				
@@ -109,10 +159,12 @@ public class ExtendedDatabaseAPI {
 					}
 				}
 			}
-			
+		
+		// The "with" clause has not been specified
 		} else if (!hasTextualQuery) {
 			sqlResults = simpleQuery(sqlQuery);
 			
+			// Converting the SQLResult into a MixedResult
 			for (SQLResult tuple : sqlResults) {
 				mixedResults.addTuple(new MixedResult(tuple, null));
 			}

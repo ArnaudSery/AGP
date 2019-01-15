@@ -11,7 +11,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- *
+ * SQLSearcher class
+ * 
+ * Used to extract values from the database.
  */
 public class SQLSearcher {
 	private String url;
@@ -19,13 +21,27 @@ public class SQLSearcher {
 	private String password;
 	private Connection jdbcConnection;
 	
-	
+	/**
+	 * SQLSearcher constructor
+	 * 
+	 * @param url      The url of the database.
+	 * @param user     A user of the database.
+	 * @param password Its password.
+	 */
 	public SQLSearcher(String url, String user, String password) {
 		this.url = url;
 		this.user = user;
 		this.password = password;
 	}
 	
+	/**
+	 * getConnection
+	 * 
+	 * Initiates a connection to the database (Singleton).
+	 * 
+	 * @throws SQLException
+	 * @return Connection
+	 */
 	private Connection getConnection() throws SQLException {
 		if (jdbcConnection == null) {
 			jdbcConnection = DriverManager.getConnection(url, user, password);
@@ -34,6 +50,15 @@ public class SQLSearcher {
 		return jdbcConnection;
 	}
 	
+	/**
+	 * search
+	 * 
+	 * Method used to execute SQL queries on the database.
+	 * 
+	 * @param query An SQL query.
+	 * @throws SQLException
+	 * @return SQLResults
+	 */
 	public SQLResults search(String query) throws SQLException {
 		Statement state;
 		ResultSet result;
@@ -67,6 +92,20 @@ public class SQLSearcher {
 		state.close();
 		return sqlResults;
 	}
+	
+	/**
+	 * close
+	 * 
+	 * Method used to close the database connection.
+	 * Use there as soon as you finish questioning the database.
+	 * 
+	 * @throws SQLException
+	 */
+	public void close() throws SQLException {
+		if (jdbcConnection != null) {
+			jdbcConnection.close();
+		}
+	}
 
 	public String getUrl() {
 		return url;
@@ -78,11 +117,5 @@ public class SQLSearcher {
 
 	public String getPassword() {
 		return password;
-	}
-	
-	public void close() throws SQLException {
-		if (jdbcConnection != null) {
-			jdbcConnection.close();
-		}
 	}
 }

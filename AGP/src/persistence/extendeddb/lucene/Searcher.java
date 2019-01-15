@@ -23,17 +23,32 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
 /**
- *
+ * Searcher class
+ * 
+ * Used to search keywords in an index.
  */
 public class Searcher {
 	private final int MAX_RESULTS = 100;
 	private Path indexPath;
 	
-	
+	/**
+	 * Searcher constructor
+	 * 
+	 * @param indexPath  The directory that contains the index.
+	 */
 	public Searcher(Path indexPath) {
 		this.indexPath = indexPath;
 	}
 	
+	/**
+	 * search
+	 * 
+	 * Method used to search keywords on the index.
+	 * 
+	 * @param query A textual query.
+	 * @throws IOException, ParseException
+	 * @return TextualResults
+	 */
 	public TextualResults search(String query) throws IOException, ParseException {
 		Directory directory;
 		Analyzer analyzer;
@@ -52,7 +67,7 @@ public class Searcher {
 		int score;
 		String filename;
 		String filenameWExt;
-		String description;
+		String content;
 		String line;
 		TextualResults textualResults;
 		
@@ -70,31 +85,32 @@ public class Searcher {
 		searcher = new IndexSearcher(reader);
 		
 		parsedQuery = parser.parse(query);
-		results = searcher
-					.search(parsedQuery, MAX_RESULTS)
-					.scoreDocs;
+		results = searcher.search(parsedQuery, MAX_RESULTS).scoreDocs;
 		
 		textualResults = new TextualResults();
 		
-		
+		// For each file found
 		for (ScoreDoc result : results) {
 			document = searcher.doc(result.doc);
 			score = (int) (result.score * 1000);
-			description = "";
+			content = "";
 			
 			documentFile = new File(document.get("path"));
 			fileReader = new FileReader(documentFile);
 			bufferedReader = new BufferedReader(fileReader);
 			
+			// Reading of the contents of the file
 			while ((line = bufferedReader.readLine()) != null) {
-				description += line + "\n";
+				content += line + "\n";
 			}
 			
+			// Getting the document filename
 			filename = documentFile.getName();
 			filenameWExt = filename.substring(0, filename.lastIndexOf("."));
 			id = Integer.parseInt(filenameWExt);
 			
-			textualResults.add(new TextualResult(id, score, description));
+			// Adding the result to textualResults
+			textualResults.add(new TextualResult(id, score, content));
 			
 			bufferedReader.close();
 			fileReader.close();
