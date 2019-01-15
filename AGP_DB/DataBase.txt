@@ -1,13 +1,6 @@
-DROP TABLE Island;
 DROP TABLE Place;
 DROP TABLE Hotel;
-
--- Création des tables
-CREATE TABLE Island (
-  id INTEGER NOT NULL AUTO_INCREMENT,
 DROP TABLE Island;
-DROP TABLE Place;
-DROP TABLE Hotel;
 
 -- Création des tables
 CREATE TABLE Island (
@@ -33,7 +26,7 @@ CREATE TABLE Place (
 
 CREATE TABLE Hotel (
   id INTEGER NOT NULL AUTO_INCREMENT,
-  name VARCHAR(20),
+  name VARCHAR(50),
   pricePerDay FLOAT,
     
   latitude FLOAT,
