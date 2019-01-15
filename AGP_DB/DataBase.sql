@@ -1,17 +1,17 @@
-DROP TABLE Place;
-DROP TABLE Hotel;
-DROP TABLE Island;
+DROP DATABASE IF EXISTS traveldb;
+CREATE DATABASE traveldb;
+USE traveldb;
 
 -- Création des tables
 CREATE TABLE Island (
-  id INTEGER NOT NULL AUTO_INCREMENT,
+  id INTEGER NOT NULL,
   name VARCHAR(20),
   PRIMARY KEY (id)
 );
 
 CREATE TABLE Place (
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  name VARCHAR(50),
+  id INTEGER NOT NULL,
+  name VARCHAR(70),
   type ENUM('historic', 'activity'),
   visitDuration INT,
   entrancePrice FLOAT,
@@ -25,8 +25,8 @@ CREATE TABLE Place (
 );
 
 CREATE TABLE Hotel (
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  name VARCHAR(50),
+  id INTEGER NOT NULL,
+  name VARCHAR(70),
   pricePerDay FLOAT,
     
   latitude FLOAT,
