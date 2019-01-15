@@ -25,7 +25,9 @@ public class ExtendedDatabaseAPI {
 	private SQLSearcher databaseConnection;
 	
 	
-	public ExtendedDatabaseAPI(SQLConfiguration sqlConfiguration, TextualConfiguration textualConfiguration) {
+	public ExtendedDatabaseAPI(SQLConfiguration sqlConfiguration,
+							   TextualConfiguration textualConfiguration) {
+		
 		this.sqlConfiguration = sqlConfiguration;
 		this.textualConfiguration = textualConfiguration;
 	}
@@ -51,23 +53,37 @@ public class ExtendedDatabaseAPI {
 		return searcher.search(query);
 	}
 
-	public MixedResults MixedQuery(String mixedQuery) throws SQLException, IOException, ParseException {
+	public MixedResults MixedQuery(String mixedQuery)
+			throws SQLException, IOException, ParseException {
+		
 		String sqlQuery;
 		String[] partsQuery;
+		
 		boolean hasTextualQuery;
 		boolean hasTableForJoin;
+		
 		SQLResults sqlResults;
 		TextualResults textualResults;
 		MixedResults mixedResults;
-		int documentId;
+		
 		int tupleId;
+		int documentId;
+		String idAttribute;
 		Map<String, String> attributes;
+		
 		
 		partsQuery = mixedQuery.split("(?i: WITH )");
 		sqlQuery = partsQuery[0];
 		
+		
 		hasTextualQuery = partsQuery.length == 2;
-		hasTableForJoin = sqlQuery.matches("(?i:.*FROM.* " + textualConfiguration.getTable() + ".*)");
+		hasTableForJoin = sqlQuery.matches(
+				"(?i:.*FROM.* "
+				+ textualConfiguration.getTable()
+				+ ".*)"
+		);
+		
+		mixedResults = new MixedResults();
 		
 		if (hasTextualQuery && hasTableForJoin) {
 			textualResults = textualQuery(partsQuery[1]);
@@ -79,14 +95,13 @@ public class ExtendedDatabaseAPI {
 			
 			sqlResults = simpleQuery(sqlQuery);
 			
-			mixedResults = new MixedResults();
-			
 			for (TextualResult textualResult : textualResults) {
 				documentId = textualResult.getId();
 				
 				for (SQLResult tuple : sqlResults) {
 					attributes = tuple.getAttributes();
-					tupleId = Integer.parseInt(attributes.get(textualConfiguration.getJoinKey()));
+					idAttribute = attributes.get(textualConfiguration.getJoinKey());
+					tupleId = Integer.parseInt(idAttribute);
 					
 					if (documentId == tupleId) {
 						mixedResults.addTuple(new MixedResult(tuple, textualResult));
@@ -95,11 +110,14 @@ public class ExtendedDatabaseAPI {
 				}
 			}
 			
-			return mixedResults;
+		} else if (!hasTextualQuery) {
+			sqlResults = simpleQuery(sqlQuery);
 			
-		} else {
-			// Returns 0 results (no textual result)
-			return new MixedResults();
+			for (SQLResult tuple : sqlResults) {
+				mixedResults.addTuple(new MixedResult(tuple, null));
+			}
 		}
+		
+		return mixedResults;
 	}
 }

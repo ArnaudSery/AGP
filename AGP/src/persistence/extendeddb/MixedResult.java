@@ -28,10 +28,18 @@ public class MixedResult {
 	}
 	
 	public String getContent() {
-		return textualResult.getContent();
+		if (textualResult != null) {
+			return textualResult.getContent();
+		} else {
+			return null;
+		}
 	}
 	
 	public int getScore() {
-		return textualResult.getScore();
+		if (textualResult != null) {
+			return textualResult.getScore();
+		} else {
+			return 0;
+		}
 	}
 }

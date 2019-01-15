@@ -129,16 +129,16 @@ class IndexerTest {
 				System.out.println("id:" + textualResult.getId()
 								   + " score:" + textualResult.getScore()
 								   + " content:" + textualResult.getContent());
-			}/*
+			}
 			
 			System.out.println("=======================================");
-			MixedResults mixedResults = database.MixedQuery("SELECT name, type FROM Place WITH rhum");
+			MixedResults mixedResults = database.MixedQuery("SELECT name, type FROM Hotel WITH plage");
 			
 			for (MixedResult mixedResult : mixedResults) {
 				System.out.println("=========" + mixedResult.getAttribute("name") + "=========");
 				System.out.println(" type:" + mixedResult.getAttribute("type") + " score:" + mixedResult.getScore());
 				System.out.println("DESCRIPTION:" + mixedResult.getContent());
-			}*/
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
