@@ -7,6 +7,7 @@ public class Simulation {
 	private SimulationEntry SimulationEntry;
 	private LinkedList<Place> placeResult = new LinkedList<Place>();
 	private LinkedList<Hotel> placeResultHotel = new LinkedList<Hotel>();
+	private LinkedList<Offer> OfferList = new LinkedList<Offer>();
 	
 	public Simulation() {
 		
@@ -36,7 +37,25 @@ public class Simulation {
 		placeResultHotel.add(HotelDuSoldatInconnu);
 		placeResultHotel.add(hotel2);
 		
-		Excursion.CreateExcursion(placeResult, placeResultHotel, SimulationEntry.getNumberHourMax());
+		//Excursion.CreateExcursion(placeResult, placeResultHotel, SimulationEntry.getNumberHourMax());
+		
+		LinkedList<LinkedList<Place>> ListGroupPlace = Excursion.CreateGroupPlace(placeResult,SimulationEntry.getNumberHourMax());
+		SimulationEntry.getNumberDay();
+		SimulationEntry.getNumberExcursion();
+		
+		Offer offre = new Offer(ListGroupPlace, SimulationEntry.getNumberDay(), SimulationEntry.getNumberExcursion(), SimulationEntry.getIntensity(), SimulationEntry.getNumberHourMax(), SimulationEntry.getTotalCost(), SimulationEntry.isConfort(), false);
+
+		
+		LinkedList<Excursion> ExcursionList = null;
+		
+		for(int i = 0;i < ListGroupPlace.size(); i++) {
+			ExcursionList.add(new Excursion(ListGroupPlace.get(i)));
+		}
+		
+		/*for(int i = 0; i < SimulationEntry.getNumberDay(); i++) {
+			Offer offre = new Offer(placeResult, SimulationEntry.getNumberDay(), SimulationEntry.getNumberExcursion(), SimulationEntry.getIntensity(), SimulationEntry.getNumberHourMax(), SimulationEntry.getTotalCost(), SimulationEntry.isConfort());
+			OfferList.add(offre);
+		}*/
 		
 		
 		

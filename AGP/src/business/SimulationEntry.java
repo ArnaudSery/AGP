@@ -6,26 +6,26 @@ public class SimulationEntry {
 		private int numberExcursion;
 		private String keyWord;
 		private int totalCost;
-		private int intensity;
 		private int numberHourMax;
-		private String confort;
+		private String intensity;
+		private boolean confort;
 		
 		public SimulationEntry() {
 			this.numberDay =  3;
 			this.numberExcursion = 2;
 			this.keyWord = "";
 			this.totalCost = 1000;
-			this.intensity = 10;
-			this.confort = "normal";// normal or hight
-			if(confort.compareTo("normal") == 0) {
+			this.intensity = "normal";// normal or hight
+			if(intensity.compareTo("normal") == 0) {
 				this.numberHourMax = 6;
 			}
 			else {
 				this.numberHourMax = 10;
 			}
+			this.confort = true;
 		}
 
-		public SimulationEntry(int numberDay, int numberExcursion, String keyWord, int totalCost, int intensity, String confort) {
+		public SimulationEntry(int numberDay, int numberExcursion, String keyWord, int totalCost, String intensity, boolean confort) {
 			this.numberDay =  numberDay;
 			this.numberExcursion = numberExcursion;
 			if(numberDay < numberExcursion) {
@@ -35,13 +35,29 @@ public class SimulationEntry {
 			this.keyWord = keyWord;
 			this.totalCost = totalCost;
 			this.intensity = intensity;
-			this.confort = confort;
-			if(confort.compareTo("normal") == 0) {
+			if(intensity.compareTo("normal") == 0) {
 				this.numberHourMax = 6;
 			}
 			else {
 				this.numberHourMax = 10;
 			}
+			this.confort = confort;
+		}
+
+		public String getIntensity() {
+			return intensity;
+		}
+
+		public void setIntensity(String intensity) {
+			this.intensity = intensity;
+		}
+
+		public void setConfort(boolean confort) {
+			this.confort = confort;
+		}
+
+		public boolean isConfort() {
+			return confort;
 		}
 
 		public int getNumberDay() {
@@ -74,14 +90,6 @@ public class SimulationEntry {
 
 		public void setTotalCost(int cost) {
 			this.totalCost = cost;
-		}
-		
-		public int getIntensity() {
-			return intensity;
-		}
-
-		public void setIntensity(int intensity) {
-			this.intensity = intensity;
 		}
 
 		public int getNumberHourMax() {

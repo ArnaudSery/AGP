@@ -3,25 +3,26 @@ package business;
 public abstract class Transport {
 
 	
-	protected int costTransport;
+	protected double costTransport;
 	protected int type;
+	protected double distanceTraveled;
 	
 	public Transport(){
 		
 	}
 	
-	public Transport(int costTransport, int type) {
-		this.costTransport = costTransport;
+	public Transport(int type, double distanceTraveled) {
 		this.type = type;
+		this.distanceTraveled = distanceTraveled;
 	}
 	
 	
 	
-	public int getCostTransport() {
+	public double getCostTransport() {
 		return costTransport;
 	}
 
-	public void setCostTransport(int costTransport) {
+	public void setCostTransport(double costTransport) {
 		this.costTransport = costTransport;
 	}
 
@@ -31,6 +32,14 @@ public abstract class Transport {
 
 	public void setType(int type) {
 		this.type = type;
+	}
+
+	public double getDistanceTraveled() {
+		return distanceTraveled;
+	}
+
+	public void setDistanceTraveled(double distanceTraveled) {
+		this.distanceTraveled = distanceTraveled;
 	}
 	
 }

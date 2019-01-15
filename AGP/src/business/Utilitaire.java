@@ -1,5 +1,7 @@
 package business;
 
+import java.util.Random;
+
 public class Utilitaire {
 
 	
@@ -33,5 +35,11 @@ public class Utilitaire {
 		
 		
 		return time;
+	}
+	
+	public static int Rand(int i, int j) {
+		Random rnd = new Random();
+		int number = i + rnd.nextInt(j - i + 1);
+		return number;
 	}
 }

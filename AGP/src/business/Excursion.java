@@ -5,49 +5,98 @@ import java.util.LinkedList;
 
 public class Excursion {
 
-	private static HashMap<Place,Transport> Excursions = new HashMap<Place,Transport>();
-	//private static LinkedList<Excursion> ExcursionList = new LinkedList<Excursion>();
+	//private static HashMap<Place,Transport> Excursions = new HashMap<Place,Transport>();
+	//private Hotel hotel;
 	
-	private static LinkedList<LinkedList<Place>> ExcursionGroup = new LinkedList<LinkedList<Place>>();
+	private static LinkedList<Transport> ExcursionTravel = new LinkedList<Transport>();
+	private static LinkedList<Place> ExcursionGroup = new LinkedList<Place>();
+
 	
-	public Excursion(HashMap<Place,Transport> Excursions) {
-		this.Excursions = Excursions;
+	public Excursion(LinkedList<Place> ExcursionGroup) {
+		this.ExcursionGroup = ExcursionGroup;
+		
+		this.ExcursionTravel = choseTravel(ExcursionGroup);
 	}
-	
-	
-	
-	public static void CreateExcursion(LinkedList<Place> placeResult, LinkedList<Hotel> placeResultHotel, int numberHourMax) {
+
+
+	//Create a list of group of places.
+	public static LinkedList<LinkedList<Place>> CreateGroupPlace(LinkedList<Place> placeResult, int numberHourMax) {
 		
+		LinkedList<LinkedList<Place>> GroupPlace = new LinkedList<LinkedList<Place>>();
 		
-		while(!placeResult.isEmpty()) {
-			
-			int k = 0;
-			int time = 0;
-			
-			ExcursionGroup.add(new LinkedList<Place>());
-			
-			for(int i = 0; i < placeResult.size(); i++) {
+		LinkedList<Place> usedPlaceResult = placeResult;
+		LinkedList<Place> usedPlaceResultRand = placeResult;
+		
+		//Create a list of list of Place
+		for(int j = 0; j < 3; j++) {
+			while(!usedPlaceResult.isEmpty()) {
 				
-				Place place = placeResult.get(i);
-				time += place.getVisitDuration();
+				int k = 0;
+				int time = 0;
 				
-				if(time == numberHourMax) {
-					ExcursionGroup.get(k).add(place);
-					break;
-				}
+				GroupPlace.add(new LinkedList<Place>());
 				
-				if(time < numberHourMax) {
-					ExcursionGroup.get(k).add(place);
+				for(int i = 0; i < usedPlaceResult.size(); i++) {
+					
+					Place place = usedPlaceResult.get(i);
+					time += place.getVisitDuration();
+					
+					if(time == numberHourMax) {
+						GroupPlace.get(k).add(place);
+						usedPlaceResult.remove(i);
+						i--;
+						break;
+					}
+					
+					if(time < numberHourMax) {
+						GroupPlace.get(k).add(place);
+						usedPlaceResult.remove(i);
+						i--;
+					}
+					else {
+						time -= place.getVisitDuration();
+						continue;
+					}
 				}
-				else {
-					time -= place.getVisitDuration();
-					continue;
-				}
+				k++;
 			}
-			k++;
+			usedPlaceResultRand = placeResult;
+			
+			while(!usedPlaceResultRand.isEmpty()) {
+				int rand = Utilitaire.Rand(0, usedPlaceResultRand.size());
+				usedPlaceResult.add(usedPlaceResultRand.get(rand));
+				usedPlaceResultRand.remove(rand);
+			}
+			
+			
+			
 		}
 		
+		return GroupPlace;
+	}
+	
+	@SuppressWarnings("null")
+	public LinkedList<Transport> choseTravel(LinkedList<Place> ExcursionGroup){
+		LinkedList<Transport> ExcursionTravel = null;
 		
+		
+		for(int i=1; i<ExcursionGroup.size();i++) {
+			Place p1 = ExcursionGroup.get(i-1);
+			Place p2 = ExcursionGroup.get(i);
+			double distanceTraveled = Utilitaire.CalculDistance(p1.getCoordinates(), p2.getCoordinates());
+			int type = Island.equals(p1, p2);
+			if(type == 0) {
+				ExcursionTravel.add(new Boat(distanceTraveled));
+			}else {
+				ExcursionTravel.add(new Bus(distanceTraveled));
+			}
+		}		
+		return ExcursionTravel;
+	}
+	
+	/*public static Hotel ChoseHotel(LinkedList<Hotel> placeResultHotel, LinkedList<Place> GroupPlace) {
+
+		//This find the nearest hotel
 		double min = 10000;
 		Hotel choiceHotel = null;
 				
@@ -56,101 +105,41 @@ public class Excursion {
 			Hotel hotel = placeResultHotel.get(i);
 			double distance = 0;
 			
-			for(int j = 0; j < ExcursionGroup.size(); j++) {
+			for(int j = 0; j < GroupPlace.size(); j++) {
 			
-				distance += Utilitaire.CalculDistance(hotel.getCoordinates(), ExcursionGroup.get(j).get(0).getCoordinates());
+				distance += Utilitaire.CalculDistance(hotel.getCoordinates(), GroupPlace.get(j).getCoordinates());
 				
 			}
 			
-			distance = distance / ExcursionGroup.size();
+			distance = distance / GroupPlace.size();
 			
 			if(min > distance) {
 				min = distance;
 				choiceHotel = placeResultHotel.get(i);
 			}
 		}
-		
-		
-		
-		
-		
-		
-		/*
-		double lenghtMin = 100000;
-		
-		Hotel currentHotel = null;
-		
-		
-		//This loop permit to find the nearest hotel of the place who have the bigest score 
-		//of the result of the search of the client
-		for(int i = 0; i < placeResultHotel.size(); i++) {
-			
-			double currentLenght;
-			double xInit = placeResultHotel.get(i).getCoordinates().getLongitude();
-			double yInit = placeResultHotel.get(i).getCoordinates().getLatitude();
-			double xFinal = placeResult.get(0).getCoordinates().getLongitude();
-			double yFinal = placeResult.get(0).getCoordinates().getLatitude();
-			currentLenght = Utilitaire.CalculDistance(xInit, yInit, xFinal, yFinal);
-			
-			if(lenghtMin > currentLenght) {
-				currentHotel = placeResultHotel.get(i);
-			}
-			
-		}
-		
-		//This loop permit to create Excursion who will be 
-		
-		int time = 0;
-		int beginHotel = 0;
-		
-		
-		for(int j = 0; j < placeResult.size(); j++) {
-				
-				
-			Place place = placeResult.get(j);
-				
-			//Choice of Transport//
-			int choiceTransport = -1;
-			
-			if(beginHotel == 0) {
-				choiceTransport = Island.equals(currentHotel, place);
-			}
-			else {
-				choiceTransport = Island.equals(placeResult.get(j-1), place);
-			}
-			
-			
-			Transport currentTransport;
-				
-			if(choiceTransport == 1) {
-				currentTransport = new Bus();
-			}
-			else {
-				currentTransport = new Boat();
-			}
-			///////////////////////
-			
-			time += Utilitaire.ReturnTimeTransport(currentHotel.getCoordinates(), place.getCoordinates(), currentTransport);
-			time += place.getVisitDuration() ;
-			
-			
-			Excursions.put(place, currentTransport);
-			
-			
-			if((time > numberHourMax) || (j+1 == placeResult.size())) {
-				Excursion ex = new Excursion(Excursions);
-				ExcursionList.add(ex);
-				time = 0;
-				
-				Excursions.clear();
-				beginHotel = 0;
-			}
-			
-			beginHotel++;
-			
-		}*/
-		
-		
-	}
+		return choiceHotel;
+	}*/
 	
+	
+
+	public static LinkedList<Transport> getExcursionTravel() {
+		return ExcursionTravel;
+	}
+
+
+	public static void setExcursionTravel(LinkedList<Transport> excursionTravel) {
+		ExcursionTravel = excursionTravel;
+	}
+
+
+	public static LinkedList<Place> getExcursionGroup() {
+		return ExcursionGroup;
+	}
+
+
+	public static void setExcursionGroup(LinkedList<Place> excursionGroup) {
+		ExcursionGroup = excursionGroup;
+	}
+		
 }
