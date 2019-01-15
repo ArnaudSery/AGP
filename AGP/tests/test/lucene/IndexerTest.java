@@ -110,30 +110,35 @@ class IndexerTest {
 		);
 		
 		try {
+			Indexer index = new Indexer(sourcePath, indexPath);
+			
+			index.createIndex(true);
+			index.addDocuments(sourcePath);
+			index.close();
+			
 			ExtendedDatabaseAPI database = new ExtendedDatabaseAPI(sqlConfiguration, textualConfiguration);
-			/*SQLResults sqlResults = database.simpleQuery("SELECT name, type FROM Place WHERE type = 'historic'");
+			SQLResults sqlResults = database.simpleQuery("SELECT name, type FROM Place WHERE type = 'historic'");
 			
 			for (SQLResult sqlResult : sqlResults) {
 				System.out.println(sqlResult.getAttributes());
 			}
 			
-			TextualResults textualResults = database.textualQuery("cergy");
+			TextualResults textualResults = database.textualQuery("musée");
 			
 			for (TextualResult textualResult : textualResults) {
 				System.out.println("id:" + textualResult.getId()
 								   + " score:" + textualResult.getScore()
 								   + " content:" + textualResult.getContent());
-			}
-			System.out.println("=======================================");*/
-			MixedResults mixedResults = database.MixedQuery("SELECT name, type FROM Place WITH musée");
+			}/*
+			
+			System.out.println("=======================================");
+			MixedResults mixedResults = database.MixedQuery("SELECT name, type FROM Place WITH rhum");
 			
 			for (MixedResult mixedResult : mixedResults) {
 				System.out.println("=========" + mixedResult.getAttribute("name") + "=========");
 				System.out.println(" type:" + mixedResult.getAttribute("type") + " score:" + mixedResult.getScore());
 				System.out.println("DESCRIPTION:" + mixedResult.getContent());
-			}
-			
-			System.out.println("=======================================");
+			}*/
 			
 		} catch (Exception e) {
 			e.printStackTrace();

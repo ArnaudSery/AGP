@@ -50,6 +50,8 @@ public class Searcher {
 		
 		int id;
 		int score;
+		String filename;
+		String filenameWExt;
 		String description;
 		String line;
 		TextualResults textualResults;
@@ -75,10 +77,9 @@ public class Searcher {
 		textualResults = new TextualResults();
 		
 		
-		for (ScoreDoc result : results) {		
-			id = result.doc;
+		for (ScoreDoc result : results) {
+			document = searcher.doc(result.doc);
 			score = (int) (result.score * 1000);
-			document = searcher.doc(id);
 			description = "";
 			
 			documentFile = new File(document.get("path"));
@@ -88,6 +89,10 @@ public class Searcher {
 			while ((line = bufferedReader.readLine()) != null) {
 				description += line + "\n";
 			}
+			
+			filename = documentFile.getName();
+			filenameWExt = filename.substring(0, filename.lastIndexOf("."));
+			id = Integer.parseInt(filenameWExt);
 			
 			textualResults.add(new TextualResult(id, score, description));
 			
