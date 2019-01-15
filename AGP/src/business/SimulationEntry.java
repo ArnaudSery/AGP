@@ -7,6 +7,7 @@ public class SimulationEntry {
 		private String keyWord;
 		private int totalCost;
 		private int intensity;
+		private int numberHourMax;
 		
 		public SimulationEntry() {
 			this.numberDay =  3;
@@ -14,9 +15,10 @@ public class SimulationEntry {
 			this.keyWord = "";
 			this.totalCost = 1000;
 			this.intensity = 10;
+			this.setNumberHourMax(10);
 		}
 
-		public SimulationEntry(int numberDay, int numberExcursion, String keyWord, int totalCost) {
+		public SimulationEntry(int numberDay, int numberExcursion, String keyWord, int totalCost, int intensity, int numberHourMax) {
 			this.numberDay =  numberDay;
 			this.numberExcursion = numberExcursion;
 			if(numberDay < numberExcursion) {
@@ -26,6 +28,7 @@ public class SimulationEntry {
 			this.keyWord = keyWord;
 			this.totalCost = totalCost;
 			this.intensity = intensity;
+			this.setNumberHourMax(numberHourMax);
 		}
 
 		public int getNumberDay() {
@@ -66,6 +69,14 @@ public class SimulationEntry {
 
 		public void setIntensity(int intensity) {
 			this.intensity = intensity;
+		}
+
+		public int getNumberHourMax() {
+			return numberHourMax;
+		}
+
+		public void setNumberHourMax(int numberHourMax) {
+			this.numberHourMax = numberHourMax;
 		}
 		
 }

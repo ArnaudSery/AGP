@@ -10,8 +10,8 @@ public class Island {
 		this.name = name;
 	}
 	
-	// e = earth / Bus  |  s = sea / Boat
-		public int equals(Hotel hotel, Place place) {
+	// 1 = Bus  |  0 = Boat
+		public static int equals(Hotel hotel, Place place) {
 			
 			
 			int choice = 0;
@@ -24,7 +24,7 @@ public class Island {
 		}
 		
 		
-		public int equals(Place place1, Place place2) {
+		public static int equals(Place place1, Place place2) {
 			
 			int choice = 0;
 			

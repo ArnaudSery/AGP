@@ -1,6 +1,5 @@
 package business;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Simulation {
@@ -37,7 +36,7 @@ public class Simulation {
 		placeResultHotel.add(HotelDuSoldatInconnu);
 		placeResultHotel.add(hotel2);
 		
-		Excursion.CreateExcursion(placeResult, placeResultHotel);
+		Excursion.CreateExcursion(placeResult, placeResultHotel, SimulationEntry.getNumberHourMax());
 		
 		
 		

@@ -4,14 +4,14 @@ public abstract class Place {
 
 	private int id;
 	private String name;
-	private float visitDuration;
+	private int visitDuration;
 	private float entrancePrice;
 	private String description;
 	private Coordinates coordinates;
 	private Island island;
 	
 	
-	public Place(int id, String name, float visitDuration, float entrancePrice, String description, Coordinates coordinates, Island island) {
+	public Place(int id, String name, int visitDuration, float entrancePrice, String description, Coordinates coordinates, Island island) {
 		this.id = id;
 		this.name = name;
 		this.visitDuration = visitDuration;
@@ -37,11 +37,11 @@ public abstract class Place {
 		this.name = name;
 	}
 
-	public float getVisitDuration() {
+	public int getVisitDuration() {
 		return visitDuration;
 	}
 
-	public void setVisitDuration(float visitDuration) {
+	public void setVisitDuration(int visitDuration) {
 		this.visitDuration = visitDuration;
 	}
 
