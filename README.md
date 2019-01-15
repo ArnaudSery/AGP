@@ -2,8 +2,8 @@
 
 Bonjour tout le monde !
 
-Commencez par télécharger postgreSQL sur windows, la dernière version.
+Commencez par télécharger la dernière version **MySQL** sur windows.
 
-Comme ça on travaillera tous sur la même base déjà.
+Comme cela, on travaillera tous sur la même base.
 
-https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
+https://www.mysql.com/fr/
