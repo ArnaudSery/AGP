@@ -67,6 +67,10 @@ public class SQLConfiguration {
 	}
 
 	public String getUrl() {
-		return "jdbc:" + system + "://" + host + "/" + base;
+		if (system != null || host != null || base != null) {
+			return "jdbc:" + system + "://" + host + "/" + base;
+		} else {
+			return null;
+		}
 	}
 }

@@ -53,7 +53,7 @@ public class ExtendedDatabaseAPI {
 		return searcher.search(query);
 	}
 
-	public MixedResults MixedQuery(String mixedQuery)
+	public MixedResults mixedQuery(String mixedQuery)
 			throws SQLException, IOException, ParseException {
 		
 		String sqlQuery;
