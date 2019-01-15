@@ -1,7 +1,7 @@
 /**
  * 
  */
-package persistence.lucene;
+package persistence.extendeddb.lucene;
 
 import java.io.BufferedReader;
 import java.io.File;

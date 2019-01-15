@@ -1,7 +1,7 @@
 /**
  * 
  */
-package persistence.lucene;
+package persistence.extendeddb.lucene;
 
 /**
  *
@@ -9,13 +9,13 @@ package persistence.lucene;
 public class TextualResult {
 	private int id;
 	private int score;
-	private String description;
+	private String content;
 	
 	
-	public TextualResult(int id, int score, String description) {
+	public TextualResult(int id, int score, String content) {
 		this.id = id;
 		this.score = score;
-		this.description = description;
+		this.content = content;
 	}
 
 	public int getId() {
@@ -26,7 +26,7 @@ public class TextualResult {
 		return score;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getContent() {
+		return content;
 	}
 }

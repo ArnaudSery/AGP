@@ -1,7 +1,7 @@
 /**
  * 
  */
-package persistence.lucene;
+package persistence.extendeddb.lucene;
 
 import java.util.Iterator;
 import java.util.LinkedList;
