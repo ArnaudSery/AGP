@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(JUnitPlatform.class)
 @SelectPackages("test")
-class Alltest {
+class AllTests {
 
 
 }
