@@ -3,9 +3,14 @@ package business;
 public class Utilitaire {
 
 	
-	public static double CalculDistance(double longitudeInit, double latitudeInit, double longituteFinal, double latitudeFinal) {
+	public static double CalculDistance(Coordinates Init, Coordinates Final) {
 		
 		double distance;
+		
+		double longitudeInit = Init.getLongitude(); 
+		double latitudeInit = Init.getLatitude();
+		double longituteFinal = Final.getLongitude();
+		double latitudeFinal = Final.getLatitude();
 		
 		distance = Math.sqrt(Math.pow(longituteFinal - longitudeInit,2) + Math.pow(latitudeFinal - latitudeInit,2));
 		
@@ -17,7 +22,7 @@ public class Utilitaire {
 		
 		int time = 0;
 		
-		double distance = CalculDistance(hotel.getLongitude(), hotel.getLongitude(), place.getLatitude(), place.getLatitude());
+		double distance = CalculDistance(hotel, place);
 		
 		if(transport.getType() == 1) {
 			time = (int) (distance * 2);

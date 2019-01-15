@@ -8,6 +8,7 @@ public class SimulationEntry {
 		private int totalCost;
 		private int intensity;
 		private int numberHourMax;
+		private String confort;
 		
 		public SimulationEntry() {
 			this.numberDay =  3;
@@ -15,10 +16,16 @@ public class SimulationEntry {
 			this.keyWord = "";
 			this.totalCost = 1000;
 			this.intensity = 10;
-			this.setNumberHourMax(10);
+			this.confort = "normal";// normal or hight
+			if(confort.compareTo("normal") == 0) {
+				this.numberHourMax = 6;
+			}
+			else {
+				this.numberHourMax = 10;
+			}
 		}
 
-		public SimulationEntry(int numberDay, int numberExcursion, String keyWord, int totalCost, int intensity, int numberHourMax) {
+		public SimulationEntry(int numberDay, int numberExcursion, String keyWord, int totalCost, int intensity, String confort) {
 			this.numberDay =  numberDay;
 			this.numberExcursion = numberExcursion;
 			if(numberDay < numberExcursion) {
@@ -28,7 +35,13 @@ public class SimulationEntry {
 			this.keyWord = keyWord;
 			this.totalCost = totalCost;
 			this.intensity = intensity;
-			this.setNumberHourMax(numberHourMax);
+			this.confort = confort;
+			if(confort.compareTo("normal") == 0) {
+				this.numberHourMax = 6;
+			}
+			else {
+				this.numberHourMax = 10;
+			}
 		}
 
 		public int getNumberDay() {

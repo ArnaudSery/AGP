@@ -6,7 +6,9 @@ import java.util.LinkedList;
 public class Excursion {
 
 	private static HashMap<Place,Transport> Excursions = new HashMap<Place,Transport>();
-	private static LinkedList<Excursion> ExcursionList = new LinkedList<Excursion>();
+	//private static LinkedList<Excursion> ExcursionList = new LinkedList<Excursion>();
+	
+	private static LinkedList<LinkedList<Place>> ExcursionGroup = new LinkedList<LinkedList<Place>>();
 	
 	public Excursion(HashMap<Place,Transport> Excursions) {
 		this.Excursions = Excursions;
@@ -16,6 +18,64 @@ public class Excursion {
 	
 	public static void CreateExcursion(LinkedList<Place> placeResult, LinkedList<Hotel> placeResultHotel, int numberHourMax) {
 		
+		
+		while(!placeResult.isEmpty()) {
+			
+			int k = 0;
+			int time = 0;
+			
+			ExcursionGroup.add(new LinkedList<Place>());
+			
+			for(int i = 0; i < placeResult.size(); i++) {
+				
+				Place place = placeResult.get(i);
+				time += place.getVisitDuration();
+				
+				if(time == numberHourMax) {
+					ExcursionGroup.get(k).add(place);
+					break;
+				}
+				
+				if(time < numberHourMax) {
+					ExcursionGroup.get(k).add(place);
+				}
+				else {
+					time -= place.getVisitDuration();
+					continue;
+				}
+			}
+			k++;
+		}
+		
+		
+		double min = 10000;
+		Hotel choiceHotel = null;
+				
+		for(int i = 0; i < placeResultHotel.size(); i++) {
+			
+			Hotel hotel = placeResultHotel.get(i);
+			double distance = 0;
+			
+			for(int j = 0; j < ExcursionGroup.size(); j++) {
+			
+				distance += Utilitaire.CalculDistance(hotel.getCoordinates(), ExcursionGroup.get(j).get(0).getCoordinates());
+				
+			}
+			
+			distance = distance / ExcursionGroup.size();
+			
+			if(min > distance) {
+				min = distance;
+				choiceHotel = placeResultHotel.get(i);
+			}
+		}
+		
+		
+		
+		
+		
+		
+		/*
 		double lenghtMin = 100000;
 		
 		Hotel currentHotel = null;
@@ -75,7 +135,6 @@ public class Excursion {
 			
 			
 			Excursions.put(place, currentTransport);
-			//placeResult.remove(j);
 			
 			
 			if((time > numberHourMax) || (j+1 == placeResult.size())) {
@@ -89,7 +148,7 @@ public class Excursion {
 			
 			beginHotel++;
 			
-		}
+		}*/
 		
 		
 	}
