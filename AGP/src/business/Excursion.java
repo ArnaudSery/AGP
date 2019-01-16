@@ -28,7 +28,7 @@ public class Excursion {
 		LinkedList<Place> usedPlaceResultRand = placeResult;
 		
 		//Create a list of list of Place
-		for(int j = 0; j < 3; j++) {
+		for(int j = 0; j < 5; j++) {
 			while(!usedPlaceResult.isEmpty()) {
 				
 				int k = 0;

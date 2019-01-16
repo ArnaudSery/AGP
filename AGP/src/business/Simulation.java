@@ -43,14 +43,14 @@ public class Simulation {
 		SimulationEntry.getNumberDay();
 		SimulationEntry.getNumberExcursion();
 		
-		Offer offre = new Offer(ListGroupPlace, SimulationEntry.getNumberDay(), SimulationEntry.getNumberExcursion(), SimulationEntry.getIntensity(), SimulationEntry.getNumberHourMax(), SimulationEntry.getTotalCost(), SimulationEntry.isConfort(), false);
-
 		
 		LinkedList<Excursion> ExcursionList = null;
 		
 		for(int i = 0;i < ListGroupPlace.size(); i++) {
 			ExcursionList.add(new Excursion(ListGroupPlace.get(i)));
 		}
+		
+		Offer offre = new Offer(ExcursionList, SimulationEntry.getNumberDay(), SimulationEntry.getNumberExcursion(), SimulationEntry.getIntensity(), SimulationEntry.getNumberHourMax(), SimulationEntry.getTotalCost(), SimulationEntry.isConfort(), false);
 		
 		/*for(int i = 0; i < SimulationEntry.getNumberDay(); i++) {
 			Offer offre = new Offer(placeResult, SimulationEntry.getNumberDay(), SimulationEntry.getNumberExcursion(), SimulationEntry.getIntensity(), SimulationEntry.getNumberHourMax(), SimulationEntry.getTotalCost(), SimulationEntry.isConfort());
