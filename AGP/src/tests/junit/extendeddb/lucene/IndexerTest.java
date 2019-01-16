@@ -1,5 +1,6 @@
-package test.lucene;
+package tests.junit.extendeddb.lucene;
 
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 
 import persistence.extendeddb.lucene.Indexer;
+
 
 class IndexerTest {
 	

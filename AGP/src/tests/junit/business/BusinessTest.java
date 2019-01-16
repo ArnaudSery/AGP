@@ -1,30 +1,16 @@
-package test.business;
+package tests.junit.business;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
-
+import org.junit.jupiter.api.Test;
 import java.util.LinkedList;
 
-import org.junit.jupiter.api.Test;
+import business.*;
 
-import business.ActivityPlace;
-import business.Coordinates;
-import business.Excursion;
-import business.HistoricPlace;
-import business.Hotel;
-import business.Island;
-import business.Place;
-import business.Simulation;
-import business.SimulationEntry;
-import business.Utilitaire;
 
 class BusinessTest {
 	
-	
-	
 	@Test
 	void testdistance() {
-		
 		Coordinates coord1 = new Coordinates(14.58, 61.30);
 		Coordinates coord2 = new Coordinates(14.51, 61.12);
 		Coordinates coord3 = new Coordinates(-14.28, 60.58);
@@ -38,7 +24,6 @@ class BusinessTest {
 	
 	@Test
 	void testExcursion() {
-		
 		SimulationEntry SimulationEntry = new SimulationEntry();
 	    LinkedList<Place> placeResult = new LinkedList<Place>();
 		LinkedList<Hotel> placeResultHotel = new LinkedList<Hotel>();
@@ -68,6 +53,4 @@ class BusinessTest {
 		
 		//Excursion.CreateExcursion(placeResult, placeResultHotel, SimulationEntry.getNumberHourMax());	
 	}
-
-
 }

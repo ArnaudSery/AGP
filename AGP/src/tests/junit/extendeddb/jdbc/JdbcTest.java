@@ -1,4 +1,4 @@
-package test.jdbc;
+package tests.junit.extendeddb.jdbc;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,7 +17,8 @@ import persistence.extendeddb.jdbc.SQLResults;
 import persistence.extendeddb.jdbc.SQLSearcher;
 import persistence.extendeddb.lucene.Indexer;
 
-class TestJdbc {
+
+class JdbcTest {
 
 	@Test
 	void testJDBC() {
@@ -39,46 +40,4 @@ class TestJdbc {
 			e.printStackTrace();
 		}
 	}
-
-	@Test
-	void testMixedQuery() {
-		Path sourcePath = Paths.get("C:\\DATA");
-		Path indexPath = Paths.get("C:\\INDEX");
-		
-		SQLConfiguration sqlConfiguration = new SQLConfiguration(
-				"mysql",
-				"localhost",
-				"travelDB",
-				"root",
-				"p@ssword"
-		);
-		
-		TextualConfiguration textualConfiguration = new TextualConfiguration(
-				sourcePath,
-				indexPath,
-				"Place",
-				"id"
-		);
-		
-		try {
-			Indexer index = new Indexer(sourcePath, indexPath);
-			
-			index.createIndex(true);
-			index.addDocuments(sourcePath);
-			index.close();
-			
-			ExtendedDatabaseAPI database = new ExtendedDatabaseAPI(sqlConfiguration, textualConfiguration);
-			MixedResults sqlResults = database.MixedQuery("SELECT name, type FROM Place with musée");
-			for(MixedResult result : sqlResults) {
-				assertNotNull(result.getContent());
-				assertTrue(result.getScore() >= 0 );
-				assertNotNull(result.getAttribute("name"));
-			}
-		
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
 }
