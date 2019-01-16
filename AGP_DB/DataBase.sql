@@ -1,16 +1,16 @@
-DROP TABLE Place;
-DROP TABLE Hotel;
-DROP TABLE Island;
+DROP DATABASE IF EXISTS traveldb;
+CREATE DATABASE traveldb;
+USE traveldb;
 
 -- Création des tables
 CREATE TABLE Island (
-  id INTEGER NOT NULL AUTO_INCREMENT,
+  id INTEGER NOT NULL,
   name VARCHAR(20),
   PRIMARY KEY (id)
 );
 
 CREATE TABLE Place (
-  id INTEGER NOT NULL AUTO_INCREMENT,
+  id INTEGER NOT NULL,
   name VARCHAR(70),
   type ENUM('historic', 'activity'),
   visitDuration INT,
@@ -18,17 +18,16 @@ CREATE TABLE Place (
   
   latitude FLOAT,
   longitude FLOAT,
-
   idIsland INTEGER,
   PRIMARY KEY (id),
   FOREIGN KEY (idIsland) REFERENCES Island (id)
 );
 
 CREATE TABLE Hotel (
-  id INTEGER NOT NULL AUTO_INCREMENT,
-  name VARCHAR(50),
+  id INTEGER NOT NULL,
+  name VARCHAR(70),
   pricePerDay FLOAT,
-    
+
   latitude FLOAT,
   longitude FLOAT,
     
@@ -43,9 +42,9 @@ INSERT INTO Island (id, name) VALUES
   (0, 'Guadeloupe'),
   (1, 'Dominique'),
   (2, 'Martinique');
-  
-INSERT INTO Place (id, name, type ,visitDuration, entrancePrice, latitude, longitude, idIsland) VALUES
-  (0, 'Savane des Pétrifications', 				'activity', 7, 8.5  , 14.40 , -60.85 ,2); 
+
+INSERT INTO Place (id, name, type, visitDuration, entrancePrice, latitude, longitude, idIsland) VALUES
+  (0, 'Savane des Pétrifications', 				'activity', 7, 8.5  , 14.40 , -60.85 ,2),
   (1,  'Musée du Café',  							'historic', 1, 5.0  , 16.06 , -61.76 ,0),
   (2,  'Distillerie Rhum Bologne',  				'activity', 1, 12.0 , 16.00 , -61.73 ,0),
   (3,  'Fort Delgrès',  							'activity', 2, 23.5 , 15.98 , -61.72 ,0),
@@ -74,15 +73,15 @@ INSERT INTO Place (id, name, type ,visitDuration, entrancePrice, latitude, longi
   (26, 'Jardin de Balata', 							'activity', 3, 12.2 , 14.67 , -61.09 ,2),
   (27, 'Cap 110', 									'historic', 8, 21.6 , 14.46 , -61.04 ,2),
   (28, 'La Baignoire de Joséphine', 				'activity', 1, 11.5 , 14.61 , -60.89 ,2),
-  (29, 'Musée départemental de préhistoire de la martinique', 	'historic', 2, 14.3 , 14.60 , -61.06 ,2),
-  
+  (29, 'Musée départemental de préhistoire de la martinique', 	'historic', 2, 14.3 , 14.60 , -61.06 ,2);
+
 INSERT INTO Hotel (id, name, pricePerDay, latitude, longitude, idIsland) VALUES
-  (0, 'Residence Roxelle' 			, 163.2 , 14.76 , -61.16 , 2);
+  (0, 'Residence Roxelle' 			, 63.2 , 14.76 , -61.16 , 2),
   (1, 'Le Relax Hotêl' 				, 158.6 , 16.35 , -61.45 , 0),
-  (2, 'Les Nids de Belle Eau' 		, 135.5 , 16.02 , -61.60 , 0),
-  (3, 'Eden Des Colibris' 			, 143.8 , 16.07 , -61.72 , 0),
-  (4, 'Comfort Cottages' 			, 148.5 , 15.59 , -61.39 , 1),
+  (2, 'Les Nids de Belle Eau' 		, 235.5 , 16.02 , -61.60 , 0),
+  (3, 'Eden Des Colibris' 			, 103.8 , 16.07 , -61.72 , 0),
+  (4, 'Comfort Cottages' 			, 348.5 , 15.59 , -61.39 , 1),
   (5, 'Castle of Comfort' 			, 129.9 , 15.28 , -61.36 , 1),
-  (6, 'Kai Woshe Inn' 				, 135.2 , 15.27 , -61.25 , 1),
-  (7, 'la Dunette' 					, 120.0 , 14.44 , -60.88 , 2),
-  (8, 'Le refuge du bon repos' 		, 126.9 , 14.83 , -61.07 , 2),
+  (6, 'Kai Woshe Inn' 				, 85.2 , 15.27 , -61.25 , 1),
+  (7, 'la Dunette' 					, 280.0 , 14.44 , -60.88 , 2),
+  (8, 'Le refuge du bon repos' 		, 206.9 , 14.83 , -61.07 , 2);

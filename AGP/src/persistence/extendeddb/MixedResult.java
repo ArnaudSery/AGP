@@ -35,7 +35,7 @@ public class MixedResult {
 	 * @return String
 	 */
 	public String getAttribute(String attribute) {
-		return sqlResult.getAttributes().get(attribute);
+		return sqlResult.getAttribute(attribute);
 	}
 	
 	/**

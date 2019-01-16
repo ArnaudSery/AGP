@@ -72,7 +72,7 @@ public class DemoApiBDA {
 			
 			// Display the results with a for loop
 			for (SQLResult sqlResult : sqlResults) {
-				System.out.println(sqlResult.getAttributes());
+				System.out.println(sqlResult.getAttribute("name"));
 			}
 			
 			// Display the results with a while loop
@@ -83,7 +83,7 @@ public class DemoApiBDA {
 			while (sqlResults.hasNext()) {
 				sqlResult = sqlResults.next();
 				
-				System.out.println(sqlResult.getAttributes());
+				System.out.println(sqlResult.getAttribute("name"));
 			}
 			
 			

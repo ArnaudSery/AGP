@@ -33,7 +33,7 @@ class JdbcTest {
 			SQLResults sqlResults = searcher.search("SELECT id, name, type FROM Place");
 			
 			for (SQLResult sqlResult : sqlResults) {
-				assertNotNull(sqlResult.getAttributes());
+				assertNotNull(sqlResult.getAttribute("id"));
 			}
 			
 		} catch (Exception e) {

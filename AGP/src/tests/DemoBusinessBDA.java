@@ -3,8 +3,6 @@
  */
 package tests;
 
-import java.util.Map;
-
 import persistence.HotelPersistence;
 import persistence.IslandPersistence;
 import persistence.PlacePersistence;
@@ -24,35 +22,30 @@ public class DemoBusinessBDA {
 	public static void main(String[] args) {
 		// Hotels
 		SQLResults sqlResults = HotelPersistence.getHotels();
-		Map<String, String> tuple;
 		
-		for (SQLResult sqlResult : sqlResults) {
-			tuple = sqlResult.getAttributes();
-			
+		for (SQLResult tuple : sqlResults) {
 			System.out.println("========= Hotel : "
-							   + tuple.get("name")
+							   + tuple.getAttribute("name")
 							   + " ========="
 			);
 			
 			System.out.println("[id] "
-							   + tuple.get("id")
+							   + tuple.getAttribute("id")
 							   + " [Price] "
-							   + tuple.get("pricePerDay")
+							   + tuple.getAttribute("pricePerDay")
 			);
 		}
 		
 		// Islands
 		sqlResults = IslandPersistence.getIslands();
 		
-		for (SQLResult sqlResult : sqlResults) {
-			tuple = sqlResult.getAttributes();
-			
+		for (SQLResult tuple : sqlResults) {
 			System.out.println("========= Island : "
-							   + tuple.get("name")
+							   + tuple.getAttribute("name")
 							   + " ========="
 			);
 			
-			System.out.println("[id] " + tuple.get("id"));
+			System.out.println("[id] " + tuple.getAttribute("id"));
 		}
 		
 		// Places
@@ -66,7 +59,7 @@ public class DemoBusinessBDA {
 			
 			System.out.println("[Type] "
 							   + mixedResult.getAttribute("type")
-							   + " [Score]"
+							   + " [Score] "
 							   + mixedResult.getScore()
 			);
 			

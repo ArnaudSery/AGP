@@ -12,7 +12,7 @@ import java.util.Map;
  * Used to store a tuple of an SQL result.
  */
 public class SQLResult {
-	Map<String, String> attributes;
+	private Map<String, String> attributes;
 	
 	/**
 	 * SQLResult constructor
@@ -45,13 +45,14 @@ public class SQLResult {
 	}
 	
 	/**
-	 * getAttributes
+	 * getAttribute
 	 * 
-	 * Returns all attributes stored in this structure in a Map.
+	 * Retrieves an attribute from this tuple.
 	 * 
-	 * @return Map<String, String>
+	 * @param attribute An attribute.
+	 * @return String
 	 */
-	public Map<String, String> getAttributes() {
-		return attributes;
+	public String getAttribute(String attribute) {
+		return attributes.get(attribute);
 	}
 }
