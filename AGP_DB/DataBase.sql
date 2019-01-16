@@ -76,12 +76,12 @@ INSERT INTO Place (id, name, type, visitDuration, entrancePrice, latitude, longi
   (29, 'Musée départemental de préhistoire de la martinique', 	'historic', 2, 14.3 , 14.60 , -61.06 ,2);
 
 INSERT INTO Hotel (id, name, pricePerDay, latitude, longitude, idIsland) VALUES
-  (0, 'Residence Roxelle' 			, 163.2 , 14.76 , -61.16 , 2),
+  (0, 'Residence Roxelle' 			, 63.2 , 14.76 , -61.16 , 2),
   (1, 'Le Relax Hotêl' 				, 158.6 , 16.35 , -61.45 , 0),
-  (2, 'Les Nids de Belle Eau' 		, 135.5 , 16.02 , -61.60 , 0),
-  (3, 'Eden Des Colibris' 			, 143.8 , 16.07 , -61.72 , 0),
-  (4, 'Comfort Cottages' 			, 148.5 , 15.59 , -61.39 , 1),
+  (2, 'Les Nids de Belle Eau' 		, 235.5 , 16.02 , -61.60 , 0),
+  (3, 'Eden Des Colibris' 			, 103.8 , 16.07 , -61.72 , 0),
+  (4, 'Comfort Cottages' 			, 348.5 , 15.59 , -61.39 , 1),
   (5, 'Castle of Comfort' 			, 129.9 , 15.28 , -61.36 , 1),
-  (6, 'Kai Woshe Inn' 				, 135.2 , 15.27 , -61.25 , 1),
-  (7, 'la Dunette' 					, 120.0 , 14.44 , -60.88 , 2),
-  (8, 'Le refuge du bon repos' 		, 126.9 , 14.83 , -61.07 , 2);
+  (6, 'Kai Woshe Inn' 				, 85.2 , 15.27 , -61.25 , 1),
+  (7, 'la Dunette' 					, 280.0 , 14.44 , -60.88 , 2),
+  (8, 'Le refuge du bon repos' 		, 206.9 , 14.83 , -61.07 , 2);
