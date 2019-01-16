@@ -12,7 +12,7 @@ public class Offer {
 	private Hotel hotel;
 	private HashMap<Integer, Excursion> planning = new HashMap<Integer, Excursion>();;
 	
-	public Offer(LinkedList<Excursion> ExcursionList, int day, int numberExcursion, String intensity, int numberHourMax, int totalCost, boolean confort, boolean rand){
+	public Offer(LinkedList<Excursion> ExcursionList, LinkedList<Hotel> hotelList, int day, int numberExcursion, String intensity, int numberHourMax, int totalCost, boolean confort, boolean rand){
 		
 		this.day = day;
 		this.numberExcursion = numberExcursion;
@@ -20,8 +20,13 @@ public class Offer {
 		this.totalCost = totalCost;
 		
 		int pause = day - numberExcursion;
+		int first = 0;
 		
-		//Choix de l'hotel au moment du 1er "put" dans planning.
+		
+		//////////int money = totalCost;////////
+		
+		//PRENDRE EN COMPTE LE PRIX QUE LA PERSONNE PEUT METTRE DANS SON VOYAGE
+		
 		if(rand) {
 			
 			int randomDayExcursion;
@@ -34,11 +39,15 @@ public class Offer {
 				
 				if(planning.get(randomDayExcursion).equals(null)){
 					planning.put(randomDayExcursion, ExcursionList.get(randomExcursion));
+					if(first == 0) {
+						Place firstPlace = ExcursionList.get(randomExcursion).getExcursionGroup().get(0);
+						this.hotel = Utility.NearestHotel(hotelList, firstPlace);
+						first++;
+					}
 				}
 			}
 			
 			for(int j = 0; j < day; j++) {
-				
 				if(planning.get(j).equals(null)){
 					planning.put(j, null);
 				}
@@ -46,9 +55,9 @@ public class Offer {
 		}
 		
 		
-		
-		
 		else {
+			
+			first = 0;
 			
 			int randomPause;
 			int numExcursion = numberExcursion;
@@ -59,6 +68,11 @@ public class Offer {
 				
 				if(numberExcursion == day) {
 					planning.put(j, ExcursionList.get(j));
+					if(first == 0) {
+						Place firstPlace = ExcursionList.get(j).getExcursionGroup().get(0);
+						this.hotel = Utility.NearestHotel(hotelList, firstPlace);
+						first++;
+					}
 				}
 				if(pause == day) {
 					planning.put(j, null);
@@ -72,34 +86,17 @@ public class Offer {
 				else {
 					numExcursion--;
 					planning.put(j, ExcursionList.get(j));
+					if(first == 0) {
+						Place firstPlace = ExcursionList.get(j).getExcursionGroup().get(0);
+						this.hotel = Utility.NearestHotel(hotelList, firstPlace);
+						first++;
+					}
 				}
 			}
 		}
-			
-		
-		
-		/*
-		int money = totalCost;
-		
-		for(int i = 0; i < day; i++) {*/
-			
-			
-			
-			// NE PAS OUBLIEZ LE PRIX
-			
-			
-			/*if(numberExcursion < i /*&& money-ExcursionList.get(i).g) {*/
-				/*planning.put(i, ExcursionList.get(i));
-			}
-			else {
-				planning.put(i, null);
-			}
-		}
-		*/
-		
-		
-		
 	}
+	
+	
 
 	public int getDay() {
 		return day;

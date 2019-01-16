@@ -141,5 +141,11 @@ public class Excursion {
 	public static void setExcursionGroup(LinkedList<Place> excursionGroup) {
 		ExcursionGroup = excursionGroup;
 	}
+	
+	/*public static void getFirstPlace(LinkedList<Excursion> excursionList, int exNum, int plNum) {
+		excursionList.get(exNum).getExcursionGroup().get(plNum);
+	}*/
+	
+	
 		
 }

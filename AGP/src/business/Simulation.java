@@ -8,6 +8,7 @@ public class Simulation {
 	private LinkedList<Place> placeResult = new LinkedList<Place>();
 	private LinkedList<Hotel> placeResultHotel = new LinkedList<Hotel>();
 	private LinkedList<Offer> OfferList = new LinkedList<Offer>();
+	private LinkedList<Excursion> excursionList;
 	
 	public Simulation() {
 		
@@ -46,13 +47,13 @@ public class Simulation {
 		
 		//EXCEPTION SI AUCUN PLACE DANS PLACERESULT
 		
-		LinkedList<Excursion> ExcursionList = null;
+		excursionList = null;
 		
 		for(int i = 0;i < ListGroupPlace.size(); i++) {
-			ExcursionList.add(new Excursion(ListGroupPlace.get(i)));
+			excursionList.add(new Excursion(ListGroupPlace.get(i)));
 		}
 		
-		Offer offre = new Offer(ExcursionList, SimulationEntry.getNumberDay(), SimulationEntry.getNumberExcursion(), SimulationEntry.getIntensity(), SimulationEntry.getNumberHourMax(), SimulationEntry.getTotalCost(), SimulationEntry.isConfort(), false);
+		Offer offre = new Offer(excursionList, placeResultHotel, SimulationEntry.getNumberDay(), SimulationEntry.getNumberExcursion(), SimulationEntry.getIntensity(), SimulationEntry.getNumberHourMax(), SimulationEntry.getTotalCost(), SimulationEntry.isConfort(), false);
 		
 		/*for(int i = 0; i < SimulationEntry.getNumberDay(); i++) {
 			Offer offre = new Offer(placeResult, SimulationEntry.getNumberDay(), SimulationEntry.getNumberExcursion(), SimulationEntry.getIntensity(), SimulationEntry.getNumberHourMax(), SimulationEntry.getTotalCost(), SimulationEntry.isConfort());
