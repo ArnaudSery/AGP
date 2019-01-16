@@ -43,10 +43,10 @@ public class PlacePersistence {
 	}
 	
 	public static MixedResults getHistoricSites(String keywords) {
-		return getPlaces("type = historic", keywords);
+		return getPlaces("type = 'historic'", keywords);
 	}
 	
 	public static MixedResults getActivities(String keywords) {
-		return getPlaces("type = activity", keywords);
+		return getPlaces("type = 'activity'", keywords);
 	}
 }
