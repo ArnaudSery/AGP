@@ -24,16 +24,14 @@ class TestJdbc {
 		String host = "localhost";
 		String base = "travelDB";
 		String user = "root";
-		String password = "";
+		String password = "p@ssword";
 		String url = "jdbc:mysql://" + host + "/" + base;
 		
 		try {
 			SQLSearcher searcher = new SQLSearcher(url, user, password);
 			SQLResults sqlResults = searcher.search("SELECT id, name, type FROM Place");
-			SQLResult sqlResult;
 			
-			while (sqlResults.hasNext()) {
-				sqlResult = sqlResults.next();
+			for (SQLResult sqlResult : sqlResults) {
 				assertNotNull(sqlResult.getAttributes());
 			}
 			
@@ -52,7 +50,7 @@ class TestJdbc {
 				"localhost",
 				"travelDB",
 				"root",
-				""
+				"p@ssword"
 		);
 		
 		TextualConfiguration textualConfiguration = new TextualConfiguration(

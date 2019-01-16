@@ -21,7 +21,7 @@ public class Database {
 	private static String host = "localhost";
 	private static String base = "travelDB";
 	private static String user = "root";
-	private static String password = "password";
+	private static String password = "p@ssword";
 	
 	// Textual queries configuration
 	private static Path sourcePath = Paths.get("C:\\Data");

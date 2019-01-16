@@ -13,28 +13,32 @@ import org.junit.jupiter.api.Test;
 import persistence.extendeddb.lucene.Indexer;
 
 class IndexerTest {
+	
 	@Test
 	void testIndex() {
-		Path sourcePath = Paths.get("C:\\DATA");
-		Path indexPath = Paths.get("C:\\INDEX");
-		Indexer index = new Indexer(sourcePath, indexPath);
-		Indexer index2 = new Indexer(sourcePath, indexPath);
+		Path sourcePath = Paths.get("C:\\Data");
+		Path indexPath = Paths.get("C:\\Index");
+		
 		try {
+			Indexer index = new Indexer(sourcePath, indexPath);
+			Indexer index2 = new Indexer(sourcePath, indexPath);
+			
 			index.createIndex(true);
 			index.addDocuments(sourcePath);
 			index.close();
+			
 			index2.createIndex(false);
 			index2.addDocuments(sourcePath);
 			index2.close();
+			
 		} catch (IOException e) {
 			fail();
 		}
+		
 		try (Stream<Path> filePathStream=Files.walk(indexPath)) {
-				assertTrue(filePathStream.count() > 5);
-		    } catch (IOException e) {
-				fail();
-			}
-	
+			assertTrue(filePathStream.count() > 5);
+		} catch (IOException e) {
+			fail();
+		}
 	}
-
 }

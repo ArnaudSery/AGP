@@ -20,19 +20,18 @@ import persistence.extendeddb.lucene.TextualResult;
 import persistence.extendeddb.lucene.TextualResults;
 
 class TestQuery {
-
 	
 	@Test
 	void testTextualQuery() {
-		Path sourcePath = Paths.get("C:\\DATA");
-		Path indexPath = Paths.get("C:\\INDEX");
+		Path sourcePath = Paths.get("C:\\Data");
+		Path indexPath = Paths.get("C:\\Index");
 		
 		SQLConfiguration sqlConfiguration = new SQLConfiguration(
 				"mysql",
 				"localhost",
 				"travelDB",
 				"root",
-				""
+				"p@ssword"
 		);
 		
 		TextualConfiguration textualConfiguration = new TextualConfiguration(
@@ -50,7 +49,7 @@ class TestQuery {
 			index.close();
 			
 			ExtendedDatabaseAPI database = new ExtendedDatabaseAPI(sqlConfiguration, textualConfiguration);
-		
+			
 			TextualResults textualResults = database.textualQuery("musée");
 			
 			for (TextualResult textualResult : textualResults) {
