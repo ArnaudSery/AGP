@@ -49,7 +49,7 @@ public class DemoBusinessBDA {
 		}
 		
 		// Places
-		MixedResults mixedResults = PlacePersistence.getAllPlaces("rhum");
+		MixedResults mixedResults = PlacePersistence.getAllPlaces("musée");
 		
 		for (MixedResult mixedResult : mixedResults) {
 			System.out.println("========= Place : "

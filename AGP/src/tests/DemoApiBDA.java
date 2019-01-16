@@ -95,7 +95,8 @@ public class DemoApiBDA {
 			for (TextualResult textualResult : textualResults) {
 				System.out.println("[id] " + textualResult.getId()
 								   + " [score] " + textualResult.getScore()
-								   + " [content] " + textualResult.getContent());
+								   + " [content] " + textualResult.getContent()
+				);
 			}
 			
 			// Display the results with a while loop
@@ -106,13 +107,14 @@ public class DemoApiBDA {
 				
 				System.out.println("[id] " + textualResult.getId()
 								   + " [score] " + textualResult.getScore()
-								   + " [content] " + textualResult.getContent());
+								   + " [content] " + textualResult.getContent()
+				);
 			}
 			
 			
 			// 3. Mixed query
 			// ============================
-			MixedResults mixedResults = database.mixedQuery("SELECT name, type FROM Place WITH rhum");
+			MixedResults mixedResults = database.mixedQuery("SELECT name, type FROM Place WITH musée");
 			
 			// Display the results with a for loop
 			for (MixedResult mixedResult : mixedResults) {
