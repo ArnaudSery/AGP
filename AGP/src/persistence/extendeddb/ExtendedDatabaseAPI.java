@@ -5,7 +5,6 @@ package persistence.extendeddb;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Map;
 
 import org.apache.lucene.queryparser.classic.ParseException;
 
@@ -115,7 +114,6 @@ public class ExtendedDatabaseAPI {
 		int tupleId;
 		int documentId;
 		String idAttribute;
-		Map<String, String> attributes;
 		
 		// Splitting the query into two parts
 		// (SQL query and textual query)
@@ -149,8 +147,7 @@ public class ExtendedDatabaseAPI {
 				documentId = textualResult.getId();
 				
 				for (SQLResult tuple : sqlResults) {
-					attributes = tuple.getAttributes();
-					idAttribute = attributes.get(textualConfiguration.getJoinKey());
+					idAttribute = tuple.getAttribute(textualConfiguration.getJoinKey());
 					tupleId = Integer.parseInt(idAttribute);
 					
 					if (documentId == tupleId) {
