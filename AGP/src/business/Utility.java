@@ -40,7 +40,7 @@ public class Utility {
 	
 	public static Hotel NearestHotel(LinkedList<Hotel> HotelList, Place place) {
 		
-		Hotel choiceHotel;
+		Hotel choiceHotel = null;
 		double minDistance, distance;
 		minDistance = CalculDistance(HotelList.get(0).getCoordinates(), place.getCoordinates());
 		
