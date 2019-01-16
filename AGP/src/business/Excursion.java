@@ -28,10 +28,10 @@ public class Excursion {
 		LinkedList<Place> usedPlaceResultRand = placeResult;
 		
 		//Create a list of list of Place
-		for(int j = 0; j < ((placeResult.size()-1)*(placeResult.size()-1 * 2)); j++) {
+		//for(int j = 0; j < ((placeResult.size()-1)*(placeResult.size()-1 * 2)); j++) {
+			int k = 0;
 			while(!usedPlaceResult.isEmpty()) {
 				
-				int k = 0;
 				int time = 0;
 				
 				GroupPlace.add(new LinkedList<Place>());
@@ -44,7 +44,6 @@ public class Excursion {
 					if(time == numberHourMax) {
 						GroupPlace.get(k).add(place);
 						usedPlaceResult.remove(i);
-						i--;
 						break;
 					}
 					
@@ -62,23 +61,25 @@ public class Excursion {
 			}
 			usedPlaceResultRand = placeResult;
 			
-			while(!usedPlaceResultRand.isEmpty()) {
+			/*while(!usedPlaceResultRand.isEmpty()) {
 				int rand = Utility.Rand(0, usedPlaceResultRand.size());
 				usedPlaceResult.add(usedPlaceResultRand.get(rand));
 				usedPlaceResultRand.remove(rand);
-			}
+			}*/
 			
 			
 			
-		}
+		//}
 		
 		return GroupPlace;
 	}
 	
 	@SuppressWarnings("null")
 	public LinkedList<Transport> choseTravel(LinkedList<Place> ExcursionGroup){
-		LinkedList<Transport> ExcursionTravel = null;
-		
+		LinkedList<Transport> ExcursionTravel = new LinkedList<Transport>();
+
+		Transport bus = new Bus();
+		Transport boat = new Boat();
 		
 		for(int i=1; i<ExcursionGroup.size();i++) {
 			Place p1 = ExcursionGroup.get(i-1);
@@ -86,9 +87,11 @@ public class Excursion {
 			double distanceTraveled = Utility.CalculDistance(p1.getCoordinates(), p2.getCoordinates());
 			int type = Island.equals(p1, p2);
 			if(type == 0) {
-				ExcursionTravel.add(new Boat(distanceTraveled));
+				boat.setDistanceTraveled(distanceTraveled);
+				ExcursionTravel.add(boat);
 			}else {
-				ExcursionTravel.add(new Bus(distanceTraveled));
+				bus.setDistanceTraveled(distanceTraveled);
+				ExcursionTravel.add(bus);
 			}
 		}		
 		return ExcursionTravel;

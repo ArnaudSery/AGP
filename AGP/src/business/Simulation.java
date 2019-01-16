@@ -4,11 +4,11 @@ import java.util.LinkedList;
 
 public class Simulation {
 	
-	private SimulationEntry SimulationEntry;
+	private SimulationEntry SimulationEntry = new SimulationEntry();
 	private LinkedList<Place> placeResult = new LinkedList<Place>();
 	private LinkedList<Hotel> placeResultHotel = new LinkedList<Hotel>();
 	private LinkedList<Offer> OfferList = new LinkedList<Offer>();
-	private LinkedList<Excursion> excursionList;
+	private LinkedList<Excursion> excursionList = new LinkedList<Excursion>();
 	
 	public Simulation() {
 		
@@ -46,8 +46,6 @@ public class Simulation {
 		
 		
 		//EXCEPTION SI AUCUN PLACE DANS PLACERESULT
-		
-		excursionList = null;
 		
 		for(int i = 0;i < ListGroupPlace.size(); i++) {
 			excursionList.add(new Excursion(ListGroupPlace.get(i)));

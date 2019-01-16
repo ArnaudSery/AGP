@@ -21,11 +21,12 @@ public class Utility {
 	}
 	
 	
-	public static int ReturnTimeTransport(Coordinates hotel, Coordinates place, Transport transport) {
+	/*public static int ReturnTimeTransport(Coordinates hotel, Coordinates place, Transport transport) {
 		
 		int time = 0;
 		
 		double distance = CalculDistance(hotel, place);
+		
 		
 		if(transport.getType() == 1) {
 			time = (int) (distance * 2);
@@ -35,7 +36,7 @@ public class Utility {
 		}
 		
 		return time;
-	}
+	}*/
 	
 	
 	public static Hotel NearestHotel(LinkedList<Hotel> HotelList, Place place) {

@@ -3,10 +3,18 @@ package business;
 
 
 public class Bus extends Transport {
+	
+	private double costTransport;
+
+	
+	public Bus() {
+		super();
+	}
+
 
 	public Bus(double distanceTraveled) {
-		this.type = 1;
+		super();
 		this.costTransport = distanceTraveled * Constante.PRICE_BUS;
-		this.distanceTraveled = distanceTraveled * 100;
+		super.distanceTraveled = distanceTraveled * 100;
 	}
 }

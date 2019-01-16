@@ -1,10 +1,18 @@
 package business;
 
 public class Boat extends Transport {
+	
+	private double costTransport;
+
+	
+	public Boat() {
+		super();
+	}
+
 
 	public Boat(double distanceTraveled) {
-		this.type = 0;
+		super();
 		this.costTransport = distanceTraveled * Constante.PRICE_BOAT;
-		this.distanceTraveled = distanceTraveled * 100;
+		super.distanceTraveled = distanceTraveled * 100;
 	}
 }
