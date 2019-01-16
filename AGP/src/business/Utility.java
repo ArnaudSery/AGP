@@ -1,5 +1,6 @@
 package business;
 
+import java.util.LinkedList;
 import java.util.Random;
 
 public class Utility {
@@ -33,9 +34,31 @@ public class Utility {
 			time = (int) (distance * 1);
 		}
 		
-		
 		return time;
 	}
+	
+	
+	public static Hotel NearestHotel(LinkedList<Hotel> HotelList, Place place) {
+		
+		Hotel choiceHotel;
+		double minDistance, distance;
+		minDistance = CalculDistance(HotelList.get(0).getCoordinates(), place.getCoordinates());
+		
+		for(int i = 0; i < HotelList.size(); i++) {
+			
+			distance = CalculDistance(HotelList.get(i).getCoordinates(), place.getCoordinates());
+			
+			if(minDistance > distance) {
+				minDistance = distance;
+				choiceHotel = HotelList.get(i);
+			}
+			
+		}
+		
+		
+		return choiceHotel;
+	}
+	
 	
 	public static int Rand(int i, int j) {
 		Random rnd = new Random();
