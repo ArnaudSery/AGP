@@ -28,7 +28,7 @@ public class Excursion {
 		LinkedList<Place> usedPlaceResultRand = placeResult;
 		
 		//Create a list of list of Place
-		for(int j = 0; j < 5; j++) {
+		for(int j = 0; j < ((placeResult.size()-1)*(placeResult.size()-1 * 2)); j++) {
 			while(!usedPlaceResult.isEmpty()) {
 				
 				int k = 0;
@@ -63,7 +63,7 @@ public class Excursion {
 			usedPlaceResultRand = placeResult;
 			
 			while(!usedPlaceResultRand.isEmpty()) {
-				int rand = Utilitaire.Rand(0, usedPlaceResultRand.size());
+				int rand = Utility.Rand(0, usedPlaceResultRand.size());
 				usedPlaceResult.add(usedPlaceResultRand.get(rand));
 				usedPlaceResultRand.remove(rand);
 			}
@@ -83,7 +83,7 @@ public class Excursion {
 		for(int i=1; i<ExcursionGroup.size();i++) {
 			Place p1 = ExcursionGroup.get(i-1);
 			Place p2 = ExcursionGroup.get(i);
-			double distanceTraveled = Utilitaire.CalculDistance(p1.getCoordinates(), p2.getCoordinates());
+			double distanceTraveled = Utility.CalculDistance(p1.getCoordinates(), p2.getCoordinates());
 			int type = Island.equals(p1, p2);
 			if(type == 0) {
 				ExcursionTravel.add(new Boat(distanceTraveled));

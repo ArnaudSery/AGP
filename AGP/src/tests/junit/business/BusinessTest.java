@@ -15,7 +15,7 @@ class BusinessTest {
 		Coordinates coord2 = new Coordinates(14.51, 61.12);
 		Coordinates coord3 = new Coordinates(-14.28, 60.58);
 		Coordinates coord4 = new Coordinates(14.25,-60.50);
-		Utilitaire ut = new Utilitaire();
+		Utility ut = new Utility();
 		double distance = ut.CalculDistance(coord1,coord2);
 		assertTrue(distance < 0.20 && distance > 0.19);
 		double distance2 = ut.CalculDistance(coord3,coord4);

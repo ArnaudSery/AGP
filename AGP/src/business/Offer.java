@@ -9,6 +9,7 @@ public class Offer {
 	private int numberExcursion;
 	private String intensity;
 	private int totalCost;
+	private Hotel hotel;
 	private HashMap<Integer, Excursion> planning = new HashMap<Integer, Excursion>();;
 	
 	public Offer(LinkedList<Excursion> ExcursionList, int day, int numberExcursion, String intensity, int numberHourMax, int totalCost, boolean confort, boolean rand){
@@ -28,15 +29,20 @@ public class Offer {
 			
 			for(int j = 0; j < numberExcursion; j++) {
 				
-				randomDayExcursion = Utilitaire.Rand(0, day);
-				randomExcursion = Utilitaire.Rand(0, ExcursionList.size());
+				randomDayExcursion = Utility.Rand(0, day);
+				randomExcursion = Utility.Rand(0, ExcursionList.size());
 				
 				if(planning.get(randomDayExcursion).equals(null)){
 					planning.put(randomDayExcursion, ExcursionList.get(randomExcursion));
 				}
-				
 			}
 			
+			for(int j = 0; j < day; j++) {
+				
+				if(planning.get(j).equals(null)){
+					planning.put(j, null);
+				}
+			}
 		}
 		
 		
@@ -49,7 +55,7 @@ public class Offer {
 			
 			for(int j = 0; j < day; j++) {
 				
-				randomPause = Utilitaire.Rand(0, 3);
+				randomPause = Utility.Rand(0, 3);
 				
 				if(numberExcursion == day) {
 					planning.put(j, ExcursionList.get(j));

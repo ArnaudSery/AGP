@@ -2,7 +2,7 @@ package business;
 
 import java.util.Random;
 
-public class Utilitaire {
+public class Utility {
 
 	
 	public static double CalculDistance(Coordinates Init, Coordinates Final) {

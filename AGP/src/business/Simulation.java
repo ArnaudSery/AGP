@@ -44,6 +44,8 @@ public class Simulation {
 		SimulationEntry.getNumberExcursion();
 		
 		
+		//EXCEPTION SI AUCUN PLACE DANS PLACERESULT
+		
 		LinkedList<Excursion> ExcursionList = null;
 		
 		for(int i = 0;i < ListGroupPlace.size(); i++) {
