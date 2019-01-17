@@ -22,6 +22,7 @@ public class Offer {
 		
 		for(int i = 0; i < numberDayExcursion; i++) {
 			Excursion excursion = new Excursion(placeResult, hotel);
+			excursions.add(excursion);
 		}
 		
 		

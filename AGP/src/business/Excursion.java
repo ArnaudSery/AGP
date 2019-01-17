@@ -5,15 +5,34 @@ import java.util.LinkedList;
 
 public class Excursion {
 
+	private int price;
+	private LinkedList<Visit> visit;
+	private RoundTrip roundTrip;
 	
 	public Excursion(LinkedList<Place> placeResult, Hotel hotel) {
+		
+		
+		this.visit = CreateVisit(placeResult);
+		this.roundTrip = CreateRoundTrip(visit, hotel);
 		
 	}
 	
 	
+	public static Visit CreateVisit(placeResult) {
+		
+		Visit visit = new Visit();
+		
+		return visit;
+		
+	}
 	
-	
-	
+	public static RoundTrip CreateRoundTrip(placeResult) {
+		
+		RoundTrip roundTrip = new RoundTrip();
+		
+		return roundTrip;
+		
+	}
 	
 	
 	

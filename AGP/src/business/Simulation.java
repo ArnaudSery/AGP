@@ -39,11 +39,11 @@ public class Simulation {
 		placeResultHotel.add(hotel2);
 		
 		
-		Utility.FindBestHotel(placeResult, placeResultHotel);
+		LinkedList<Hotel> bestHotel = Utility.FindBestHotel(placeResult, placeResultHotel);
 		
 		
 		for(int i = 0; i < 3; i++) {
-			Offer offer = new Offer(placeResult, placeResultHotel.get(i), simulationEntry.getNumberDayExcursion());
+			Offer offer = new Offer(placeResult, bestHotel.get(i), simulationEntry.getNumberDayExcursion());
 			offerList.add(offer);
 		}
 		
