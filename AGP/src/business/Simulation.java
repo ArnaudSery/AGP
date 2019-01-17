@@ -70,10 +70,6 @@ public class Simulation {
 			offerList.add(offer);
 		}
 		
-		for(int i = 0; i < 3; i++) {
-			System.out.println();
-		}
-		
 		
 		
 		
@@ -119,6 +115,14 @@ public class Simulation {
 		
 		
 		
+	}
+	
+	public String toString(LinkedList<Offer> offerList) {
+		String query = "";
+		for(int i = 0;i<offerList.size();i++) {
+			query += offerList.get(i).toString() + "\n";
+		}
+		return query;
 	}
 	
 
