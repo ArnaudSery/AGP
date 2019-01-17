@@ -55,17 +55,20 @@ public class Simulation {
 		placeResultHotel.add(LaFoireDuTrone);
 		placeResultHotel.add(TroisFontaines);
 		
+		for (int index = 0; index < placeResultHotel.size(); index++) {
+			System.out.println(placeResultHotel.get(index).getId());
+		}
+		
 		LinkedList<Hotel> bestHotel = Utility.FindBestHotel(placeResult, placeResultHotel);
 		// PRINTLN for test
-				for (int index = 0; index < bestHotel.size(); index++) {
-					System.out.println(	"Island: " + bestHotel.get(index).getIsland().getId() + 
-										", Hotels: " + bestHotel.get(index).getName());
-				}
+		for (int index = 0; index < bestHotel.size(); index++) {
+			System.out.println(	"Island: " + bestHotel.get(index).getIsland().getId() + ", Hotels: " + bestHotel.get(index).getName());
+		}
 		
-		for(int i = 0; i < 3; i++) {
+		/*for(int i = 0; i < 3; i++) {
 			Offer offer = new Offer(placeResult, bestHotel.get(i), simulationEntry.getNumberDayExcursion());
 			offerList.add(offer);
-		}
+		}*/
 		
 		
 		
