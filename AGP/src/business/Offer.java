@@ -44,19 +44,15 @@ public class Offer {
 	public static LinkedList<Excursion> CreateOffer(LinkedList<Place> placeResult, Hotel hotel, int numberDayExcursion, int priceMin, int priceMax) {
 		
 		LinkedList<Excursion> excursions = new LinkedList<Excursion>();
-		int price = 0;
 		
 		for(int i = 0; i < numberDayExcursion; i++) {
 			Excursion excursion = new Excursion(placeResult, hotel);
-			price += excursion.getPrice();
-			//if(price > priceMin && price < priceMax) {
-				excursions.add(excursion);
-			/*}
-			else {
-				price -= excursion.getPrice();
-				excursions.add(null);
-			}*/
+			double price = excursion.getPrice();
+			excursions.add(excursion);
 			
+			if(price > priceMin && price < priceMax) {
+				excursions.remove(excursion);
+			}
 		}
 		
 		return excursions;
