@@ -51,6 +51,10 @@ public class Visit {
 		public void setTransport(Transport transport) {
 			this.transport = transport;
 		}
+
+		public String toString() {
+			return "Visit de " + place.getName() + ", en utilisant le " + transport.getClass().getSimpleName() + ".";
+		}
 		
 		
 	
