@@ -86,15 +86,15 @@ public class Offer {
 	public String toString() {
 		String query = "";
 		
-		query+= "Prix total de l'offre : " + this.price + " Euros.\n=====================================================\n";
+		query+= "Prix total de l'offre : " + price + " Euros.\n=====================================================\n";
 		
-		for(int i=0;i<this.excursionList.size();i++) {
+		for(int i=0;i<excursionList.size();i++) {
 
-			query += "	|Hotel : " + this.hotel.getName() + ", Prix/nuit : " + this.hotel.getPricePerDay() + ".\n";
-			query += this.excursionList.get(i).toString() + "\n";
+			query += "	|Hotel : " + hotel.getName() + ", Prix/nuit : " + hotel.getPricePerDay() + ".\n";
+			query += excursionList.get(i).toString() + "\n";
 
 			if(i%moduloExcursion == 0) {
-				query += "Jour : " + i + " => " + this.excursionList.get(i).toString() + ".\n";
+				query += "Jour : " + i + " => " + excursionList.get(i).toString() + ".\n";
 			}else {
 				query += "Jour : " + i + " => Plage.";
 			}
