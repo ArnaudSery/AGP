@@ -68,10 +68,10 @@ public class Simulation {
 		for(int i = 0; i < 3; i++) {
 			Offer offer = new Offer(placeResult, bestHotel.get(i), simulationEntry.getNumberDayExcursion(), simulationEntry.getNumberDay());
 			offerList.add(offer);
+			System.out.println(offerList.toString());
 		}
 		
 		
-		toString(offerList);
 		
 		
 		
