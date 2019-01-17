@@ -79,46 +79,6 @@ public class Simulation {
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		/*
-		//Excursion.CreateExcursion(placeResult, placeResultHotel, SimulationEntry.getNumberHourMax());
-		
-		LinkedList<LinkedList<Place>> ListGroupPlace = Excursion.CreateGroupPlace(placeResult,SimulationEntry.getNumberHourMax());
-		SimulationEntry.getNumberDay();
-		SimulationEntry.getNumberExcursion();
-		
-		
-		//EXCEPTION SI AUCUN PLACE DANS PLACERESULT
-		
-		for(int i = 0; i < ListGroupPlace.size(); i++) {
-			excursionList.add(new Excursion(ListGroupPlace.get(i)));
-		}
-		
-		for(int i = 0; i < 10; i++) {
-			Offer offer = new Offer(excursionList, placeResultHotel, SimulationEntry.getNumberDay(), SimulationEntry.getNumberExcursion(), SimulationEntry.getIntensity(), SimulationEntry.getNumberHourMax(), SimulationEntry.getTotalCost(), SimulationEntry.isConfort(), false);
-			OfferList.add(offer);
-			System.out.println("Offre " + i + ":");
-			System.out.println("Hotel " + offer.getHotel().getName() + ":");
-		}*/
-		/*for(int i = 0; i < SimulationEntry.getNumberDay(); i++) {
-			Offer offre = new Offer(placeResult, SimulationEntry.getNumberDay(), SimulationEntry.getNumberExcursion(), SimulationEntry.getIntensity(), SimulationEntry.getNumberHourMax(), SimulationEntry.getTotalCost(), SimulationEntry.isConfort());
-			OfferList.add(offre);
-		}*/
-		
-		
-		
 	}
 	
 	public String toString(LinkedList<Offer> offerList) {

@@ -12,11 +12,6 @@ public class Offer {
 
 	public Offer(LinkedList<Place> placeResult, Hotel hotel, String intensity, int day, int priceMin, int priceMax) {
 		
-		this.hotel = hotel;
-		
-		this.excursionList = CreateOffer(placeResult, hotel, numberDayExcursion);
-		
-		this.price = CalculPriceOffer(excursionList, hotel, day);
 		
 		if(intensity.compareTo("hight") == 0) {
 			this.numberDayExcursion = day;
@@ -30,6 +25,12 @@ public class Offer {
 			this.numberDayExcursion = day/4;
 			this.moduloExcursion = Constante.MODULO_LOW;
 		}
+		
+		this.hotel = hotel;
+		
+		this.excursionList = CreateOffer(placeResult, hotel, numberDayExcursion);
+		
+		this.price = CalculPriceOffer(excursionList, hotel, day);
 		
 		
 	}
@@ -105,13 +106,13 @@ public class Offer {
 		
 		
 		for(int i=0;i<excursionList.size();i++) {
-
+			query += "Jour : " + i + " => \n";
 			query += "	|Hotel : " + hotel.getName() + ", Prix/nuit : " + hotel.getPricePerDay() + ".\n";
 
 			if(i%moduloExcursion == 0) {
-				query += "Jour : " + i + " => " + excursionList.get(i).toString() + ".\n";
+				query += excursionList.get(i).toString() + "\n";
 			}else {
-				query += "Jour : " + i + " => Plage.";
+				query += " Plage.";
 			}
 		}
 			
