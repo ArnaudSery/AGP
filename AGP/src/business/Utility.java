@@ -109,4 +109,8 @@ public class Utility {
 		int number = i + rnd.nextInt(j - i + 1);
 		return number;
 	}
+	
+	public void toString(String query) {
+		System.out.println(query);
+	}
 }
