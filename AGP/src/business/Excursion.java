@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class Excursion {
 
-	private int price;
+	private double price;
 	private LinkedList<Visit> visits;
 	private RoundTrip roundTrip;
 	
@@ -20,10 +20,19 @@ public class Excursion {
 	}
 	
 	
-	private int CalculPriceExcursion(LinkedList<Visit> visits, RoundTrip roundTrip) {
+	private double CalculPriceExcursion(LinkedList<Visit> visits, RoundTrip roundTrip) {
+		double priceExcursion = 0;
+		
+		for(int i=0;i<visits.size();i++) {
+			priceExcursion += visits.get(i).getPlace().getEntrancePrice();
+			priceExcursion += visits.get(i).getTransport().getCostTransport();
+		}
 		
 		
-		return 0;
+		priceExcursion += roundTrip.getTransport().getCostTransport();
+		
+		
+		return priceExcursion;
 	}
 
 
@@ -69,7 +78,7 @@ public class Excursion {
 	}
 
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
