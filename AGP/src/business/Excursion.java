@@ -6,7 +6,6 @@ public class Excursion {
 
 	private double price;
 	private LinkedList<Visit> visits;
-	private static LinkedList<Visit> visited;
 	private RoundTrip roundTrip;
 	
 	public Excursion(LinkedList<Place> placeResult, Hotel hotel) {
@@ -43,30 +42,20 @@ public class Excursion {
 		int time = Constante.TIME_EXCURSION;
 		
 			
-		for(int index = 0; index < placeResult.size(); index++) {
-			System.out.println("ID:" + placeResult.get(index).getId() + " Nom:" +placeResult.get(index).getName());
-			System.out.println(index);
-			time -= placeResult.get(index).getVisitDuration();
+		for(int i = 0; i < placeResult.size(); i++) {
+			time -= placeResult.get(i).getVisitDuration();
 			
-			if(index == 0) {
-				
-				Visit visit = new Visit(hotel, placeResult.get(index));
-				
-				if (!visited.contains(visit)) {
-					visits.add(visit);
-					visited.add(visit);
-				}
+			if(i == 0) {
+				Visit visit = new Visit(hotel, placeResult.get(i));
+				visits.add(visit);
 			}
 			else {
 				if(time <= 0) {
 					break;
 				}
 				else {
-					Visit visit = new Visit(placeResult.get(index-1), placeResult.get(index));
-					if (!visited.contains(visit)) {
-						visits.add(visit);
-						visited.add(visit);
-					}
+					Visit visit = new Visit(placeResult.get(i-1), placeResult.get(i));
+					visits.add(visit);
 				}
 			}
 			
