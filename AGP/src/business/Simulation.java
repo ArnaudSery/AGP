@@ -21,26 +21,46 @@ public class Simulation {
 		Coordinates coord4 = new Coordinates(14.25,60.50);
 		Coordinates coord5 = new Coordinates(14.23,60.52);
 		Coordinates coord6 = new Coordinates(14.26,60.50);
+		Coordinates coord7 = new Coordinates(14.31,60.55);
+		Coordinates coord8 = new Coordinates(14.32,60.45);
+		
 		Island isle = new Island(0, "Guadeloupe");
+		Island isle2 = new Island(1, "Dominique");
+		Island isle3 = new Island(2, "Martinique");
+
 		Hotel HotelDuSoldatInconnu = new Hotel(0, "HotelDuSoldatInconnu", 200, coord1, isle);
+		Hotel hotel2 = new Hotel(1, "hotel2", 150, coord4, isle);
+		Hotel LaFoireDuTrone = new Hotel(2, "LaFoireDuTrone", 200, coord7, isle2);
+		Hotel TroisFontaines = new Hotel(3, "TroisFontaines", 200, coord8, isle3);
+
 		Place restaurantDelArte = new HistoricPlace(1, "DelArte", 2, 100, "husihvgriuh", coord2, isle);
 		Place TourEiffel = new HistoricPlace(2, "TourEiffel", 6, 100, "husihvgriuh", coord3, isle);
-		Hotel hotel2 = new Hotel(3, "hotel2", 150, coord4, isle);
-		Place place1 = new ActivityPlace(4, "place1", 5, 150, "lol", coord5, isle);
-		Place place2 = new ActivityPlace(5, "place2", 2, 150, "lol",coord6, isle);
+		Place place1 = new ActivityPlace(4, "place1", 5, 150, "lol", coord5, isle2);
+		Place place2 = new ActivityPlace(5, "place2", 2, 150, "lol",coord6, isle2);
+		Place place3 = new ActivityPlace(6, "place3", 2, 150, "lol",coord6, isle3);
+		Place place4 = new ActivityPlace(7, "place4", 2, 150, "lol",coord6, isle3);
+		Place place5 = new ActivityPlace(8, "place5", 2, 150, "lol",coord6, isle3);
 		
 		
 		placeResult.add(restaurantDelArte);
 		placeResult.add(TourEiffel);
 		placeResult.add(place1);
 		placeResult.add(place2);
+		placeResult.add(place3);
+		placeResult.add(place4);
+		placeResult.add(place5);
 		
 		placeResultHotel.add(HotelDuSoldatInconnu);
 		placeResultHotel.add(hotel2);
-		
+		placeResultHotel.add(LaFoireDuTrone);
+		placeResultHotel.add(TroisFontaines);
 		
 		LinkedList<Hotel> bestHotel = Utility.FindBestHotel(placeResult, placeResultHotel);
-		
+		// PRINTLN for test
+				for (int index = 0; index < bestHotel.size(); index++) {
+					System.out.println(	"Island: " + bestHotel.get(index).getIsland().getId() + 
+										", Hotels: " + bestHotel.get(index).getName());
+				}
 		
 		for(int i = 0; i < 3; i++) {
 			Offer offer = new Offer(placeResult, bestHotel.get(i), simulationEntry.getNumberDayExcursion());

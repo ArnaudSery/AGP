@@ -1,6 +1,9 @@
 package business;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class Utility {
@@ -38,12 +41,45 @@ public class Utility {
 		return time;
 	}*/
 	
-	public static LinkedList<Hotel> FindBestHotel(LinkedList<Place> placeResult, LinkedList<Hotel> placeResultHotel){
+	public static LinkedList<Hotel> FindBestHotel(LinkedList<Place> placeResult, LinkedList<Hotel> hotelResult){
+		LinkedList<Hotel> bestHotels = new LinkedList<Hotel>();
+		Map<Integer, Integer> totalPlacesPerHotel = countPlacesPerIsland(placeResult);
+		int max = 0;
+		
+		// find the island which has the most hotels
+		for (int index = 0; index < totalPlacesPerHotel.size(); index++) {
+			if (max < totalPlacesPerHotel.get(index)) {
+				max = totalPlacesPerHotel.get(index);
+			}
+		}
+		
+		// add the hotel of the island which contains the most places
+		for (int index = 0; index < hotelResult.size(); index++) {
+			if (hotelResult.get(index).getIsland().getId() == max) {
+				bestHotels.add(hotelResult.get(index));			
+			}
+		}
 		
 		
-		return null;
+		return bestHotels;
 	}
 	
+	public static Map<Integer, Integer> countPlacesPerIsland(LinkedList<Place> places) {
+		Map<Integer, Integer> totalPlacesPerHotel = new HashMap<Integer, Integer>(); 
+		int islandNumber = 3;
+		
+		// For each Island count the places
+		for (int index = 0; index < islandNumber; index++) {
+			int number = 0;
+			for (Place place : places) {
+				if (index == place.getIsland().getId()) {
+					number++;
+				}
+			}
+			totalPlacesPerHotel.put(index, number);
+		}
+		return totalPlacesPerHotel;
+	}
 	
 	public static Hotel NearestHotel(LinkedList<Hotel> HotelList, Place place) {
 		
