@@ -5,11 +5,7 @@ package simulation;
 
 import java.util.List;
 
-import business.Excursion;
 import business.Offer;
-import business.Place;
-import business.Transport;
-import business.Visit;
 import business.tools.OffersBuilder;
 import business.tools.UserPreferences;
 
