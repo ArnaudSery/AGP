@@ -24,36 +24,48 @@ import persistence.PlacePersistence;
  *
  */
 public class OffersBuilder {
-	private String placeType = "activity";
-	private String keywords = "";
-	private int minimumPrice = 100;
-	private int maximumPrice = 1000;
-	private int numberOfDays = 4;
-	private int excursionsFrequency = 1;
-	private double maximumTransportDuration = 0.5;
+	private String placeType;
+	private String keywords;
+	private int minimumPrice;
+	private int maximumPrice;
+	private int numberOfDays;
+	private int excursionsFrequency;
+	private double maximumTransportDuration;
 	
-	public OffersBuilder() {
+	
+	public OffersBuilder(UserPreferences preferences) {
+		this.placeType = preferences.getPlaceType();
+		this.keywords = preferences.getKeywords();
+		this.minimumPrice = preferences.getMinimumPrice();
+		this.maximumPrice = preferences.getMaximumPrice();
+		this.numberOfDays = preferences.getNumberOfDays();
+		this.excursionsFrequency = preferences.getExcursionsFrequency();
+		this.maximumTransportDuration = preferences.getMaximumTransportDuration();
+	}
+	
+	public List<Offer> buildOffers() {
 		List<Offer> offers = new LinkedList<Offer>();
 		Offer offer;
+		double offerPrice;
 		
 		initialize(placeType, keywords);
 		
+		// We build 3 offers
 		for (int i = 0; i < 3; i++) {
 			offer = buildOffer();
+			offerPrice = offer.getPrice();
 			
-			if (offer.getPrice() >= minimumPrice) {
+			if (offerPrice >= minimumPrice
+				&& offerPrice <= maximumPrice) {
+				
 				offers.add(offer);
 			}
 		}
 		
-		int number = 1;
-		for (Offer currentOffer : offers) {
-			affichage(currentOffer, number);
-			number++;
-		}
+		return offers;
 	}
 	
-	public void initialize(String placeType, String keywords) {
+	private void initialize(String placeType, String keywords) {
 		Island islandR;
 		List<Island> islands;
 		List<Place> places;
@@ -112,7 +124,7 @@ public class OffersBuilder {
 		PlacesManager.setPlacesInOrder(places);
 	}
 	
-	public Offer buildOffer() {
+	private Offer buildOffer() {
 		List<Place> places = PlacesManager.getPlacesInOrder();
 		Hotel hotel;
 		Hotel hotelR;
@@ -252,56 +264,5 @@ public class OffersBuilder {
 		}
 		
 		return offer;
-	}
-	
-	public void affichage(Offer offer, int number) {
-		Excursion excursionOfDay;
-		
-		System.out.println("\n\n\n####################################################");
-		System.out.println("|| Offer n° " + number + "		|| price = " + (float)offer.getPrice() + "	  ||");
-		System.out.println("####################################################");
-		System.out.println("Hotel : " + offer.getHotel().getName() + "\n");
-		
-		for (int day = 1; day <= numberOfDays; day++) {
-			System.out.println("DAY " + day + " ==>");
-			
-			if (!offer.hasExcursionOnDay(day)) {
-				System.out.println("	|Break day, go to the beach !");
-				System.out.println("	|-----------------------------------------------------------");
-				continue;
-			}
-			
-			excursionOfDay = offer.getExcursionOfDay(day);
-			
-			if (!excursionOfDay.hasVisits()) {
-				System.out.println("	|Break day, go to the beach ! (due to your budget or preferences)");
-				System.out.println("	|-----------------------------------------------------------");
-				continue;
-			}
-			
-			System.out.println("Excursion :	Time : " + excursionOfDay.getDuration() + "	Price : " + excursionOfDay.getPrice());
-			System.out.println("	/ Start of the excursion from your hotel");
-			
-			for (Visit currentVisit : excursionOfDay.getPlacesToVisit()) {
-				Place currentPlace = currentVisit.getPlaceToVisit();
-				Transport currentTransport = currentVisit.getTransportDriveway();
-				
-				
-				System.out.println("	|----Visit on " + currentPlace.getName()
-								   + " for " + currentPlace.getVisitDuration() + " hours with a " + currentTransport
-				);
-				
-				/*System.out.println("	|_____With a " + currentTransport
-								   + " [Transport cost] " + currentTransport.getPriceForThisTravel()
-								   + " [Transport duration] " + currentTransport.getDurationForThisTravel()
-				);*/
-			}
-			System.out.println("	| Return to hotel");
-			System.out.println("	\\----------------------------------------------------------\n");
-		}
-	}
-	
-	public static void main(String[] args) {
-		new OffersBuilder();
 	}
 }
