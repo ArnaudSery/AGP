@@ -46,8 +46,10 @@ public class OffersBuilder {
 			}
 		}
 		
+		int number = 1;
 		for (Offer currentOffer : offers) {
-			affichage(currentOffer);
+			affichage(currentOffer, number);
+			number++;
 		}
 	}
 	
@@ -252,42 +254,50 @@ public class OffersBuilder {
 		return offer;
 	}
 	
-	public void affichage(Offer offer) {
+	public void affichage(Offer offer, int number) {
 		Excursion excursionOfDay;
 		
-		System.out.println("[Offer price] " + offer.getPrice());
+		System.out.println("\n\n\n####################################################");
+		System.out.println("|| Offer n° " + number + "		|| price = " + (float)offer.getPrice() + "	  ||");
+		System.out.println("####################################################");
+		System.out.println("Hotel : " + offer.getHotel().getName() + "\n");
+		
 		for (int day = 1; day <= numberOfDays; day++) {
-			System.out.println("========= DAY " + day + " =========");
+			System.out.println("DAY " + day + " ==>");
 			
 			if (!offer.hasExcursionOnDay(day)) {
-				System.out.println("Nothing this day");
+				System.out.println("	|Break day, go to the beach !");
+				System.out.println("	|-----------------------------------------------------------");
 				continue;
 			}
 			
 			excursionOfDay = offer.getExcursionOfDay(day);
 			
 			if (!excursionOfDay.hasVisits()) {
-				System.out.println("Nothing this day (please ajust your budget or preferences)");
+				System.out.println("	|Break day, go to the beach ! (due to your budget or preferences)");
+				System.out.println("	|-----------------------------------------------------------");
 				continue;
 			}
 			
-			System.out.println("[Excursion duration] " + excursionOfDay.getDuration() + " [Excursion price] " + excursionOfDay.getPrice());
+			System.out.println("Excursion :	Time : " + excursionOfDay.getDuration() + "	Price : " + excursionOfDay.getPrice());
+			System.out.println("	/ Start of the excursion from your hotel");
 			
 			for (Visit currentVisit : excursionOfDay.getPlacesToVisit()) {
 				Place currentPlace = currentVisit.getPlaceToVisit();
 				Transport currentTransport = currentVisit.getTransportDriveway();
 				
-				System.out.println("\n-->[Visit] " + currentPlace.getName()
-								   + " [Visit cost] " + currentPlace.getEntrancePrice()
-								   + " [Visit duration] " + currentPlace.getVisitDuration()
-								   + " [Score] " + currentPlace.getScore()
+				
+				System.out.println("	|----Visit on " + currentPlace.getName()
+								   + " for " + currentPlace.getVisitDuration() + " hours with a " + currentTransport
 				);
 				
-				System.out.println("   [Transport] " + currentTransport
+				/*System.out.println("	|_____With a " + currentTransport
 								   + " [Transport cost] " + currentTransport.getPriceForThisTravel()
 								   + " [Transport duration] " + currentTransport.getDurationForThisTravel()
-				);
+				);*/
 			}
+			System.out.println("	| Return to hotel");
+			System.out.println("	\\----------------------------------------------------------\n");
 		}
 	}
 	
