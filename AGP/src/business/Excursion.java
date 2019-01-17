@@ -6,29 +6,63 @@ import java.util.LinkedList;
 public class Excursion {
 
 	private int price;
-	private LinkedList<Visit> visit;
+	private LinkedList<Visit> visits;
 	private RoundTrip roundTrip;
 	
 	public Excursion(LinkedList<Place> placeResult, Hotel hotel) {
 		
 		
-		this.visit = CreateVisit(placeResult);
-		this.roundTrip = CreateRoundTrip(visit, hotel);
+		this.visits = CreateVisit(placeResult, hotel);
+		this.roundTrip = CreateRoundTrip(visits, hotel);
+		
+		this.price = CalculPriceExcursion(visits, roundTrip);
 		
 	}
 	
 	
-	public static Visit CreateVisit(placeResult) {
+	private int CalculPriceExcursion(LinkedList<Visit> visits, RoundTrip roundTrip) {
 		
-		Visit visit = new Visit();
 		
-		return visit;
+		return 0;
+	}
+
+
+	public static LinkedList<Visit> CreateVisit(LinkedList<Place> placeResult, Hotel hotel) {
+		
+		LinkedList<Visit> visits = new LinkedList<Visit>();
+		
+		int time = Constante.TIME_EXCURSION;
+		
+			
+		for(int i = 0; i < placeResult.size(); i++) {
+			
+			time -= placeResult.get(i).getVisitDuration();
+			
+			if(i == 0) {
+				Visit visit = new Visit(hotel, placeResult.get(i));
+				visits.add(visit);
+			}
+			else {
+				if(time <= 0) {
+					break;
+				}
+				else {
+					Visit visit = new Visit(placeResult.get(i-1), placeResult.get(i));
+					visits.add(visit);
+				}
+			}
+			
+			
+		}
+		
+		
+		return visits;
 		
 	}
 	
-	public static RoundTrip CreateRoundTrip(placeResult) {
+	public static RoundTrip CreateRoundTrip(LinkedList<Visit> visits, Hotel hotel) {
 		
-		RoundTrip roundTrip = new RoundTrip();
+		RoundTrip roundTrip = new RoundTrip(visits.getLast().getPlace(), hotel);
 		
 		return roundTrip;
 		
