@@ -18,7 +18,7 @@ public class SimulationEntry {
 			this.keyWord = "";
 			
 			this.numberDay = 5;
-			this.intensity = "hight";
+			this.intensity = "medium";
 			if(intensity.compareTo("hight") == 0) {
 				this.numberDayExcursion = numberDay;
 			}

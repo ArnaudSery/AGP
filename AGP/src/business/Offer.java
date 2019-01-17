@@ -7,6 +7,7 @@ public class Offer {
 	private float price;
 	private Hotel hotel;
 	private int numberDayExcursion;
+	private int day;
 	private int moduloExcursion;
 	private LinkedList<Excursion> excursionList = new LinkedList<Excursion>();
 
@@ -19,12 +20,16 @@ public class Offer {
 		}
 		else if(intensity.compareTo("medium") == 0) {
 			this.numberDayExcursion = day/2;
+			numberDayExcursion += day%2;
 			this.moduloExcursion = Constante.MODULO_MEDIUM;
 		}
 		else if(intensity.compareTo("low") == 0) {
 			this.numberDayExcursion = day/4;
+			numberDayExcursion += day%2;
 			this.moduloExcursion = Constante.MODULO_LOW;
 		}
+		
+		this.day = day;
 		
 		this.hotel = hotel;
 		
@@ -99,23 +104,26 @@ public class Offer {
 	
 	
 	public String toString() {
+		
 		String query = "\n";
+		int numExcursion = 0;
 		
 		query+= "Prix total de l'offre : " + price + " Euros.\n=====================================================\n";
 		
-		
-		
-		for(int i=0;i<excursionList.size();i++) {
+		for(int i = 0; i < day; i++) {
 			query += "Jour : " + i + " => \n";
 			query += "	|Hotel : " + hotel.getName() + ", Prix/nuit : " + hotel.getPricePerDay() + ".\n";
-
+			
 			if(i%moduloExcursion == 0) {
-				query += excursionList.get(i).toString() + "\n";
-			}else {
-				query += " Plage.";
+				query += excursionList.get(numExcursion).toString() + "\n";
+				numExcursion++;
+			}
+			else {
+				query += "	|	Plage.\n";
+				query += "	|Retour : " + hotel.getName() + ", Prix/nuit : " + hotel.getPricePerDay() + ".\n\n";
 			}
 		}
-			
+		
 		return query;
 	}
 	
