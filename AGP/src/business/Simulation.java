@@ -55,7 +55,7 @@ public class Simulation {
 		placeResultHotel.add(LaFoireDuTrone);
 		placeResultHotel.add(TroisFontaines);
 		
-		for (int index = 0; index < placeResultHotel.size(); index++) {
+		/*for (int index = 0; index < placeResultHotel.size(); index++) {
 			System.out.println(placeResultHotel.get(index).getId());
 		}
 		
@@ -63,13 +63,16 @@ public class Simulation {
 		// PRINTLN for test
 		for (int index = 0; index < bestHotel.size(); index++) {
 			System.out.println(	"Island: " + bestHotel.get(index).getIsland().getId() + ", Hotels: " + bestHotel.get(index).getName());
-		}
-		
-		/*for(int i = 0; i < 3; i++) {
-			Offer offer = new Offer(placeResult, bestHotel.get(i), simulationEntry.getNumberDayExcursion());
-			offerList.add(offer);
 		}*/
 		
+		for(int i = 0; i < 3; i++) {
+			Offer offer = new Offer(placeResult, placeResultHotel.get(i), simulationEntry.getNumberDayExcursion());
+			offerList.add(offer);
+		}
+		
+		for(int i = 0; i < 3; i++) {
+			System.out.println();
+		}
 		
 		
 		

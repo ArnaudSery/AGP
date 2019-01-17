@@ -11,7 +11,11 @@ public class Offer {
 	
 	public Offer(LinkedList<Place> placeResult, Hotel hotel, int numberDayExcursion) {
 		
+		this.hotel = hotel;
+		
 		this.excursionList = CreateOffer(placeResult, hotel, numberDayExcursion);
+		
+		this.price = CalculPriceOffer(excursionList, hotel);
 		
 	}
 	
@@ -27,6 +31,41 @@ public class Offer {
 		
 		
 		return excursions;
+	}
+
+	
+	public int CalculPriceOffer(LinkedList<Excursion> excursionList, Hotel hotel) {
+		
+		return 0;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+
+	public Hotel getHotel() {
+		return hotel;
+	}
+
+
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
+	}
+
+
+	public LinkedList<Excursion> getExcursionList() {
+		return excursionList;
+	}
+
+
+	public void setExcursionList(LinkedList<Excursion> excursionList) {
+		this.excursionList = excursionList;
 	}
 	
 	

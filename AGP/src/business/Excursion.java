@@ -67,6 +67,38 @@ public class Excursion {
 		return roundTrip;
 		
 	}
+
+
+	public int getPrice() {
+		return price;
+	}
+
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+
+	public LinkedList<Visit> getVisits() {
+		return visits;
+	}
+
+
+	public void setVisits(LinkedList<Visit> visits) {
+		this.visits = visits;
+	}
+
+
+	public RoundTrip getRoundTrip() {
+		return roundTrip;
+	}
+
+
+	public void setRoundTrip(RoundTrip roundTrip) {
+		this.roundTrip = roundTrip;
+	}
+	
+	
 	
 	
 	
