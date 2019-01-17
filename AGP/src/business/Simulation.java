@@ -39,6 +39,7 @@ public class Simulation {
 		placeResultHotel.add(hotel2);
 		
 		
+		Utility.FindBestHotel(placeResult, placeResultHotel);
 		
 		
 		for(int i = 0; i < 3; i++) {

@@ -38,6 +38,12 @@ public class Utility {
 		return time;
 	}*/
 	
+	public static LinkedList<Hotel> FindBestHotel(LinkedList<Place> placeResult, LinkedList<Hotel> placeResultHotel){
+		
+		
+		return null;
+	}
+	
 	
 	public static Hotel NearestHotel(LinkedList<Hotel> HotelList, Place place) {
 		
