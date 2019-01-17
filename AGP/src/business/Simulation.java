@@ -66,7 +66,7 @@ public class Simulation {
 		}*/
 		
 		for(int i = 0; i < 3; i++) {
-			Offer offer = new Offer(placeResult, placeResultHotel.get(i), simulationEntry.getNumberDayExcursion());
+			Offer offer = new Offer(placeResult, placeResultHotel.get(i), simulationEntry.getNumberDayExcursion(), simulationEntry.getNumberDay());
 			offerList.add(offer);
 		}
 		
