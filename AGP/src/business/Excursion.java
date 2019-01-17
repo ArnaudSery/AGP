@@ -109,7 +109,7 @@ public class Excursion {
 	
 	public String toString() {
 		
-		String display = null;
+		String display = "";
 		
 		for(int i = 0; i < visits.size(); i++){
 			display += visits.get(i).toString();
