@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>JSF AGP</title>
+</h:head>
+<h:body >
+	<h1>#{msg['label.entry.welcome']}</h1>
+	<p>
+		<strong>#{msg['label.entry.offer']}</strong>
+	</p>
+	<h:form>
+		#{msg['label.entry.day']} <h:inputText value="#{entryBean.numberDay}"></h:inputText> <br />
+	    #{msg['label.entry.min']} <h:inputText value="#{entryBean.priceMin}"></h:inputText>   <br />
+		#{msg['label.entry.max']} <h:inputText value="#{entryBean.priceMax}"></h:inputText>   <br />
+		#{msg['label.entry.key']} <h:inputText value="#{entryBean.keyword}"></h:inputText>   <br />
+		#{msg['label.entry.type']} <h:selectOneMenu value="#{entryBean.type}" 	onchange="submit()">
+			<f:selectItems value="#{entryBean.types}" />
+		</h:selectOneMenu>
+		#{msg['label.entry.intensity']} <h:selectOneMenu value="#{entryBean.intensity}" 	onchange="submit()">
+			<f:selectItems value="#{entryBean.intensities}" />
+		</h:selectOneMenu>
+	</h:form>
+
+	<p>
+		<strong>#{msg['label.entry.search']}</strong>
+	</p>
+	
+	<p>
+		#{msg['label.entry.search']}
+	</p>
+	<h:form>
+		#{msg['label.entry.type']} <h:selectOneMenu value="#{entryBean.type}" 	onchange="submit()">
+			<f:selectItems value="#{entryBean.types}" />
+		</h:selectOneMenu>	
+		#{msg['label.entry.key']} <h:inputText value="#{entryBean.keyword}"></h:inputText>   <br />
+		
+	</h:form>
+	
+	<h:form>
+		#{msg['label.entry.type']} <h:selectOneMenu value="#{entryBean.type}" 	onchange="submit()">
+			<f:selectItems value="#{entryBean.types}" />
+		</h:selectOneMenu>	
+		#{msg['label.entry.key']} <h:inputText value="#{entryBean.keyword}"></h:inputText>   <br />
+		<h:commandButton value="#{msg['label.entry.simulate']}" action="#{entryBean.queryActivity}"/>
+	</h:form>
+	
+</h:body>
+</html>
