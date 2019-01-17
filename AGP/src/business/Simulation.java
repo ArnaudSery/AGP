@@ -75,16 +75,19 @@ public class Simulation {
 			offerList.add(offer);
 		}
 		
-		System.out.println(offerList.toString());
+		System.out.println(toString());
 		
 		
 		
 	}
 	
-	public String toString(LinkedList<Offer> offerList) {
+	public String toString() {
 		String query = "";
-		for(int i = 0;i<offerList.size();i++) {
-			query += offerList.get(i).toString() + "\n";
+		for(int i = 0; i  <offerList.size(); i++) {
+			if((offerList.get(i).getPrice() > simulationEntry.getPriceMin()) && (offerList.get(i).getPrice() < simulationEntry.getPriceMax())) {
+				query += offerList.get(i).toString() + "\n";
+			}
+			
 		}
 		return query;
 	}

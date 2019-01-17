@@ -9,6 +9,8 @@ public class Offer {
 	private int numberDayExcursion;
 	private int day;
 	private int moduloExcursion;
+	private int priceMin;
+	private int priceMax;
 	private LinkedList<Excursion> excursionList = new LinkedList<Excursion>();
 
 	public Offer(LinkedList<Place> placeResult, Hotel hotel, String intensity, int day, int priceMin, int priceMax) {
@@ -29,6 +31,9 @@ public class Offer {
 			this.moduloExcursion = Constante.MODULO_LOW;
 		}
 		
+		this.priceMin = priceMin;
+		this.priceMax = priceMax;
+		
 		this.day = day;
 		
 		this.hotel = hotel;
@@ -47,12 +52,12 @@ public class Offer {
 		
 		for(int i = 0; i < numberDayExcursion; i++) {
 			Excursion excursion = new Excursion(placeResult, hotel);
-			double price = excursion.getPrice();
+			//double price = excursion.getPrice();
 			excursions.add(excursion);
 			
-			if(price > priceMin && price < priceMax) {
+			/*if(price > priceMin && price < priceMax) {
 				excursions.remove(excursion);
-			}
+			}*/
 		}
 		
 		return excursions;
