@@ -45,18 +45,20 @@ public class Utility {
 		LinkedList<Hotel> bestHotels = new LinkedList<Hotel>();
 		Map<Integer, Integer> totalPlacesPerHotel = countPlacesPerIsland(placeResult);
 		System.out.println(totalPlacesPerHotel.toString());
-		int max = 0;
+		int max = -1;
+		int saveIndex = -1;
 		
 		// find the island which has the most hotels
 		for (int index = 0; index < totalPlacesPerHotel.size(); index++) {
 			if (max < totalPlacesPerHotel.get(index)) {
 				max = totalPlacesPerHotel.get(index);
+				saveIndex = index;
 			}
 		}
 		System.out.println("max="+max);
 		// add the hotel of the island which contains the most places
 		for (int index = 0; index < hotelResult.size(); index++) {
-			if (hotelResult.get(index).getIsland().getId() == hotelResult.get(max).getIsland().getId()) {
+			if (hotelResult.get(index).getIsland().getId() == saveIndex) {
 				bestHotels.add(hotelResult.get(index));			
 			}
 		}
