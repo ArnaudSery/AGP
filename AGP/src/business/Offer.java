@@ -9,8 +9,8 @@ public class Offer {
 	private int numberDayExcursion;
 	private int moduloExcursion;
 	private LinkedList<Excursion> excursionList = new LinkedList<Excursion>();
-	
-	public Offer(LinkedList<Place> placeResult, Hotel hotel, String intensity, int day) {
+
+	public Offer(LinkedList<Place> placeResult, Hotel hotel, String intensity, int day, int priceMin, int priceMax) {
 		
 		this.hotel = hotel;
 		

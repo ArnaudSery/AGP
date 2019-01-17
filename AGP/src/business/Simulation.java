@@ -71,7 +71,7 @@ public class Simulation {
 		}*/
 		
 		for(int i = 0; i < 3; i++) {
-			Offer offer = new Offer(placeResult, bestHotel.get(i), simulationEntry.getIntensity(), simulationEntry.getNumberDay());
+			Offer offer = new Offer(placeResult, bestHotel.get(i), simulationEntry.getIntensity(), simulationEntry.getNumberDay(), simulationEntry.getPriceMin(), simulationEntry.getPriceMax());
 			offerList.add(offer);
 		}
 		
