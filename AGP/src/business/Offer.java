@@ -5,7 +5,63 @@ import java.util.LinkedList;
 
 public class Offer {
 	
-	private int day;
+	private int price;
+	private Hotel hotel;
+	private LinkedList<Excursion> excursionList = new LinkedList<Excursion>();
+	
+	public Offer(LinkedList<Place> placeResult, Hotel hotel, int numberDayExcursion) {
+		
+		this.excursionList = CreateOffer(placeResult, hotel, numberDayExcursion);
+		
+	}
+	
+	
+	public static LinkedList<Excursion> CreateOffer(LinkedList<Place> placeResult, Hotel hotel, int numberDayExcursion) {
+		
+		LinkedList<Excursion> excursions = new LinkedList<Excursion>();
+		
+		for(int i = 0; i < numberDayExcursion; i++) {
+			Excursion excursion = new Excursion(placeResult, hotel);
+		}
+		
+		
+		return excursions;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*private int day;
 	private int numberExcursion;
 	private String intensity;
 	private int totalCost;
@@ -98,6 +154,14 @@ public class Offer {
 	
 	
 
+	public Hotel getHotel() {
+		return hotel;
+	}
+
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
+	}
+
 	public int getDay() {
 		return day;
 	}
@@ -136,16 +200,6 @@ public class Offer {
 
 	public void setPlanning(HashMap<Integer, Excursion> planning) {
 		this.planning = planning;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}*/
 	
 }

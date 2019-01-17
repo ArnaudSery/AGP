@@ -5,6 +5,36 @@ import java.util.LinkedList;
 
 public class Excursion {
 
+	
+	public Excursion(LinkedList<Place> placeResult, Hotel hotel) {
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
 	//private static HashMap<Place,Transport> Excursions = new HashMap<Place,Transport>();
 	//private Hotel hotel;
 	
@@ -59,7 +89,7 @@ public class Excursion {
 				}
 				k++;
 			}
-			usedPlaceResultRand = placeResult;
+			usedPlaceResultRand = placeResult;*/
 			
 			/*while(!usedPlaceResultRand.isEmpty()) {
 				int rand = Utility.Rand(0, usedPlaceResultRand.size());
@@ -71,7 +101,7 @@ public class Excursion {
 			
 		//}
 		
-		return GroupPlace;
+	/*	return GroupPlace;
 	}
 	
 	@SuppressWarnings("null")
@@ -95,7 +125,7 @@ public class Excursion {
 			}
 		}		
 		return ExcursionTravel;
-	}
+	}*/
 	
 	/*public static Hotel ChoseHotel(LinkedList<Hotel> placeResultHotel, LinkedList<Place> GroupPlace) {
 
@@ -126,7 +156,7 @@ public class Excursion {
 	
 	
 
-	public static LinkedList<Transport> getExcursionTravel() {
+	/*public static LinkedList<Transport> getExcursionTravel() {
 		return ExcursionTravel;
 	}
 
@@ -143,7 +173,7 @@ public class Excursion {
 
 	public static void setExcursionGroup(LinkedList<Place> excursionGroup) {
 		ExcursionGroup = excursionGroup;
-	}
+	}*/
 	
 	/*public static void getFirstPlace(LinkedList<Excursion> excursionList, int exNum, int plNum) {
 		excursionList.get(exNum).getExcursionGroup().get(plNum);

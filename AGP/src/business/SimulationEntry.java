@@ -2,102 +2,128 @@ package business;
 
 public class SimulationEntry {
 
-		private int numberDay;
-		private int numberExcursion;
+		private String typeVisit;
 		private String keyWord;
-		private int totalCost;
-		private int numberHourMax;
+		
+		private int numberDay;
 		private String intensity;
-		private boolean confort;
+		private int numberDayExcursion;
+		private int priceMin;
+		private int priceMax;
 		
 		public SimulationEntry() {
-			this.numberDay =  3;
-			this.numberExcursion = 2;
+			
+			this.typeVisit = "";
 			this.keyWord = "";
-			this.totalCost = 1000;
-			this.intensity = "normal";// normal or hight
-			if(intensity.compareTo("normal") == 0) {
-				this.numberHourMax = 6;
+			
+			this.numberDay = 3;
+			this.intensity = "hight";
+			if(intensity.compareTo("hight") == 0) {
+				this.numberDayExcursion = numberDay;
 			}
-			else {
-				this.numberHourMax = 10;
+			else if(intensity.compareTo("medium") == 0) {
+				this.numberDayExcursion = numberDay/2;
 			}
-			this.confort = true;
-		}
-
-		public SimulationEntry(int numberDay, int numberExcursion, String keyWord, int totalCost, String intensity, boolean confort) {
-			this.numberDay =  numberDay;
-			this.numberExcursion = numberExcursion;
-			if(numberDay < numberExcursion) {
-				this.numberExcursion = this.numberDay;
-				System.out.println("numberExcursion = numberDay");
+			else if(intensity.compareTo("low") == 0) {
+				this.numberDayExcursion = numberDay/4;
 			}
-			this.keyWord = keyWord;
-			this.totalCost = totalCost;
-			this.intensity = intensity;
-			if(intensity.compareTo("normal") == 0) {
-				this.numberHourMax = 6;
+			this.priceMin = 1000;
+			this.priceMax = 2000;
+		}
+		
+
+		public SimulationEntry(String typeVisit, String keyWord, int numberDay, String intensity, int numberDayExcursion, int priceMin, int priceMax) {
+			
+			this.typeVisit = "";
+			this.keyWord = "";
+			
+			this.numberDay = 3;
+			this.intensity = "hight";
+			if(intensity.compareTo("hight") == 0) {
+				this.numberDayExcursion = numberDay;
 			}
-			else {
-				this.numberHourMax = 10;
+			else if(intensity.compareTo("medium") == 0) {
+				this.numberDayExcursion = numberDay/2;
 			}
-			this.confort = confort;
+			else if(intensity.compareTo("low") == 0) {
+				this.numberDayExcursion = numberDay/4;
+			}
+			this.priceMin = 1000;
+			this.priceMax = 2000;
+
 		}
 
-		public String getIntensity() {
-			return intensity;
+
+		public String getTypeVisit() {
+			return typeVisit;
 		}
 
-		public void setIntensity(String intensity) {
-			this.intensity = intensity;
+
+		public void setTypeVisit(String typeVisit) {
+			this.typeVisit = typeVisit;
 		}
 
-		public void setConfort(boolean confort) {
-			this.confort = confort;
-		}
-
-		public boolean isConfort() {
-			return confort;
-		}
-
-		public int getNumberDay() {
-			return numberDay;
-		}
-
-		public void setNumberDay(int numberDay) {
-			this.numberDay = numberDay;
-		}
-
-		public int getNumberExcursion() {
-			return numberExcursion;
-		}
-
-		public void setNumberExcursion(int numberExcursion) {
-			this.numberExcursion = numberExcursion;
-		}
 
 		public String getKeyWord() {
 			return keyWord;
 		}
 
+
 		public void setKeyWord(String keyWord) {
 			this.keyWord = keyWord;
 		}
 
-		public int getTotalCost() {
-			return totalCost;
+
+		public int getNumberDay() {
+			return numberDay;
 		}
 
-		public void setTotalCost(int cost) {
-			this.totalCost = cost;
+
+		public void setNumberDay(int numberDay) {
+			this.numberDay = numberDay;
 		}
 
-		public int getNumberHourMax() {
-			return numberHourMax;
+
+		public String getIntensity() {
+			return intensity;
 		}
 
-		public void setNumberHourMax(int numberHourMax) {
-			this.numberHourMax = numberHourMax;
+
+		public void setIntensity(String intensity) {
+			this.intensity = intensity;
 		}
+
+
+		public int getNumberDayExcursion() {
+			return numberDayExcursion;
+		}
+
+
+		public void setNumberDayExcursion(int numberDayExcursion) {
+			this.numberDayExcursion = numberDayExcursion;
+		}
+
+
+		public int getPriceMin() {
+			return priceMin;
+		}
+
+
+		public void setPriceMin(int priceMin) {
+			this.priceMin = priceMin;
+		}
+
+
+		public int getPriceMax() {
+			return priceMax;
+		}
+
+
+		public void setPriceMax(int priceMax) {
+			this.priceMax = priceMax;
+		}
+		
+		
+		
 		
 }
