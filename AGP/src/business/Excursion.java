@@ -15,18 +15,26 @@ public class Excursion {
 		this.visit = CreateVisit(placeResult);
 		this.roundTrip = CreateRoundTrip(visit, hotel);
 		
-	}
-	
-	
-	public static Visit CreateVisit(placeResult) {
-		
-		Visit visit = new Visit();
-		
-		return visit;
+		this.price = CalculPriceExcursion(this.visit, this.roundTrip);
 		
 	}
 	
-	public static RoundTrip CreateRoundTrip(placeResult) {
+	
+	private int CalculPriceExcursion(LinkedList<Visit> visits, RoundTrip roundTrip) {
+		
+		return 0;
+	}
+
+
+	public static LinkedList<Visit> CreateVisit(LinkedList<Place> placeResult) {
+		
+		LinkedList<Visit> visits = new LinkedList<Visit>();
+		
+		return visits;
+		
+	}
+	
+	public static RoundTrip CreateRoundTrip(LinkedList<Visit> visits, Hotel hotel) {
 		
 		RoundTrip roundTrip = new RoundTrip();
 		
