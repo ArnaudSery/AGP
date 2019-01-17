@@ -9,7 +9,7 @@ import business.*;
 
 class BusinessTest {
 	
-	@Test
+	/*@Test
 	void testdistance() {
 		Coordinates coord1 = new Coordinates(14.58, 61.30);
 		Coordinates coord2 = new Coordinates(14.51, 61.12);
@@ -52,5 +52,5 @@ class BusinessTest {
 		placeResultHotel.add(hotel2);
 		
 		//Excursion.CreateExcursion(placeResult, placeResultHotel, SimulationEntry.getNumberHourMax());	
-	}
+	}*/
 }
