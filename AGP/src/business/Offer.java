@@ -91,9 +91,9 @@ public class Offer {
 		
 		for(int i=0;i<this.excursionList.size();i++) {
 			if(i%moduloExcursion == 0) {
-				query += this.excursionList.get(i).toString() + ".\n";
+				query += "Jour : " + i + " => " + this.excursionList.get(i).toString() + ".\n";
 			}else {
-				
+				query += "Jour : " + i + " => Plage.";
 			}
 		}
 			
