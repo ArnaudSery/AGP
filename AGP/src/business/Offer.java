@@ -107,7 +107,6 @@ public class Offer {
 		for(int i=0;i<excursionList.size();i++) {
 
 			query += "	|Hotel : " + hotel.getName() + ", Prix/nuit : " + hotel.getPricePerDay() + ".\n";
-			query += excursionList.get(i).toString() + "\n";
 
 			if(i%moduloExcursion == 0) {
 				query += "Jour : " + i + " => " + excursionList.get(i).toString() + ".\n";
