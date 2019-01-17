@@ -107,7 +107,21 @@ public class Excursion {
 		this.roundTrip = roundTrip;
 	}
 	
-	
+	public String toString() {
+		
+		String display = null;
+		
+		for(int i = 0; i < visits.size(); i++){
+			display += visits.get(i).toString();
+			display += "\n";
+		}
+		
+		
+		display += roundTrip.toString();
+		
+		
+		return display;
+	}
 	
 	
 	

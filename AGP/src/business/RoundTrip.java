@@ -40,6 +40,11 @@ public class RoundTrip {
 	public void setTransport(Transport transport) {
 		this.transport = transport;
 	}
+
+	public String toString() {
+		return "Retour à l'hotel " + hotel.getName() + ", en utilisant " + transport.getClass().getSimpleName() + ".";
+	}
+	
 	
 
 }
