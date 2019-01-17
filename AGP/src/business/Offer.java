@@ -90,11 +90,14 @@ public class Offer {
 				"Hotel : " + this.hotel.getName() + ", Prix/nuit : " + this.hotel.getPricePerDay() + ".\n";
 		
 		for(int i=0;i<this.excursionList.size();i++) {
-			if(i%moduloExcursion == 0) {
+			
+			if(0 == 0) {
 				query += "Jour : " + i + " => " + this.excursionList.get(i).toString() + ".\n";
 			}else {
 				query += "Jour : " + i + " => Plage.";
 			}
+			
+			
 		}
 			
 		return query;
