@@ -33,7 +33,7 @@ public class Offer {
 		
 		this.hotel = hotel;
 		
-		this.excursionList = CreateOffer(placeResult, hotel, numberDayExcursion);
+		this.excursionList = CreateOffer(placeResult, hotel, numberDayExcursion, priceMin, priceMax);
 		
 		this.price = CalculPriceOffer(excursionList, hotel, day);
 		
@@ -41,13 +41,22 @@ public class Offer {
 	}
 	
 	
-	public static LinkedList<Excursion> CreateOffer(LinkedList<Place> placeResult, Hotel hotel, int numberDayExcursion) {
+	public static LinkedList<Excursion> CreateOffer(LinkedList<Place> placeResult, Hotel hotel, int numberDayExcursion, int priceMin, int priceMax) {
 		
 		LinkedList<Excursion> excursions = new LinkedList<Excursion>();
+		int price = 0;
 		
 		for(int i = 0; i < numberDayExcursion; i++) {
 			Excursion excursion = new Excursion(placeResult, hotel);
-			excursions.add(excursion);
+			price += excursion.getPrice();
+			//if(price > priceMin && price < priceMax) {
+				excursions.add(excursion);
+			/*}
+			else {
+				price -= excursion.getPrice();
+				excursions.add(null);
+			}*/
+			
 		}
 		
 		return excursions;
