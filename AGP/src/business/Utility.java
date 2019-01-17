@@ -44,7 +44,7 @@ public class Utility {
 	public static LinkedList<Hotel> FindBestHotel(LinkedList<Place> placeResult, LinkedList<Hotel> hotelResult){
 		LinkedList<Hotel> bestHotels = new LinkedList<Hotel>();
 		Map<Integer, Integer> totalPlacesPerHotel = countPlacesPerIsland(placeResult);
-		System.out.println(totalPlacesPerHotel.toString());
+		//System.out.println(totalPlacesPerHotel.toString());
 		int max = -1;
 		int saveIndex = -1;
 		
@@ -55,7 +55,7 @@ public class Utility {
 				saveIndex = index;
 			}
 		}
-		System.out.println("max="+max);
+		//System.out.println("max="+max);
 		// add the hotel of the island which contains the most places
 		for (int index = 0; index < hotelResult.size(); index++) {
 			if (hotelResult.get(index).getIsland().getId() == saveIndex) {

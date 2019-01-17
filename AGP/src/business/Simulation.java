@@ -71,7 +71,7 @@ public class Simulation {
 		}
 		
 		
-		
+		toString(offerList);
 		
 		
 		
