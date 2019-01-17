@@ -7,6 +7,7 @@ public class SimulationEntry {
 		
 		private int numberDay;
 		private String intensity;
+		private int moduloExcursion;
 		private int numberDayExcursion;
 		private int priceMin;
 		private int priceMax;
@@ -32,7 +33,7 @@ public class SimulationEntry {
 		}
 		
 
-		public SimulationEntry(String typeVisit, String keyWord, int numberDay, String intensity, int numberDayExcursion, int priceMin, int priceMax) {
+		public SimulationEntry(String typeVisit, String keyWord, int numberDay, String intensity, int numberDayExcursion, int priceMin, int priceMax, int moduloExcursion) {
 			
 			this.typeVisit = "";
 			this.keyWord = "";
@@ -41,12 +42,15 @@ public class SimulationEntry {
 			this.intensity = "hight";
 			if(intensity.compareTo("hight") == 0) {
 				this.numberDayExcursion = numberDay;
+				this.moduloExcursion = 1;
 			}
 			else if(intensity.compareTo("medium") == 0) {
 				this.numberDayExcursion = numberDay/2;
+				this.moduloExcursion = 2;
 			}
 			else if(intensity.compareTo("low") == 0) {
 				this.numberDayExcursion = numberDay/4;
+				this.moduloExcursion = 4;
 			}
 			this.priceMin = 1000;
 			this.priceMax = 2000;
@@ -121,6 +125,16 @@ public class SimulationEntry {
 
 		public void setPriceMax(int priceMax) {
 			this.priceMax = priceMax;
+		}
+
+
+		public int getModuloExcursion() {
+			return moduloExcursion;
+		}
+
+
+		public void setModuloExcursion(int moduloExcursion) {
+			this.moduloExcursion = moduloExcursion;
 		}
 		
 		

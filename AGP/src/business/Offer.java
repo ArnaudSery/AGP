@@ -6,15 +6,18 @@ public class Offer {
 	
 	private double price;
 	private Hotel hotel;
+	private int moduloExcursion;
 	private LinkedList<Excursion> excursionList = new LinkedList<Excursion>();
 	
-	public Offer(LinkedList<Place> placeResult, Hotel hotel, int numberDayExcursion, int day) {
+	public Offer(LinkedList<Place> placeResult, Hotel hotel, int numberDayExcursion, int day, int moduloExcursion) {
 		
 		this.hotel = hotel;
 		
 		this.excursionList = CreateOffer(placeResult, hotel, numberDayExcursion);
 		
 		this.price = CalculPriceOffer(excursionList, hotel, day);
+		
+		this.moduloExcursion = moduloExcursion;
 	}
 	
 	
@@ -87,7 +90,11 @@ public class Offer {
 				"Hotel : " + this.hotel.getName() + ", Prix/nuit : " + this.hotel.getPricePerDay() + ".\n";
 		
 		for(int i=0;i<this.excursionList.size();i++) {
-			query += this.excursionList.get(i).toString() + ".\n";
+			if(i%moduloExcursion == 0) {
+				query += this.excursionList.get(i).toString() + ".\n";
+			}else {
+				
+			}
 		}
 			
 		return query;
