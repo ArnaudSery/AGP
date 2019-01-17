@@ -1,63 +1,43 @@
+/**
+ * 
+ */
 package business;
 
+/**
+ *
+ */
 public class Visit {
-		
-		private Place place;
-		private Transport transport;
-		
-
-		public Visit(Place placeStart, Place placeDestination) {
-			
-			this.place = placeDestination;
-			int type = Island.equals(placeStart, placeDestination);
-			
-			double distanceTraveled = Utility.CalculDistance(placeStart.getCoordinates(), placeDestination.getCoordinates());
-			
-			if(type == 0) {
-				transport = new Boat(distanceTraveled);
-			}else {
-				transport = new Bus(distanceTraveled);
-			}
-			
-		}
-					
-					
-		public Visit(Hotel hotelStart, Place placeDestination) {
-			this.place = placeDestination;
-			int type = Island.equals(hotelStart, placeDestination);
-			
-			double distanceTraveled = Utility.CalculDistance(hotelStart.getCoordinates(), placeDestination.getCoordinates());
-			
-			if(type == 0) {
-				transport = new Boat(distanceTraveled);
-			}else {
-				transport = new Bus(distanceTraveled);
-			}
-			
-		}
-
-		public Place getPlace() {
-			return place;
-		}
-
-		public void setPlace(Place place) {
-			this.place = place;
-		}
-
-		public Transport getTransport() {
-			return transport;
-		}
-
-		public void setTransport(Transport transport) {
-			this.transport = transport;
-		}
-
-		public String toString() {
-			return "	|	Visit de " + place.getName() + ", en utilisant le " + transport.getClass().getSimpleName() + ".";
-			
-		}
-		
-		
+	private Transport transportDriveway;
+	private Place placeToVisit;
 	
+	public Visit(Transport transportDriveway, Place placeToVisit) {
+		this.transportDriveway = transportDriveway;
+		this.placeToVisit = placeToVisit;
+	}
+	
+	public double getPrice() {
+		return transportDriveway.getPriceForThisTravel()
+			   + placeToVisit.getEntrancePrice();
+	}
+	
+	public double getDuration() {
+		return transportDriveway.getDurationForThisTravel()
+			   + placeToVisit.getVisitDuration();
+	}
 
+	public Transport getTransportDriveway() {
+		return transportDriveway;
+	}
+
+	public void setTransportDriveway(Transport transportDriveway) {
+		this.transportDriveway = transportDriveway;
+	}
+
+	public Place getPlaceToVisit() {
+		return placeToVisit;
+	}
+
+	public void setPlaceToVisit(Place placeToVisit) {
+		this.placeToVisit = placeToVisit;
+	}
 }

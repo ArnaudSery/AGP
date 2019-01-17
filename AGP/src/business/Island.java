@@ -1,56 +1,57 @@
+/**
+ * 
+ */
 package business;
 
+/**
+ *
+ */
 public class Island {
-	
 	private int id;
 	private String name;
+	private int score;
+	
+	public Island(int id) {
+		this.id = id;
+		this.name = null;
+		this.score = 0;
+	}
 	
 	public Island(int id, String name) {
 		this.id = id;
 		this.name = name;
+		this.score = 0;
 	}
 	
-	// 1 = Bus  |  0 = Boat
-		public static int equals(Hotel hotel, Place place) {
-			
-			
-			int choice = 0;
-			
-			if(hotel.getIsland().equals(place.getIsland())){
-				choice = 1;
-			}
-			
-			return choice;
-		}
-		
-		
-		public static int equals(Place place1, Place place2) {
-			
-			int choice = 0;
-			
-			if(place1.getIsland().equals(place2.getIsland())){
-				choice = 1;
-			}
-			
-			return choice;
-		}
-
-		public int getId() {
-			return id;
-		}
-
-		public void setId(int id) {
-			this.id = id;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-		
-		
+	public boolean equals(Island island) {
+		return (id == island.getId());
+	}
 	
+	public void incrementScore() {
+		score++;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
 }

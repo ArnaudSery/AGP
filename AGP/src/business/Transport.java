@@ -1,29 +1,29 @@
+/**
+ * 
+ */
 package business;
 
+/**
+ *
+ */
 public abstract class Transport {
-
 	protected double distanceTraveled;
-	protected double costTransport;
+	protected double priceForThisTravel;
+	protected double durationForThisTravel;
 	
-	public Transport(){
-		
+	public Transport(double distanceTraveled) {
+		this.distanceTraveled = distanceTraveled;
 	}
 
 	public double getDistanceTraveled() {
 		return distanceTraveled;
 	}
 
-	public void setDistanceTraveled(double distanceTraveled) {
-		this.distanceTraveled = distanceTraveled;
-	}
-	
-	public double getCostTransport() {
-		return costTransport;
+	public double getPriceForThisTravel() {
+		return priceForThisTravel;
 	}
 
-
-	public void setCostTransport(double costTransport) {
-		this.costTransport = costTransport;
+	public double getDurationForThisTravel() {
+		return durationForThisTravel;
 	}
-	
 }

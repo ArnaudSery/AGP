@@ -3,13 +3,14 @@
  */
 package tests;
 
+import java.util.List;
+
+import business.Hotel;
+import business.Island;
+import business.Place;
 import persistence.HotelPersistence;
 import persistence.IslandPersistence;
 import persistence.PlacePersistence;
-import persistence.extendeddb.MixedResult;
-import persistence.extendeddb.MixedResults;
-import persistence.extendeddb.jdbc.SQLResult;
-import persistence.extendeddb.jdbc.SQLResults;
 
 /**
  *
@@ -21,50 +22,48 @@ public class DemoBusinessBDA {
 	 */
 	public static void main(String[] args) {
 		// Hotels
-		SQLResults sqlResults = HotelPersistence.getHotels();
+		List<Hotel> hotels = HotelPersistence.getHotels();
 		
-		for (SQLResult tuple : sqlResults) {
+		for (Hotel hotel : hotels) {
 			System.out.println("========= Hotel : "
-							   + tuple.getAttribute("name")
+							   + hotel.getName()
 							   + " ========="
 			);
 			
 			System.out.println("[id] "
-							   + tuple.getAttribute("id")
+							   + hotel.getId()
 							   + " [Price] "
-							   + tuple.getAttribute("pricePerDay")
+							   + hotel.getPricePerDay()
 			);
 		}
 		
 		// Islands
-		sqlResults = IslandPersistence.getIslands();
+		List<Island> islands = IslandPersistence.getIslands();
 		
-		for (SQLResult tuple : sqlResults) {
+		for (Island island : islands) {
 			System.out.println("========= Island : "
-							   + tuple.getAttribute("name")
+							   + island.getName()
 							   + " ========="
 			);
 			
-			System.out.println("[id] " + tuple.getAttribute("id"));
+			System.out.println("[id] " + island.getId());
 		}
 		
 		// Places
-		MixedResults mixedResults = PlacePersistence.getAllPlaces("musée");
+		List<Place> places = PlacePersistence.getPlaces("musée");
 		
-		for (MixedResult mixedResult : mixedResults) {
+		for (Place place : places) {
 			System.out.println("========= Place : "
-							   + mixedResult.getAttribute("name")
+							   + place.getName()
 							   + " ========="
 			);
 			
-			System.out.println("[Type] "
-							   + mixedResult.getAttribute("type")
-							   + " [Score] "
-							   + mixedResult.getScore()
+			System.out.println(" [Score] "
+							   + place.getScore()
 			);
 			
 			System.out.println("[Description] "
-							   + mixedResult.getContent()
+							   + place.getDescription()
 			);
 		}
 	}
