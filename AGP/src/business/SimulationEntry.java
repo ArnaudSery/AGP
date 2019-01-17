@@ -9,8 +9,8 @@ public class SimulationEntry {
 		private int numberDay;
 		private String intensity;
 		private int numberDayExcursion;
-		private int priceMin;
-		private int priceMax;
+		private int priceMin = 1000;
+		private int priceMax = 2000;
 		
 		public SimulationEntry() {
 			
@@ -28,8 +28,6 @@ public class SimulationEntry {
 			else if(intensity.compareTo("low") == 0) {
 				this.numberDayExcursion = numberDay/4;
 			}
-			this.priceMin = 1000;
-			this.priceMax = 2000;
 		}
 		
 
@@ -49,8 +47,6 @@ public class SimulationEntry {
 			else if(intensity.compareTo("low") == 0) {
 				this.numberDayExcursion = numberDay/4;
 			}
-			this.priceMin = 1000;
-			this.priceMax = 2000;
 
 		}
 
