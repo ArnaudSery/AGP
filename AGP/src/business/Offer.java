@@ -88,6 +88,8 @@ public class Offer {
 		
 		query+= "Prix total de l'offre : " + price + " Euros.\n=====================================================\n";
 		
+		
+		
 		for(int i=0;i<excursionList.size();i++) {
 
 			query += "	|Hotel : " + hotel.getName() + ", Prix/nuit : " + hotel.getPricePerDay() + ".\n";
@@ -98,7 +100,6 @@ public class Offer {
 			}else {
 				query += "Jour : " + i + " => Plage.";
 			}
-
 		}
 			
 		return query;
