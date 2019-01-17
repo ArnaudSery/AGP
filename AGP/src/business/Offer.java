@@ -1,22 +1,20 @@
 package business;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Offer {
 	
-	private int price;
+	private double price;
 	private Hotel hotel;
 	private LinkedList<Excursion> excursionList = new LinkedList<Excursion>();
 	
-	public Offer(LinkedList<Place> placeResult, Hotel hotel, int numberDayExcursion) {
+	public Offer(LinkedList<Place> placeResult, Hotel hotel, int numberDayExcursion, int day) {
 		
 		this.hotel = hotel;
 		
 		this.excursionList = CreateOffer(placeResult, hotel, numberDayExcursion);
 		
-		this.price = CalculPriceOffer(excursionList, hotel);
-		
+		this.price = CalculPriceOffer(excursionList, hotel, day);
 	}
 	
 	
@@ -29,22 +27,35 @@ public class Offer {
 			excursions.add(excursion);
 		}
 		
-		
 		return excursions;
 	}
+	
 
 	
-	public int CalculPriceOffer(LinkedList<Excursion> excursionList, Hotel hotel) {
+	public double CalculPriceOffer(LinkedList<Excursion> excursionList, Hotel hotel, int day) {
 		
-		return 0;
+		double price = 0;
+		double priceHotel = 0;
+		
+		for(int i = 0; i < excursionList.size(); i++) {
+			price += excursionList.get(i).getPrice();
+		}
+		
+		priceHotel = day * hotel.getPricePerDay();
+		
+		price += priceHotel;
+		
+		return price;
 	}
+	
+	
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
 
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
