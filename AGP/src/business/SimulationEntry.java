@@ -1,7 +1,6 @@
 package business;
 
 public class SimulationEntry {
-	
 
 		private String typeVisit;
 		private String keyWord;
