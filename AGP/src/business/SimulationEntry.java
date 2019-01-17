@@ -21,12 +21,15 @@ public class SimulationEntry {
 			this.intensity = "hight";
 			if(intensity.compareTo("hight") == 0) {
 				this.numberDayExcursion = numberDay;
+				this.moduloExcursion = 1;
 			}
 			else if(intensity.compareTo("medium") == 0) {
 				this.numberDayExcursion = numberDay/2;
+				this.moduloExcursion = 2;
 			}
 			else if(intensity.compareTo("low") == 0) {
 				this.numberDayExcursion = numberDay/4;
+				this.moduloExcursion = 4;
 			}
 			this.priceMin = 1000;
 			this.priceMax = 2000;

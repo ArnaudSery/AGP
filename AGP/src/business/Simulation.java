@@ -36,10 +36,15 @@ public class Simulation {
 		Place restaurantDelArte = new HistoricPlace(1, "DelArte", 2, 100, "husihvgriuh", coord2, isle);
 		Place TourEiffel = new HistoricPlace(2, "TourEiffel", 6, 100, "husihvgriuh", coord3, isle);
 		Place place1 = new ActivityPlace(4, "place1", 5, 150, "lol", coord5, isle);
-		Place place2 = new ActivityPlace(5, "place2", 2, 150, "lol",coord6, isle);
-		Place place3 = new ActivityPlace(6, "place3", 2, 150, "lol",coord6, isle);
-		Place place4 = new ActivityPlace(7, "place4", 2, 150, "lol",coord6, isle);
+		Place place2 = new ActivityPlace(5, "place2", 2, 150, "lol",coord6, isle2);
+		Place place3 = new ActivityPlace(6, "place3", 2, 150, "lol",coord6, isle3);
+		Place place4 = new ActivityPlace(7, "place4", 6, 150, "lol",coord6, isle2);
 		Place place5 = new ActivityPlace(8, "place5", 2, 150, "lol",coord6, isle);
+		Place place6 = new ActivityPlace(9, "place6", 5, 150, "lol", coord5, isle);
+		Place place7 = new ActivityPlace(10, "place7", 2, 150, "lol",coord6, isle2);
+		Place place8 = new ActivityPlace(11, "place8", 3, 150, "lol",coord6, isle);
+		Place place9 = new ActivityPlace(12, "place9", 2, 150, "lol",coord6, isle3);
+		Place place10 = new ActivityPlace(13, "place10", 8, 150, "lol",coord6, isle2);
 		
 		
 		placeResult.add(restaurantDelArte);
@@ -68,10 +73,9 @@ public class Simulation {
 		for(int i = 0; i < 3; i++) {
 			Offer offer = new Offer(placeResult, bestHotel.get(i), simulationEntry.getNumberDayExcursion(), simulationEntry.getNumberDay(), simulationEntry.getModuloExcursion());
 			offerList.add(offer);
-			System.out.println(offerList.toString());
 		}
 		
-		
+		System.out.println(offerList.toString());
 		
 		
 		

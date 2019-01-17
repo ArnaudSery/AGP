@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class Offer {
 	
-	private double price;
+	private float price;
 	private Hotel hotel;
 	private int moduloExcursion;
 	private LinkedList<Excursion> excursionList = new LinkedList<Excursion>();
@@ -35,9 +35,9 @@ public class Offer {
 	
 
 	
-	public double CalculPriceOffer(LinkedList<Excursion> excursionList, Hotel hotel, int day) {
+	public float CalculPriceOffer(LinkedList<Excursion> excursionList, Hotel hotel, int day) {
 		
-		double price = 0;
+		float price = 0;
 		double priceHotel = 0;
 		
 		for(int i = 0; i < excursionList.size(); i++) {
@@ -53,12 +53,12 @@ public class Offer {
 	
 	
 
-	public double getPrice() {
+	public float getPrice() {
 		return price;
 	}
 
 
-	public void setPrice(double price) {
+	public void setPrice(float price) {
 		this.price = price;
 	}
 
@@ -86,18 +86,20 @@ public class Offer {
 	public String toString() {
 		String query = "";
 		
-		query+= "Prix total de l'offre : " + this.price + " Euros.\n" +
-				"Hotel : " + this.hotel.getName() + ", Prix/nuit : " + this.hotel.getPricePerDay() + ".\n";
+		query+= "Prix total de l'offre : " + price + " Euros.\n=====================================================\n";
 		
-		for(int i=0;i<this.excursionList.size();i++) {
-			
-			if(0 == 0) {
-				query += "Jour : " + i + " => " + this.excursionList.get(i).toString() + ".\n";
+		
+		
+		for(int i=0;i<excursionList.size();i++) {
+
+			query += "	|Hotel : " + hotel.getName() + ", Prix/nuit : " + hotel.getPricePerDay() + ".\n";
+			query += excursionList.get(i).toString() + "\n";
+
+			if(i%moduloExcursion == 0) {
+				query += "Jour : " + i + " => " + excursionList.get(i).toString() + ".\n";
 			}else {
 				query += "Jour : " + i + " => Plage.";
 			}
-			
-			
 		}
 			
 		return query;
