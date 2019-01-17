@@ -17,4 +17,16 @@ public class Bus extends Transport {
 		this.costTransport = distanceTraveled * Constante.PRICE_BUS;
 		super.distanceTraveled = distanceTraveled * 100;
 	}
+
+
+	public double getCostTransport() {
+		return costTransport;
+	}
+
+
+	public void setCostTransport(double costTransport) {
+		this.costTransport = costTransport;
+	}
+	
+	
 }
