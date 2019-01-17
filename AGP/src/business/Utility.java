@@ -44,6 +44,7 @@ public class Utility {
 	public static LinkedList<Hotel> FindBestHotel(LinkedList<Place> placeResult, LinkedList<Hotel> hotelResult){
 		LinkedList<Hotel> bestHotels = new LinkedList<Hotel>();
 		Map<Integer, Integer> totalPlacesPerHotel = countPlacesPerIsland(placeResult);
+		System.out.println(totalPlacesPerHotel.toString());
 		int max = 0;
 		
 		// find the island which has the most hotels
@@ -52,10 +53,10 @@ public class Utility {
 				max = totalPlacesPerHotel.get(index);
 			}
 		}
-		
+		System.out.println("max="+max);
 		// add the hotel of the island which contains the most places
 		for (int index = 0; index < hotelResult.size(); index++) {
-			if (hotelResult.get(index).getIsland().getId() == max) {
+			if (hotelResult.get(index).getIsland().getId() == hotelResult.get(max).getIsland().getId()) {
 				bestHotels.add(hotelResult.get(index));			
 			}
 		}
@@ -66,10 +67,10 @@ public class Utility {
 	
 	public static Map<Integer, Integer> countPlacesPerIsland(LinkedList<Place> places) {
 		Map<Integer, Integer> totalPlacesPerHotel = new HashMap<Integer, Integer>(); 
-		int islandNumber = 3;
+		int totalIsland = 3;
 		
 		// For each Island count the places
-		for (int index = 0; index < islandNumber; index++) {
+		for (int index = 0; index < totalIsland; index++) {
 			int number = 0;
 			for (Place place : places) {
 				if (index == place.getIsland().getId()) {
