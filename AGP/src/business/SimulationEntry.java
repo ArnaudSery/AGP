@@ -17,7 +17,7 @@ public class SimulationEntry {
 			this.typeVisit = "";
 			this.keyWord = "";
 			
-			this.numberDay = 3;
+			this.numberDay = 5;
 			this.intensity = "hight";
 			if(intensity.compareTo("hight") == 0) {
 				this.numberDayExcursion = numberDay;
