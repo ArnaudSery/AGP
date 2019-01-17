@@ -34,7 +34,7 @@ public class Simulation {
 		Hotel TroisFontaines = new Hotel(3, "TroisFontaines", 200, coord8, isle3);
 
 		Place restaurantDelArte = new HistoricPlace(1, "DelArte", 2, 100, "husihvgriuh", coord2, isle);
-		Place TourEiffel = new HistoricPlace(2, "TourEiffel", 6, 100, "husihvgriuh", coord3, isle);
+		Place TourEiffel = new HistoricPlace(2, "TourEiffel", 6, 100, "husihvgriuh", coord3, isle3);
 		Place place1 = new ActivityPlace(4, "place1", 5, 150, "lol", coord5, isle);
 		Place place2 = new ActivityPlace(5, "place2", 2, 150, "lol",coord6, isle2);
 		Place place3 = new ActivityPlace(6, "place3", 2, 150, "lol",coord6, isle3);
