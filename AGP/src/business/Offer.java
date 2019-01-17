@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class Offer {
 	
-	private double price;
+	private float price;
 	private Hotel hotel;
 	private LinkedList<Excursion> excursionList = new LinkedList<Excursion>();
 	
@@ -32,9 +32,9 @@ public class Offer {
 	
 
 	
-	public double CalculPriceOffer(LinkedList<Excursion> excursionList, Hotel hotel, int day) {
+	public float CalculPriceOffer(LinkedList<Excursion> excursionList, Hotel hotel, int day) {
 		
-		double price = 0;
+		float price = 0;
 		double priceHotel = 0;
 		
 		for(int i = 0; i < excursionList.size(); i++) {
@@ -50,12 +50,12 @@ public class Offer {
 	
 	
 
-	public double getPrice() {
+	public float getPrice() {
 		return price;
 	}
 
 
-	public void setPrice(double price) {
+	public void setPrice(float price) {
 		this.price = price;
 	}
 
@@ -83,11 +83,11 @@ public class Offer {
 	public String toString() {
 		String query = "";
 		
-		query+= "Prix total de l'offre : " + this.price + " Euros.\n" +
-				"Hotel : " + this.hotel.getName() + ", Prix/nuit : " + this.hotel.getPricePerDay() + ".\n";
+		query+= "Prix total de l'offre : " + this.price + " Euros.\n=====================================================\n";
 		
 		for(int i=0;i<this.excursionList.size();i++) {
-			query += this.excursionList.get(i).toString() + ".\n";
+			query += "	|Hotel : " + this.hotel.getName() + ", Prix/nuit : " + this.hotel.getPricePerDay() + ".\n";
+			query += this.excursionList.get(i).toString() + "\n";
 		}
 			
 		return query;

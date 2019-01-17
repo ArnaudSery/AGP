@@ -53,7 +53,8 @@ public class Visit {
 		}
 
 		public String toString() {
-			return "Visit de " + place.getName() + ", en utilisant le " + transport.getClass().getSimpleName() + ".";
+			return "	|	Visit de " + place.getName() + ", en utilisant le " + transport.getClass().getSimpleName() + ".";
+			
 		}
 		
 		

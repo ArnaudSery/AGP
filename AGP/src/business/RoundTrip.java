@@ -42,7 +42,7 @@ public class RoundTrip {
 	}
 
 	public String toString() {
-		return "Retour à l'hotel " + hotel.getName() + ", en utilisant " + transport.getClass().getSimpleName() + ".";
+		return "	|Retour à l'hotel " + hotel.getName() + ", en utilisant le " + transport.getClass().getSimpleName() + ".\n";
 	}
 	
 	
