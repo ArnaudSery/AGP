@@ -110,7 +110,7 @@ public class Utility {
 		return number;
 	}
 	
-	public void toString(String query) {
+	public static void toString(String query) {
 		System.out.println(query);
 	}
 }
