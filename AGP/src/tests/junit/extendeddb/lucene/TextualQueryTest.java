@@ -11,6 +11,7 @@ import persistence.extendeddb.ExtendedDatabaseAPI;
 import persistence.extendeddb.SQLConfiguration;
 import persistence.extendeddb.TextualConfiguration;
 import persistence.extendeddb.lucene.Indexer;
+import persistence.extendeddb.lucene.Searcher;
 import persistence.extendeddb.lucene.TextualResult;
 import persistence.extendeddb.lucene.TextualResults;
 
@@ -36,11 +37,20 @@ class TextualQueryTest {
 				"Place",
 				"id"
 		);
-		
+		TextualResults result = new TextualResults();
+		int size = result.size();
+		boolean bool = result.hasNext();
+		TextualResult name = new TextualResult(1, 3, "test");
+		TextualResult text = result.next();
+		int id = name.getId();
+		int score = name.getScore();
+		String oui = name.getContent();
 		try {
 			Indexer index = new Indexer(sourcePath, indexPath);
 			
 			index.createIndex(true);
+			index.setIndexPath(sourcePath);
+			index.setSourcePath(indexPath);
 			index.addDocuments(sourcePath);
 			index.close();
 			
