@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import java.util.LinkedList;
 import java.util.List;
 
 import business.*;
@@ -182,16 +181,5 @@ class BusinessTest {
 		List<Excursion> excursions = offer.getExcursions();
 		int freq = offer.getExcursionsFrequency();
 		int days = offer.getNumberOfDays();
-
-		Hotel bateliere = new Hotel(1);
-		offer.setHotel(bateliere);
-
-		offer.setExcursionsFrequency(2);
-		offer.setNumberOfDays(15);
-		offer.setExcursions(excursions);
-		
-		double price = offer.getPrice();
-
-
 	}
 }
