@@ -16,16 +16,19 @@ body {
 	padding:5%;
 	padding-top:2%;
 	padding-bottom:2%;
-	background-color: rgba(8, 18, 20, 0.9 );
+	background-color: rgba(8, 18, 20, 0.7 );
 	color:#ffffff;
-	text-align:center;
+	text-align:left;
 }
 
 body h1 {
 	color:  #a1ebf2;
 	font-size:35px;
 	text-shadow: (2px,2px,2px, black)
-
+	text-align:center;
+}
+body h2 {
+	font-size:20px;
 }
 	
 body form{
